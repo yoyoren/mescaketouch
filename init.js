@@ -12,15 +12,79 @@ app.set('view engine', 'ejs');
 //app.use(express.bodyParser());
 //app.use(express.session());
 var sys = require('sys');
- 
-
-var m = require('./includes/db_connection.js').Mysql;
-m.getOne('ecs_users',{user_id:2},function(d){
-	console.log(d);
-});
+var RES_SUCCESS = 0;
+var RES_FAIL = 1;
+var STATIC_DOMAIN = 'http://s1.static.mescake.com/';
+var STATIC_DOMAIN = 'http://10.237.113.51/';
+var Res = {
+	ajax:function(res,d){
+		res.send(d);
+	},
+	page:function(res,d){
+		var d = d||{};
+		d.STATIC_DOMAIN = STATIC_DOMAIN;
+		res.render(d.view,d);
+	}
+}
 
 app.get('/',function(req,res){
-	 res.render('index', {});
+	 var host = res.req.headers.host;
+	 var pageview = require('./lib/pageview.js').PageView;
+	 var htmlToText = require('html-to-text');
+
+	 pageview.getGoodsData(function(d1,d2){
+		for(var i in d1){
+			d1[i].url = 'http://www.mescake.com/themes/default/images/sgoods/'+d1[i].goods_sn.substring(0,3)+'.jpg';
+			d1[i].goods_desc = htmlToText.fromString(d1[i].goods_desc);
+		}
+		Res.page(res,{
+			view:'index',
+			goodsData:d1,
+			catoData:d2
+		});
+	 });
+	 
+});
+
+app.get('/getIndexDataAnsyc',function(req,res){
+	 var pageview = require('./lib/pageview.js').PageView;
+	 pageview.getGoodsData(function(d1,d2){
+		res.send({
+			code:RES_SUCCESS,
+			goodsData:d1,
+			catoData:d2
+		});
+	 });
+});
+
+app.get('/getGoodsAttrAnsyc',function(req,res){
+	 var goodsId = req.query.id;
+	 var goods = require('./lib/goods.js').Goods;
+	 goods.getGoodsAttrData(goodsId,function(d){
+		 Res.ajax(res,{
+			code:RES_SUCCESS,
+			data:d
+		});
+	 });
+});
+
+
+app.get('/cake',function(req,res){
+	  var pageview = require('./lib/pageview.js').PageView;
+	  var goodsId = req.query.id;
+	  pageview.getGoodsDetailData(goodsId,function(d){
+		var tmpl = fs.readFileSync('./tmpl/cake_'+goodsId+'.htm','utf-8');
+		tmpl = tmpl.replace(/\{STATIC_DOMAIN\}/gi,STATIC_DOMAIN);
+		Res.page(res,{
+			view:'goods_detail',
+			goodsId:goodsId,
+			goods:d,
+			tmpl:tmpl
+		});
+		
+	  });
+		
+
 });
 
 var server = http.createServer(app);

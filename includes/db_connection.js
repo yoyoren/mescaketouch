@@ -32,10 +32,11 @@ var Mysql = {
 	getOne:function(table,condition,callback){
 	  
 	  var sql = 'SELECT * FROM {TABLE} WHERE {CONDITION} LIMIT 0,1';
-	  var con = '';
+	  var con = [];
 	  for(var c in condition){
-		  con+=(c+'='+condition[c]);
+		  con.push(c+'='+condition[c]);
 	  }
+	  con = con.join(' AND ');
 	  sql = sql.replace('{TABLE}',table);
 	  sql = sql.replace('{CONDITION}',con);
 
@@ -44,8 +45,19 @@ var Mysql = {
 	  });
 	},
 
-	getAll:function(){
-	
+	getAll:function(table,condition,callback){
+	  var sql = 'SELECT * FROM {TABLE} WHERE {CONDITION}';
+	  var con = [];
+	  for(var c in condition){
+		  con.push(c+'='+condition[c]);
+	  }
+	  con = con.join(' AND ');
+	  sql = sql.replace('{TABLE}',table);
+	  sql = sql.replace('{CONDITION}',con);
+
+	  this.query(sql,function(rows,fields){
+		callback(rows);
+	  });
 	}
 
 }
