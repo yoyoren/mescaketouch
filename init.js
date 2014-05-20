@@ -75,10 +75,12 @@ app.get('/cake',function(req,res){
 	  pageview.getGoodsDetailData(goodsId,function(d){
 		var tmpl = fs.readFileSync('./tmpl/cake_'+goodsId+'.htm','utf-8');
 		tmpl = tmpl.replace(/\{STATIC_DOMAIN\}/gi,STATIC_DOMAIN);
+		
 		Res.page(res,{
 			view:'goods_detail',
 			goodsId:goodsId,
-			goods:d,
+			goods:d.goods,
+			matrial:d.goodsattr.attr_value,
 			tmpl:tmpl
 		});
 		

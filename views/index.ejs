@@ -5,6 +5,7 @@
   <% include includes/head_script %>
   <link rel="stylesheet" type="text/css" href="<%=STATIC_DOMAIN%>css/homev2.css" />
   <link rel="stylesheet" type="text/css" href="<%=STATIC_DOMAIN%>css/home-wap.css" />
+ <link rel="stylesheet" type="text/css" href="<%=STATIC_DOMAIN%>touch/animate.css" />
 </head>
 <body>
   <% include includes/header %>
@@ -30,7 +31,7 @@
          <div class="clearfix">
          <%for(var m=0;m<catoData[i].cato[j].data.length;m++){%>
 		<div class="pro-list-item">
-		  <a href="/cake?id=<%=goodsData[catoData[i].cato[j].data[m]].goods_id%>"><img src="<%=goodsData[catoData[i].cato[j].data[m]].url%>"></a>
+		  <a href="/cake?id=<%=goodsData[catoData[i].cato[j].data[m]].goods_id%>"><img style="display:none" data-src="<%=goodsData[catoData[i].cato[j].data[m]].url%>" src="http://s1.static.mescake.com/css/img/blank.gif" class="lazyload"></a>
 		  <h5><%=goodsData[catoData[i].cato[j].data[m]].goods_name%></h5>
 		  <p><%=goodsData[catoData[i].cato[j].data[m]].goods_desc%></p>
 		</div>
@@ -43,4 +44,32 @@
   </div>
   <% include includes/footer_nav %>
 </body>
+<script>
+(function(){
+	var lazyloadImage = $('.lazyload');
+	var max = 8;
+	for(var i=0;i<max;i++){
+	    lazyloadImage[i].onload = function(){
+		this.className='animated fadeIn';
+		this.style.display = 'block';
+	    }
+	    lazyloadImage[i].src = lazyloadImage[i].getAttribute('data-src');
+	}
+	$(window).scroll(function(){
+		var lazyloadImage = $('.lazyload');
+		for(var i=0;i<lazyloadImage.length;i++){
+		    lazyloadImage[i].onload = function(){
+			this.className='animated fadeIn';
+			this.style.display = 'block';
+		    }
+
+		    lazyloadImage[i].onerror = function(){
+			$(this).remove();
+		    }
+		    lazyloadImage[i].src = lazyloadImage[i].getAttribute('data-src');
+		}
+	});
+})();
+
+</script>
 </html>

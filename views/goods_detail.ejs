@@ -10,20 +10,15 @@
   <% include includes/header %>
   <p class="wap-pro-tip">* 产品照片为2磅蛋糕实物</p>
   <div class="wap-price-area">
-    <p class="buy-price"><%=goods.goods_name%>  <em>￥</em><span id="display_price">0</span></p>
-    <div class="wap-price-intro">请选择蛋糕尺寸<em class="check-down-ico"></em></div>
-    <div class="wap-check-area hide">
-      <em class="check-btn">5.0磅：约13x13cm[适合15-5人]</em>
-      <em class="check-btn">10磅：约13x13cm[适合30-40人]</em>
-      <em class="check-btn">15磅：约13x13cm[适合40-50人]</em>
-      <em class="check-btn">20磅：约13x13cm[适合60-70人]</em>
-      <em class="check-btn checked">25磅：约13x13cm[适合80-90人]</em>
-      <em class="check-btn">30磅：约13x13cm[适合100+人]</em>
+    <p class="buy-price"><%=goods.goods_name%><em>￥</em><span id="display_price">0</span></p>
+    <div class="wap-price-intro" id="attr_sel">请选择蛋糕尺寸<em class="check-down-ico"></em></div>
+    <div class="wap-check-area" style="display:none" id="sel_list">
       <p class="wap-check-tip">5磅以上蛋糕请提前24小时订购或致电客服咨询</p>
     </div>
   </div>
   <div class="wap-bug-btn">
-    <a href="" class="btn big-btn status1-btn">立即购买</a><a href="" class="btn big-btn">加入购物车</a>
+    <a href="#" id="buy_now" class="btn big-btn status1-btn">立即购买</a>
+    <a href="#" id="add_to_cart" class="btn big-btn">加入购物车</a>
   </div>
 
   <%-tmpl%>
@@ -33,7 +28,7 @@
         <div class="ma-title">
           <p class="mat-1">原材料</p>
         </div>
-        <p class="ma-intro">荔枝、茉莉花酱、乳脂奶油、芝士、荔枝酒</p>
+        <p class="ma-intro"><%=matrial%></p>
         <div class="ma-ico-area tl-c">
           <p><em class="ma-ico1"></em>含酒</p>
           <p class="marl-20"><em class="ma-ico2"></em>包含进口原料</p>
@@ -61,5 +56,42 @@
     </div>
   </div>
   <% include includes/footer %>
+  <script>
+  var id = '<%=goods.goods_id%>';
+  var container = $('#sel_list');
+  $.get('getGoodsAttrAnsyc',{id:id},function(d){
+	var data = d.data;
+	var html = '';
+	for(var i=0;i<data.length;i++){
+		html+='<em class="check-btn" data-id="'+data[i].attr_id+'" data-price="'+data[i].attr_price+'">'+data[i].attr_value+'</em>';
+	}
+	container.prepend(html);
+	$(container.find('em')[0]).trigger('click');
+  });
+
+  $('#attr_sel').click(function(){
+	if(container.css('display')=='none'){
+		container.show();
+	}else{
+		container.hide();
+	}
+  });
+
+  container.delegate('em','click',function(){
+	var _this = $(this);
+	var price = _this.data('price');
+	$('#display_price').html(price);
+	container.find('em').removeClass('checked');
+	_this.addClass('checked');
+  });
+
+  $('#buy_now').click(function(){
+  
+  });
+
+  $('#add_to_cart').click(function(){
+  
+  });
+  </script>
 </body>
 </html>
