@@ -25,7 +25,7 @@
          <a class="pro-list-title" name="<%=catoData[i].cato[j].name%>"><%=catoData[i].cato[j].title%></a>
          <div class="clearfix">
          <%for(var m=0;m<catoData[i].cato[j].data.length;m++){%>
-	       <%if(goodsData[catoData[i].cato[j].data[m]]){%>\
+	       <%if(goodsData[catoData[i].cato[j].data[m]]){%>
 		<div class="pro-list-item">
 		  <a href="/cake?id=<%=goodsData[catoData[i].cato[j].data[m]].goods_id%>"><img style="display:none" data-src="<%=goodsData[catoData[i].cato[j].data[m]].url%>" src="http://s1.static.mescake.com/css/img/blank.gif" class="lazyload"></a>
 		  <h5><%=goodsData[catoData[i].cato[j].data[m]].goods_name%></h5>
