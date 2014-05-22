@@ -1,13 +1,51 @@
-
 <!DOCTYPE html>
 <html>
 <head>
   <% include includes/head_script %>
   <link rel="stylesheet" type="text/css" href="<%=STATIC_DOMAIN%>css/homev2.css" />
-  <link rel="stylesheet" type="text/css" href="<%=STATIC_DOMAIN%>css/home-wap.css" />
+  <link rel="stylesheet" type="text/css" href="<%=STATIC_DOMAIN%>css/home-wap.css"/>
+  <style>
+  body{width:100%;height:100%;overflow:hidden}
+  .app-main {
+         position:relative;
+	 height:100%;
+	 width:100%;
+	 overflow:hidden;
+	 -webkit-box-shadow: 0 0 4px rgba(0,0,0,.4);
+	 box-shadow: 0 0 4px rgba(0,0,0,.4);
+	 -webkit-transform: translate3d(0,0,0);
+	 transform: translate3d(0,0,0);
+	 -webkit-transition: -webkit-transform 400ms ease;
+  }
+  
+  .sidebar-left-in {
+	-webkit-transform: translate3d(-440px,0,0);
+	transform: translate3d(-440px,0,0);
+   }
+
+   .sidebar-left-in {
+	-webkit-transform: translate3d(-300px,0,0);
+	transform: translate3d(-300px,0,0);
+	-webkit-transition: -webkit-transform 400ms ease;
+	-moz-transition: -moz-transform 400ms ease;
+	-o-transition: -o-transform 400ms ease;
+	transition: transform 400ms ease;
+   }
+   .app-nav {position:absolute;top:0px;left:0px;}
+   .app-bottom{position:absolute;top:auto;bottom:0px;left:0px;}
+  </style>
 </head>
 <body>
-  <% include includes/header %>
+<div id="right_bar" style="position:absolute;width:300px;height:100%;top:0px;right:0px;background: #555;">
+
+</div>
+<div id="app_main" class='app-main app-nav'>
+  <div class="return-area" href="/">
+	<a href='/'><em class="ra-ico"></em><span class="ra-con">每实</span></a>
+	<em class="wap-func-more-ico" id="menu_button"></em>
+  </div>
+
+  <script type="tmpl" id="operate">
   <p class="wap-pro-tip">* 产品照片为2磅蛋糕实物</p>
   <div class="wap-price-area">
     <p class="buy-price"><%=goods.goods_name%><em>￥</em><span id="display_price">0</span></p>
@@ -16,82 +54,137 @@
       <p class="wap-check-tip">5磅以上蛋糕请提前24小时订购或致电客服咨询</p>
     </div>
   </div>
-  <div class="wap-bug-btn">
+  </script>
+  
+  <div class="wap-bug-btn app-bottom">
     <a href="#" id="buy_now" class="btn big-btn status1-btn">立即购买</a>
     <a href="#" id="add_to_cart" class="btn big-btn">加入购物车</a>
   </div>
+  
+  <div style="display:block;height:100%;overflow:scroll;">
+       <div style="padding-top:40px;padding-bottom:40px;">
+	  <%-tmpl%>
+	  <div class="material-area"> 
+	    <div class="material-inner clearfix">
+	      <div class="ma-item1">
+		<div class="ma-title">
+		  <p class="mat-1">原材料</p>
+		</div>
+		<p class="ma-intro"><%=matrial%></p>
+		<div class="ma-ico-area tl-c">
+		  <p><em class="ma-ico1"></em>含酒</p>
+		  <p class="marl-20"><em class="ma-ico2"></em>包含进口原料</p>
+		</div>
+	      </div>
+	      <div class="ma-item2">
+		<div class="ma-title">
+		  <p class="mat-2">保鲜</p>
+		</div>
+		<p class="ma-intro">0-4℃，冷藏保鲜24小时</p>
+		<div class="ma-ico-area tl-c">
+		  <p><em class="ma-ico3"></em>最佳食用温度10℃</p>
+		</div>
+	      </div>
+	      <div class="ma-item3">
+		<div class="ma-title">
+		  <p class="mat-3">送货</p>
+		</div>
+		<p class="ma-intro">北京市五环内免费送货</p>
+		<div class="ma-ico-area">
+		  <p class="clearfix"><em class="ma-ico4"></em>蛋糕在收到后2-3小时内食用最佳,如对本蛋糕
+	食材有过敏经历者，请选择其他款蛋糕</p>
+		</div>
+	      </div>
+	    </div>
+	  </div>
 
-  <%-tmpl%>
-  <div class="material-area"> 
-    <div class="material-inner clearfix">
-      <div class="ma-item1">
-        <div class="ma-title">
-          <p class="mat-1">原材料</p>
-        </div>
-        <p class="ma-intro"><%=matrial%></p>
-        <div class="ma-ico-area tl-c">
-          <p><em class="ma-ico1"></em>含酒</p>
-          <p class="marl-20"><em class="ma-ico2"></em>包含进口原料</p>
-        </div>
-      </div>
-      <div class="ma-item2">
-        <div class="ma-title">
-          <p class="mat-2">保鲜</p>
-        </div>
-        <p class="ma-intro">0-4℃，冷藏保鲜24小时</p>
-        <div class="ma-ico-area tl-c">
-          <p><em class="ma-ico3"></em>最佳食用温度10℃</p>
-        </div>
-      </div>
-      <div class="ma-item3">
-        <div class="ma-title">
-          <p class="mat-3">送货</p>
-        </div>
-        <p class="ma-intro">北京市五环内免费送货</p>
-        <div class="ma-ico-area">
-          <p class="clearfix"><em class="ma-ico4"></em>蛋糕在收到后2-3小时内食用最佳,如对本蛋糕
-食材有过敏经历者，请选择其他款蛋糕</p>
-        </div>
-      </div>
-    </div>
   </div>
-  <% include includes/footer %>
+
+</div>
   <script>
-  var id = '<%=goods.goods_id%>';
-  var container = $('#sel_list');
-  $.get('getGoodsAttrAnsyc',{id:id},function(d){
-	var data = d.data;
-	var html = '';
-	for(var i=0;i<data.length;i++){
-		html+='<em class="check-btn" data-id="'+data[i].attr_id+'" data-price="'+data[i].attr_price+'">'+data[i].attr_value+'</em>';
-	}
-	container.prepend(html);
-	$(container.find('em')[0]).trigger('click');
-  });
-
-  $('#attr_sel').click(function(){
-	if(container.css('display')=='none'){
-		container.show();
-	}else{
-		container.hide();
-	}
-  });
-
-  container.delegate('em','click',function(){
-	var _this = $(this);
-	var price = _this.data('price');
-	$('#display_price').html(price);
-	container.find('em').removeClass('checked');
-	_this.addClass('checked');
-  });
-
-  $('#buy_now').click(function(){
-  
-  });
-
-  $('#add_to_cart').click(function(){
-  
-  });
+   window.GOODS_ID = '<%=goods.goods_id%>';
   </script>
+  <script>
+  (function(){
+	 $('#menu_button').click(function(){
+	   if($('#app_main').hasClass('sidebar-left-in')){
+		$('#app_main').removeClass('sidebar-left-in');
+	   }else{
+		$('#app_main').addClass('sidebar-left-in');
+	   }
+	 });
+
+	  $('.sia_01').after($('#operate').html());
+	  var id = '<%=goods.goods_id%>';
+	  var container = $('#sel_list');
+	  $.get('getGoodsAttrAnsyc',{id:id},function(d){
+		var data = d.data;
+		var html = '';
+		for(var i=0;i<data.length;i++){
+			html+='<em class="check-btn" data-id="'+data[i].goods_attr_id+'" data-price="'+data[i].attr_price+'">'+data[i].attr_value+'</em>';
+		}
+		container.prepend(html);
+		$(container.find('em')[0]).trigger('click');
+	  });
+
+	  $('#attr_sel').click(function(){
+		if(container.css('display')=='none'){
+			container.show();
+		}else{
+			container.hide();
+		}
+	  });
+
+	  container.delegate('em','click',function(){
+		
+		var _this = $(this);
+		var price = _this.data('price');
+		window.ATTR = _this.data('id');
+		$('#display_price').html(price);
+		container.find('em').removeClass('checked');
+		_this.addClass('checked');
+	  });
+	  function add_to_cart(callback){
+	    var goods = {};
+	    var spec_arr = [];
+	    var fittings_arr = [];
+	    var number = 1;
+	    var quick = 0;
+
+	    // 检查是否有商品规格
+	    goods.quick = 1;
+	    //商品重量
+	    goods.spec = window.ATTR||[];
+	    goods.goods_id = window.GOODS_ID;
+	    //数量
+	    goods.number = 1;
+	    goods.parent = 0;
+	    M.post('route.php?mod=order&action=add_to_cart',{
+		mod:'order',
+		action:'add_to_cart',
+		goods : JSON.stringify(goods),
+		goods_id : window.GOODS_ID,
+		parent_id :0,
+		is_cut:0
+	    },function(d){
+		callback();
+	    });	    
+	  }
+	  $('#buy_now').click(function(){
+		add_to_cart(function(){
+		   location.href = 'http://www.mescake.com/checkout'
+		});
+		return false;
+	  });
+
+	  $('#add_to_cart').click(function(){
+		add_to_cart(function(){
+			alert('添加成功!');
+		});
+		return false;
+	  });
+  })();
+  </script>
+  
 </body>
 </html>

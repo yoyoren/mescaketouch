@@ -72,18 +72,29 @@ app.get('/getGoodsAttrAnsyc',function(req,res){
 app.get('/cake',function(req,res){
 	  var pageview = require('./lib/pageview.js').PageView;
 	  var goodsId = req.query.id;
-	  pageview.getGoodsDetailData(goodsId,function(d){
-		var tmpl = fs.readFileSync('./tmpl/cake_'+goodsId+'.htm','utf-8');
-		tmpl = tmpl.replace(/\{STATIC_DOMAIN\}/gi,STATIC_DOMAIN);
-		
-		Res.page(res,{
-			view:'goods_detail',
-			goodsId:goodsId,
-			goods:d.goods,
-			matrial:d.goodsattr.attr_value,
-			tmpl:tmpl
-		});
-		
+	  pageview.getGoodsDetailData(goodsId,function(d,err){
+		if(err){
+			res.redirect('/');
+		}else{
+			var filePath = './tmpl/cake_'+goodsId+'.htm';
+			fs.exists(filePath, function(exists) {
+				if(exists){
+					var tmpl = fs.readFileSync(filePath,'utf-8');
+					tmpl = tmpl.replace(/\{STATIC_DOMAIN\}/gi,STATIC_DOMAIN);
+					
+					Res.page(res,{
+						view:'goods_detail',
+						goodsId:goodsId,
+						goods:d.goods,
+						matrial:d.goodsattr.attr_value,
+						tmpl:tmpl
+					});
+				}else{
+					res.redirect('/');
+				}
+			});
+
+		}
 	  });
 		
 

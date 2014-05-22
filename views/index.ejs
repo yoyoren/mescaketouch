@@ -10,16 +10,11 @@
 <body>
   <% include includes/header %>
   <div class="wap-btn-area">
-    <a href="" class="wap-btn">爱的许诺</a> 
-    <a href="" class="wap-btn">一起旅行</a> 
-    <a href="" class="wap-btn">献给品赏家</a> 
-    <a href="" class="wap-btn">献给爱人</a> 
-    <a href="" class="wap-btn">献给旅行家</a> 
-    <a href="" class="wap-btn">环球经典</a> 
-    <a href="" class="wap-btn">异国风味</a> 
-    <a href="" class="wap-btn">分享时刻</a> 
-    <a href="" class="wap-btn">来点气氛</a> 
-    <a href="" class="wap-btn">梦想家</a> 
+    <%for(var i in catoData){%>
+       <%for(var j=0;j<catoData[i].cato.length;j++){%>
+          <a href="#<%=catoData[i].cato[j].name%>" class="wap-btn"><%=catoData[i].cato[j].title.split('/').pop()%></a> 
+       <%}%>
+    <%}%>
   </div>
   <!-- for-love  for-happy for-dream -->
   <div class="pro-content-area">
@@ -27,7 +22,7 @@
     <div class="pro-list-area fl-l">
       <%for(var i in catoData){%>
        <%for(var j=0;j<catoData[i].cato.length;j++){%>
-         <h4 class="pro-list-title"><%=catoData[i].cato[j].title%></h4>
+         <a class="pro-list-title" name="<%=catoData[i].cato[j].name%>"><%=catoData[i].cato[j].title%></a>
          <div class="clearfix">
          <%for(var m=0;m<catoData[i].cato[j].data.length;m++){%>
 		<div class="pro-list-item">
