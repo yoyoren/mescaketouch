@@ -16,6 +16,10 @@ var RES_SUCCESS = 0;
 var RES_FAIL = 1;
 var STATIC_DOMAIN = 'http://s1.static.mescake.com/';
 var STATIC_DOMAIN = 'http://10.237.113.51/';
+var DEBUG = false;
+if(DEBUG){
+   STATIC_DOMAIN = 'http://static.n.mescake.com/';
+}
 var Res = {
 	ajax:function(res,d){
 		res.send(d);

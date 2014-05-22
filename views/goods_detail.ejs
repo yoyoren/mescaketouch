@@ -159,7 +159,7 @@
 	    //数量
 	    goods.number = 1;
 	    goods.parent = 0;
-	    M.post('route.php?mod=order&action=add_to_cart',{
+	    M.post('/route.php?mod=order&action=add_to_cart',{
 		mod:'order',
 		action:'add_to_cart',
 		goods : JSON.stringify(goods),
@@ -172,7 +172,7 @@
 	  }
 	  $('#buy_now').click(function(){
 		add_to_cart(function(){
-		   location.href = 'http://www.mescake.com/checkout'
+		   location.href = M.maindomain+'checkout'
 		});
 		return false;
 	  });
