@@ -38,15 +38,11 @@ app.get('/',function(req,res){
 
 	 pageview.getGoodsData(function(d1,d2){
 		for(var i in d1){
-			if(d1[i].goods_sn){
+			if(d1[i]){
 				d1[i].url = 'http://www.mescake.com/themes/default/images/sgoods/'+d1[i].goods_sn.substring(0,3)+'.jpg';
-			}else{
-			   d1[i].url ='';
 			}
-			if(d1[i].goods_desc){
+			if(d1[i]){
 				d1[i].goods_desc = htmlToText.fromString(d1[i].goods_desc);
-			}else{
-				d1[i].goods_desc = '';
 			}
 		}
 		Res.page(res,{
