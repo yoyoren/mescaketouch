@@ -160,8 +160,6 @@
 	    goods.number = 1;
 	    goods.parent = 0;
 	    M.post('/route.php?mod=order&action=add_to_cart',{
-		mod:'order',
-		action:'add_to_cart',
 		goods : JSON.stringify(goods),
 		goods_id : window.GOODS_ID,
 		parent_id :0,
