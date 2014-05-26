@@ -3,12 +3,13 @@
 <head>
   <title>产品分类</title>
   <% include includes/head_script %>
-  <link rel="stylesheet" type="text/css" href="<%=STATIC_DOMAIN%>css/homev2.css" />
   <link rel="stylesheet" type="text/css" href="<%=STATIC_DOMAIN%>css/home-wap.css" />
  <link rel="stylesheet" type="text/css" href="<%=STATIC_DOMAIN%>touch/animate.css" />
 </head>
 <body>
+<div id="app_main" class="app-main app-nav">
   <% include includes/header %>
+  <div class="scroll-area" style="padding-top:60px;">
   <div class="wap-btn-area">
     <%for(var i in catoData){%>
        <%for(var j=0;j<catoData[i].cato.length;j++){%>
@@ -39,7 +40,9 @@
     </div>
    </div>
   </div>
+</div>
   <% include includes/footer_nav %>
+</div>
 </body>
 <script>
 (function(){
@@ -52,7 +55,7 @@
 	    }
 	    lazyloadImage[i].src = lazyloadImage[i].getAttribute('data-src');
 	}
-	$(window).scroll(function(){
+	$('.scroll-area').scroll(function(){
 		var lazyloadImage = $('.lazyload');
 		for(var i=0;i<lazyloadImage.length;i++){
 		    lazyloadImage[i].onload = function(){

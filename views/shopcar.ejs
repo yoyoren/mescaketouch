@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>产品分类</title>
+  <% include includes/head_script %>
+  <link rel="stylesheet" type="text/css" href="<%=STATIC_DOMAIN%>css/home-wap.css" />
+  <link rel="stylesheet" type="text/css" href="<%=STATIC_DOMAIN%>css/dialog.css" />
+  <link rel="stylesheet" type="text/css" href="<%=STATIC_DOMAIN%>css/dialog-wap.css" />
+</head>
+<body>
+ <div id="app_main" class="app-main app-nav">
+    <div class="return-area"><a href=""><em class="ra-ico"></em><span class="ra-con">订单确认</span></a><em class="wap-func-more-ico" id="menu_button"></em></div>
+    <div class="scroll-area">
+      <h4 class="wap-order-title-item">订单信息</h4>
+      <p class="wap-total-price" id="order_price">￥388元</p>
+    </div>
+    <div class="wap-total-btn-area tl-c">
+      <p>共<span id="staff_count">0</span>件商品，总计<span id="total_price"></span>元</p><p>
+      <a href="#" class="btn big-btn status1-btn">去结算</a>
+    </p></div>
+  </div>
+ <script src="<%=STATIC_DOMAIN%>touch/page/shopcar.js"></script>
+
+</body>  
+</html>

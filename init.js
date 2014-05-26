@@ -76,6 +76,41 @@ app.get('/getGoodsAttrAnsyc',function(req,res){
 	 });
 });
 
+app.get('/login',function(req,res){
+	Res.page(res,{
+		view:'login'
+	});
+});
+
+app.get('/account',function(req,res){
+	Res.page(res,{
+		view:'account'
+	});
+});
+
+app.get('/myorder',function(req,res){
+	Res.page(res,{
+		view:'myorder'
+	});
+});
+
+app.get('/orderdetail',function(req,res){
+	Res.page(res,{
+		view:'orderdetail'
+	});
+});
+
+app.get('/register',function(req,res){
+	Res.page(res,{
+		view:'register'
+	});
+});
+
+app.get('/shopcar',function(req,res){
+	Res.page(res,{
+		view:'shopcar'
+	});
+});
 
 app.get('/cake',function(req,res){
 	  var pageview = require('./lib/pageview.js').PageView;

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>我的订单列表</title>
+  <% include includes/head_script %>
+  <link rel="stylesheet" type="text/css" href="<%=STATIC_DOMAIN%>css/home-wap.css" />
+  <link rel="stylesheet" type="text/css" href="<%=STATIC_DOMAIN%>css/dialog.css" />
+  <link rel="stylesheet" type="text/css" href="<%=STATIC_DOMAIN%>css/dialog-wap.css" />
+</head>
+<body>
+<div id="app_main" class="app-main app-nav">
+  <div class="return-area" href="/">
+    <a href='/'><em class="ra-ico"></em><span class="ra-con">我的订单</span></a>
+    <em class="wap-func-more-ico" id="menu_button"></em>
+  </div>
+  <div class="scroll-area">
+    <div class="content-area" id="container">
+      
+    </div>
+  </div>
+  <% include includes/footer_nav %>
+  <script>
+	M.loading();
+  </script>
+  <script src="<%=STATIC_DOMAIN%>touch/page/myorder.js"></script>
+</div>
+</body>
+</html>

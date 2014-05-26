@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>我的账户</title>
+  <% include includes/head_script %>
+  <link rel="stylesheet" type="text/css" href="<%=STATIC_DOMAIN%>css/home-wap.css" />
+  <link rel="stylesheet" type="text/css" href="<%=STATIC_DOMAIN%>css/dialog.css" />
+  <link rel="stylesheet" type="text/css" href="<%=STATIC_DOMAIN%>css/dialog-wap.css" />
+</head>
+<body>
+<div id="app_main" class="app-main app-nav">
+  <div class="return-area" href="/">
+  <a href='/'><em class="ra-ico"></em><span class="ra-con">我的账户</span></a>
+  <em class="wap-func-more-ico" id="menu_button"></em>
+  </div>
+  <div class="scroll-area">
+    <div class="content-area">
+      <div class="content">
+        <div class="acc-box">
+          <div class="acc-item"><p class="acc-p1">手机号码：<span id="phone">0</span></p>
+            <a href="" class="btn status1-btn">修改</a>
+          </div>
+          <div class="acc-item"><p class="acc-p1">登录密码：********* </p>
+            <a href="" class="btn status1-btn">修改</a>
+          </div>
+          <div class="list-line" style="margin:20px 0;"></div>
+          <div class="acc-item"><p class="acc-p1">账户余额：<span id="money">256</span>元</p><p>余额可以直接抵扣消费<a href="" class="acc-link">礼品卡充值</a></p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<% include includes/footer_nav %>
+<script>
+M.loading();
+(function(){
+	M.get('route.php?mod=account&action=get_users_info',{},function(d){
+		var data = d.info[0];
+		$('#phone').html(data.mobile_phone);
+		$('#money').html(data.user_money);
+		M.loadingEnd();
+	});
+})();
+</script>
+</body>
+</html>
