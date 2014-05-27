@@ -128,6 +128,24 @@ app.get('/forgetpassword',function(req,res){
 	});
 });
 
+app.get('/changepassword',function(req,res){
+	Res.page(res,{
+		view:'changepassword'
+	});
+});
+
+app.get('/changemobile',function(req,res){
+	Res.page(res,{
+		view:'changemobile'
+	});
+});
+
+app.get('/charge',function(req,res){
+	Res.page(res,{
+		view:'charge'
+	});
+});
+
 app.get('/register',function(req,res){
 	Res.page(res,{
 		view:'register'

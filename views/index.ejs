@@ -28,7 +28,9 @@
          <%for(var m=0;m<catoData[i].cato[j].data.length;m++){%>
 	       <%if(goodsData[catoData[i].cato[j].data[m]]){%>
 		<div class="pro-list-item">
-		  <a href="/cake?id=<%=goodsData[catoData[i].cato[j].data[m]].goods_id%>"><img style="display:none" data-src="<%=goodsData[catoData[i].cato[j].data[m]].url%>" src="http://s1.static.mescake.com/css/img/blank.gif" class="lazyload"></a>
+		  <a href="/cake?id=<%=goodsData[catoData[i].cato[j].data[m]].goods_id%>">
+		  <canvas class="lazyload" id="cvs_<%=i%>_<%=j%>_<%=m%>" data-src="<%=goodsData[catoData[i].cato[j].data[m]].url%>" style="margin:0 auto;position: relative;z-index: 1;width: 140px;"></canvas>
+		  </a>
 		  <h5><%=goodsData[catoData[i].cato[j].data[m]].goods_name%></h5>
 		  <p><%=goodsData[catoData[i].cato[j].data[m]].goods_desc%></p>
 		</div>
@@ -46,28 +48,31 @@
 </body>
 <script>
 (function(){
-	var lazyloadImage = $('.lazyload');
-	var max = 8;
-	for(var i=0;i<max;i++){
-	    lazyloadImage[i].onload = function(){
-		this.className='animated fadeIn';
-		this.style.display = 'block';
-	    }
-	    lazyloadImage[i].src = lazyloadImage[i].getAttribute('data-src');
-	}
-	$('.scroll-area').scroll(function(){
+	var renderCvs = function(max){
 		var lazyloadImage = $('.lazyload');
-		for(var i=0;i<lazyloadImage.length;i++){
-		    lazyloadImage[i].onload = function(){
-			this.className='animated fadeIn';
-			this.style.display = 'block';
+		var max = max||lazyloadImage.length;
+		for(var i=0;i<max;i++){
+		    var img = new Image();
+		    img.id = lazyloadImage[i].id;
+		    img.onload = function(){
+			var zCvs = $('#'+this.id);
+			var domCvs = zCvs[0];
+			var cvs = domCvs.getContext('2d');
+			domCvs.width = '140';
+			domCvs.height = '108';
+			cvs.drawImage(this,0,0,140,108);
+			domCvs.className='animated fadeIn';
+			domCvs.style.display = 'block';
+			zCvs.removeClass('lazyload');
 		    }
-
-		    lazyloadImage[i].onerror = function(){
-			$(this).remove();
-		    }
-		    lazyloadImage[i].src = lazyloadImage[i].getAttribute('data-src');
+		    img.src = lazyloadImage[i].getAttribute('data-src');
 		}
+	}
+	renderCvs(8);
+	var scrollContainer = $('.scroll-area');
+	scrollContainer.scroll(function(){
+		scrollContainer.unbind('scroll');
+		renderCvs();
 	});
 })();
 
