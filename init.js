@@ -89,14 +89,42 @@ app.get('/account',function(req,res){
 });
 
 app.get('/myorder',function(req,res){
+
 	Res.page(res,{
 		view:'myorder'
 	});
 });
 
-app.get('/orderdetail',function(req,res){
+app.get('/checkout',function(req,res){
+	var  time = (new Date()).getTime();
+	//var time1 = new Date();
 	Res.page(res,{
-		view:'orderdetail'
+		view:'checkout',
+		date:time
+	});
+});
+
+app.get('/done',function(req,res){
+	Res.page(res,{
+		view:'done'
+	});
+});
+
+app.get('/orderdetail',function(req,res){
+	var orderId = req.query.id;
+	if(!orderId){
+		res.redirect('/');
+	}else{
+		Res.page(res,{
+			view:'orderdetail',
+			orderId:orderId
+		});
+	}
+});
+
+app.get('/forgetpassword',function(req,res){
+	Res.page(res,{
+		view:'forgetpassword'
 	});
 });
 

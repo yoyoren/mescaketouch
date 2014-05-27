@@ -1,15 +1,3 @@
-<script>
-M.checklogin(function(d){
-if(d){
-	$('#nav_account').attr('href','/account');
-	$('#nav_my_order').attr('href','/myorder');
-}else{
-	$('#nav_account').attr('href','/login?from=account');
-	$('#nav_my_order').attr('href','/login?from=myorder');
-	
-}
-})
-</script>
 <div class="nav-bar" style="z-index:10000">
     <ul>
       <li><a href="/"><em class="nb-ico-home"></em><span class="nb-span">首页</span></a></li>
@@ -19,11 +7,4 @@ if(d){
       <li><a href="#" id="logout"><em class="nb-ico-logout"></em><span class="nb-span">退出</span></a></li>
     </ul>
   </div>
-<script>
-$('#logout').click(function(){
-  M.loading();
-  M.checkLogout(function(){
-	location.reload();
-  });
-});
-</script>
+  <% include nav_script %>

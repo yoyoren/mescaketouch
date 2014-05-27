@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>结算</title>
+  <% include includes/head_script %>
+  <link rel="stylesheet" type="text/css" href="<%=STATIC_DOMAIN%>css/home-wap.css" />
+  <link rel="stylesheet" type="text/css" href="<%=STATIC_DOMAIN%>css/dialog.css" />
+  <link rel="stylesheet" type="text/css" href="<%=STATIC_DOMAIN%>css/dialog-wap.css" />
+  <style>
+      .date-select{
+		width:25%;
+		background-color: #f6f6f6;
+		border-color: #ddd;
+		color: #333;
+		text-shadow: 0 1px 0 #f3f3f3;
+		margin: .5em 0;
+		padding: .5em .5em;
+		display: block;
+		position: relative;
+		text-align: center;
+		text-overflow: ellipsis;
+		overflow: hidden;
+		white-space: nowrap;
+		cursor: pointer;
+		-webkit-user-select: none;
+		border-radius: .3125em;
+		box-shadow: 0 1px 3px rgba(0,0,0,.15);
+		font-weight: 700;
+		border-width: 1px;
+		border-style: solid;
+		display:inline-block
+		}
+	.date-select select {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		min-height: 1.5em;
+		min-height: 100%;
+		height: 3em;
+		max-height: 100%;
+		outline: 0;
+		-webkit-border-radius: inherit;
+		border-radius: inherit;
+		-webkit-appearance: none;
+		-moz-appearance: none;
+		cursor: pointer;
+		filter: Alpha(Opacity=0);
+		opacity: 0;
+		z-index: 2;
+	}
+	.ui-icon-carat-d:after {
+		top: 50%;
+		margin-top: -11px;
+		content: "";
+		position: absolute;
+		display: block;
+		width: 22px;
+		height: 22px;
+		background-image: url("data:image/svg+xml;charset=US-ASCII,%3C%3Fxml%20version%3D%221.0%22%20encoding%3D%22iso-8859-1%22%3F%3E%3C!DOCTYPE%20svg%20PUBLIC%20%22-%2F%2FW3C%2F%2FDTD%20SVG%201.1%2F%2FEN%22%20%22http%3A%2F%2Fwww.w3.org%2FGraphics%2FSVG%2F1.1%2FDTD%2Fsvg11.dtd%22%3E%3Csvg%20version%3D%221.1%22%20id%3D%22Layer_1%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%20x%3D%220px%22%20y%3D%220px%22%20%20width%3D%2214px%22%20height%3D%2214px%22%20viewBox%3D%220%200%2014%2014%22%20style%3D%22enable-background%3Anew%200%200%2014%2014%3B%22%20xml%3Aspace%3D%22preserve%22%3E%3Cpolygon%20style%3D%22fill%3A%23FFFFFF%3B%22%20points%3D%2211.949%2C3.404%207%2C8.354%202.05%2C3.404%20-0.071%2C5.525%207%2C12.596%2014.07%2C5.525%20%22%2F%3E%3C%2Fsvg%3E");
+		background-color: rgba(0,0,0,.3);
+		background-position: center center;
+		background-repeat: no-repeat;
+		-webkit-border-radius: 1em;
+		border-radius: 1em;
+	}
+      </style>
+</head>
+<body>
+  <% include includes/right_nav %>
+  <div id="app_main" class="app-main app-nav">
+    <div class="return-area">
+	<a href="/"><em class="ra-ico"></em>
+	<span class="ra-con">继续购物</span></a><em class="wap-func-more-ico" id="right_nav_menu_button"></em>
+    </div>
+    <div class="scroll-area">
+      <h4 class="wap-order-title-item">订单信息</h4>
+      <p class="wap-total-price" id="order_price"></p>
+      <div class="wap-order-item" style="padding:10px;">
+        <div class="check-container">
+          <input type="text" id="message_input" name="message_input" class="global-input" placeholder="留言说明（140字以内）" style="margin-bottom:0;"/>
+        </div>
+      </div>
+      <h4 class="wap-order-title-item">送货信息</h4>
+      <p class="wap-little-tip hide">*为保证送货准确性，请您填写正确无误的信息</p>
+      <p class="wap-little-tip hide">如果您之前注册购买过，请<a href="" class="td-u">登录</a>以读取地址信息，并积累积分</p>
+      <div id="address_container"></div>
+      <div class="clearfix pad-l-r10">
+        <em class="check-btn fl-l">添加新地址</em>
+        <em class="wap-more-address fl-r">更多地址<em class="wap-ad-down-ico"></em></em>
+      </div>
+      <h4 class="wap-order-title-item">送货时间</h4>
+      <div class="clearfix pad-l-r10" style="padding-bottom:20px;">
+	<div class="date-select ui-icon-carat-d">
+		<span>2014年</span>
+		<select id="year_sel" type="year">
+		  <option>2014</option>
+		  <option>2015</option>
+		</select>
+	</div>
+	<div class="date-select ui-icon-carat-d">
+		<span>1</span>
+		<select id="month_sel" type="month">
+		  <option>1</option>
+		</select>
+	</div>
+	<div class="date-select ui-icon-carat-d">
+		<span>选择日期</span>
+		<select id="day_sel" type="day">
+
+		</select>
+	</div>
+	<div class="date-select ui-icon-carat-d">
+		<span>选择小时</span>
+		<select id="hour_sel" type="hour">
+		  <option>0</option>
+		</select>
+	</div>
+        <div class="date-select ui-icon-carat-d">
+		<span>选择分钟</span>
+		<select id="minute_sel" type="minute">
+		  <option>0</option>
+		</select>
+	</div>
+        
+      </div>
+      <h4 class="wap-order-title-item">发票</h4>
+      <div class="wap-order-item" style="padding:10px;">
+        <label>开发票<input type="checkbox" class="wap-checkbox-item" style="top:18px;"/></label>
+        <ul class="tt-ul invoice-ul clearfix hide">
+          <li class="clearfix">
+            <div class="l-title">发票类型：</div>
+            <div class="r-con clearfix" style="padding-bottom:20px;">
+              普通发票
+            </div>
+          </li>
+          <li class="clearfix">
+            <div class="l-title">发票抬头：</div>
+            <div class="r-con clearfix" style="padding-bottom:20px;">
+              <label for="personal" class="space"><input type="radio" name="invoice" id="personal" class="radio-item" />个人</label>
+              <label for="company"><input type="radio" name="invoice" id="company" class="radio-item" />公司</label>
+            </div>
+          </li>
+          <li class="clearfix">
+            <div class="l-title lh-input">顾客姓名：</div>
+            <div class="r-con clearfix">
+              <div class="check-container">
+                <input type="password" class="global-input" placeholder="请填写发票打印抬头"/>
+                <span class="tips-container">输入错误</span>
+              </div>
+            </div>
+          </li>
+          <li class="clearfix">
+            <div class="l-title lh-input">公司名称：</div>
+            <div class="r-con clearfix">
+              <div class="check-container">
+                <input type="password" class="global-input" placeholder="请填写发票打印抬头"/>
+                <span class="tips-container">输入错误</span>
+              </div>
+            </div>
+          </li>
+          <li class="clearfix">
+            <div class="l-title">发票内容：</div>
+            <div class="r-con clearfix" style="padding-bottom:20px;">
+              <label for="cake" class="space"><input type="radio" name="invoiceCon" id="cake" class="radio-item" />蛋糕</label>
+              <label for="food"><input type="radio" name="invoiceCon" id="food" class="radio-item" />食品</label>
+            </div>
+          </li>
+        </ul>
+      </div>
+      
+      <h4 class="wap-order-title-item">付款方式</h4>
+      <div class="wap-order-item" style="padding:10px;">
+        <label for="cashon">货到付款
+            <input type="radio" name="payStyle" id="cashon" class="wap-radio-item" />
+        </label>
+      </div>
+      <div class="wap-order-item" style="padding:10px;">
+        <label for="alipay"><input type="radio" name="payStyle" id="alipay" class="wap-radio-item" />支付宝</label>
+      </div>
+      <div class="wap-order-item" style="padding:10px;">
+        <label for="kuaiqian"><input type="radio" name="payStyle" id="kuaiqian" class="wap-radio-item" />快钱</label>
+      </div>
+    </div>
+    <div class="wap-total-btn-area tl-c">
+      <p>总计<span id="total_price"></span>元<p/>
+      <a href="#" id="done_button" class="btn big-btn status1-btn">提交订单</a>
+    </div>
+  </div>
+  <script>
+ (function(){
+  var server_date = '<%=date%>';
+  var time = (new Date(server_date*1));
+  var year = time.getFullYear();
+  var month = time.getMonth()+1;
+  var day = time.getDate();
+  var monthHtml='';
+  var dayHtml='';
+  var jq  ={
+   year_sel:$('#year_sel'),
+   month_sel:$('#month_sel'),
+   day_sel:$('#day_sel')
+
+  }
+  var getSelDate = function(){
+	return year_sel.val()+'-'+month_sel.val()+'-'+day_sel.val();
+  }
+
+  var renderMonth = function(month){
+	var monthHtml='';
+	for(var i=month;i<=12;i++){
+	    monthHtml+='<option value="'+i+'">'+i+'月</option>'
+	}
+	jq.month_sel.html(monthHtml);
+	jq.month_sel.prev().html(month+'月');
+  }
+  renderMonth(month);
+
+  for(var i=day;i<=31;i++){
+     dayHtml+='<option value="'+i+'">'+i+'日</option>'
+  }
+  jq.day_sel.html(dayHtml);
+  jq.day_sel.prev().html(day+'日');
+  jq.year_sel.change(function(){
+	var monthHtml='';
+	if($(this).val()>year){
+	  renderMonth(1);
+	}else{
+	  renderMonth(month);
+	}
+  });
+  $('.date-select').find('select').change(function(){
+    var _this = $(this);
+    var val = _this.val();
+    var type = _this.attr('type');
+    var prefix = '';
+    switch(type){
+	case 'year':prefix='年';break;
+	case 'month':prefix='月';break;
+	case 'day':prefix='日';break;
+	case 'hour':prefix='时';break;
+	case 'minute':prefix='分';break;
+    }
+    _this.prev().html(val+prefix);
+  });
+
+  jqHourSel.change(function(){
+		var date = getSelDate();
+		var temp = CURRENT_TIME.split('-').join('').split(' ');
+		var currentDate = temp[0];
+		var hour = parseInt(temp[1].split(':')[0],10);
+		var minute = parseInt(temp[1].split(':')[1],10);
+		var selDate = date.split('-').join('');
+		var selHour=jqHourSel.val();
+
+		if($(this).val()==22){
+			jqMinuteSel.html('<option value="0">0</option>');
+		}else if(currentDate == selDate){
+			//下当日订单且当前时间不超过半点，送货时间最早为五小时以后的30分的节点，超过半点送货时间最早为六小时以后00分的时间节点
+			if(minute<30 && selHour==hour+5){
+				jqMinuteSel.html('<option value="0">30</option>');
+			}else{
+				jqMinuteSel.html('<option value="0">0</option><option value="30">30</option>');
+			}
+		}else{
+			jqMinuteSel.html('<option value="0">0</option><option value="30">30</option>');
+		}
+	});
+})();
+  </script>
+  <script src="<%=STATIC_DOMAIN%>touch/page/shopcar.js"></script>
+  <script src="<%=STATIC_DOMAIN%>touch/page/checkout.js"></script>
+</body>
+</html>

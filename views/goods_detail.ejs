@@ -5,13 +5,11 @@
   <link rel="stylesheet" type="text/css" href="<%=STATIC_DOMAIN%>css/home-wap.css"/>
 </head>
 <body>
-<div id="right_bar" style="position:absolute;width:300px;height:100%;top:0px;right:0px;background: #555;">
-
-</div>
+<% include includes/right_nav %>
 <div id="app_main" class='app-main app-nav'>
   <div class="return-area" href="/">
 	<a href='/'><em class="ra-ico"></em><span class="ra-con">每实</span></a>
-	<em class="wap-func-more-ico" id="menu_button"></em>
+	<em class="wap-func-more-ico" id="right_nav_menu_button"></em>
   </div>
 
   <script type="tmpl" id="operate">
@@ -72,14 +70,6 @@
   </script>
   <script>
   (function(){
-	 $('#menu_button').click(function(){
-	   if($('#app_main').hasClass('sidebar-left-in')){
-		$('#app_main').removeClass('sidebar-left-in');
-	   }else{
-		$('#app_main').addClass('sidebar-left-in');
-	   }
-	 });
-
 	  $('.sia_01').after($('#operate').html());
 	  var id = '<%=goods.goods_id%>';
 	  var container = $('#sel_list');
@@ -136,7 +126,7 @@
 	  }
 	  $('#buy_now').click(function(){
 		add_to_cart(function(){
-		   location.href = M.mainDomain+'checkout';
+		   location.href = M.touchDomain+'checkout';
 		});
 		return false;
 	  });

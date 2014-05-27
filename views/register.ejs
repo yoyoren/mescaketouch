@@ -11,7 +11,7 @@
   <% include includes/header %>
   <div class="content-area">
     <div class="content">
-      <div class="dialog-con dialog" style="width:320px;">
+      <div class="dialog-con dialog" style="z-index:1900; padding-top:60px;">
         <form>
           <div class="dialog-head">
             <p class="dia-title">新用户注册</p>
@@ -54,8 +54,8 @@
 
 	JQ.get_vaild_code.click(function(){
 		var mobile = $('#username').val();
-		if(!MES.IS_MOBILE(mobile)){
-			MES.inputError('username_error');
+		if(!M.IS_MOBILE(mobile)){
+			M.inputError('username_error');
 			return;
 		}
 		if(VaildLock){
@@ -75,14 +75,11 @@
 			VaildLock = false;
 		},60000);
 		
-		M.post({
-		  mod:'account',
-	          action:'signup_vaild_code',
-		  param:{
+		M.post('route.php?mod=account&action=signup_vaild_code',{
 			mobile:mobile
-		  },
-		  callback:function(d){ }
-		});
+		  },function(d){
+		  
+		  });
 		return false;
 	});
 
@@ -91,32 +88,25 @@
 		var username = $('#username').val();
 		var vaild_code = $('#vaild_code').val();
 		
-		if(!MES.IS_MOBILE(username)){
-			MES.inputError('username_error');
+		if(!M.IS_MOBILE(username)){
+			M.inputError('username_error');
 			return;
 		}
 
 		if(vaild_code.length!=6){
-			MES.inputError('vaildcode_error');
+			M.inputError('vaildcode_error');
 			return;
 		}
 
 		if(password.length<6){
-			MES.inputError('password_error');
+			M.inputError('password_error');
 			return;
 		}
-
-		
-
-		MES.post({
-		  mod:'account',
-		 action:'signup',
-		  param:{
+		M.post('route.php?mod=account&action=signup',{
 			password:password,
 			username:username,
 			'vaild_code':vaild_code
-		  },
-		  callback:function(d){
+		},function(d){
 			if(d.code == 10010){
 				$('#vaildcode_error').show();
 				setTimeout(function(){
@@ -135,8 +125,7 @@
 				require(['ui/confirm'],function(confirm){
 					new confirm('注册失败！可能是你使用的手机号已经被注册！');
 			    });
-			}
-		  }
+		        }
 		});
 		return false;
 	});
