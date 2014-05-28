@@ -20,7 +20,7 @@
             <input type="text" class="global-input slide-code-btn" placeholder="请输入手机号码" style="width:198px;" id="username">
             <span class="tips-container" style="display:none" id="username_error">输入错误</span><!-- 错误信息容器,出现2秒后消失 -->
           </div><a href="#" id="get_vaild_code" class="btn vert-btn code-btn">获取验证码</a>
-	  <a style="display:none" href="#" class="btn vert-btn code-btn" id="vaild_code_sended">验证已发送</a>
+	  <a style="display:none;width:auto" href="#" class="btn vert-btn code-btn" id="vaild_code_sended">已发送</a>
           <div class="check-container">
             <input type="password" class="global-input" placeholder="请输入短信验证码" id="vaild_code">
             <span class="tips-container" style="display:none" id="vaildcode_error">输入错误</span><!-- 错误信息容器,出现2秒后消失 -->
@@ -59,10 +59,8 @@
 			return;
 		}
 		if(VaildLock){
-			require(['ui/confirm'],function(confirm){
-				new confirm('请在60秒之后再新发送验证码');
-			});
-			return;
+		  M.confirm('请在60秒之后再新发送验证码');
+                  return;
 		}
 
 		//防止频繁发送
@@ -115,16 +113,12 @@
 			}
 
 			if(d.code == 0){
-			  require(['ui/alert'],function(alert){
-				 orderAlert = new alert('注册成功！页面将跳转到首页...');
-				 setTimeout(function(){
-					location.href = 'index.htm';
-				 },2000);
-			  });
+			  M.confirm('注册成功！将跳转到首页...');
+			  setTimeout(function(){
+				location.href = '/';
+			  },2000);
 			}else{
-				require(['ui/confirm'],function(confirm){
-					new confirm('注册失败！可能是你使用的手机号已经被注册！');
-			    });
+			   M.confirm('注册失败！可能是你使用的手机号已经被注册！');
 		        }
 		});
 		return false;

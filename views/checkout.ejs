@@ -8,7 +8,7 @@
   <link rel="stylesheet" type="text/css" href="<%=STATIC_DOMAIN%>css/dialog-wap.css" />
   <style>
       .date-select{
-		width:25%;
+		width:26%;
 		background-color: #f6f6f6;
 		border-color: #ddd;
 		color: #333;
@@ -81,13 +81,51 @@
           <input type="text" id="message_input" name="message_input" class="global-input" placeholder="留言说明（140字以内）" style="margin-bottom:0;"/>
         </div>
       </div>
-      <h4 class="wap-order-title-item">送货信息</h4>
+      <h4 class="wap-order-title-item">送货地址</h4>
       <p class="wap-little-tip hide">*为保证送货准确性，请您填写正确无误的信息</p>
       <p class="wap-little-tip hide">如果您之前注册购买过，请<a href="" class="td-u">登录</a>以读取地址信息，并积累积分</p>
+      
+      <div class="wap-add-adress">
+        <p>区域选择：</p>
+	<div class="date-select ui-icon-carat-d">
+		<span>北京市</span>
+		<select id="city_sel" type="city">
+		  <option value="441">北京市</option>
+		</select>
+	</div>
+        <div class="date-select ui-icon-carat-d">
+		<span>选择区</span>
+		<select id="region_sel" type="region">
+		</select>
+	</div>
+	<div class="date-select ui-icon-carat-d">
+		<span>选择街道</span>
+		<select id="district_sel" type="district">
+		</select>
+	</div>
+	<br>
+        <p class="wap-check-tip hide">北京市五环内免费送货，五环外不送货</p>
+        <p>详细地址：</p>
+        <div class="check-container">
+          <input type="text" id="new_address" class="global-input has-bor-input" placeholder="详细地址">
+          <span class="tips-container hide">输入错误</span>
+        </div>
+        <p>收货人：</p>
+        <div class="check-container">
+          <input type="text" id="new_contact" class="global-input has-bor-input" placeholder="收货人姓名">
+          <span class="tips-container hide">输入错误</span><!-- 错误信息容器,出现2秒后消失 -->
+        </div>
+        <p>联系手机：</p>
+        <div class="check-container">
+          <input type="text" id="new_tel" class="global-input has-bor-input" placeholder="联系人的手机号码">
+          <span class="tips-container hide">输入错误</span><!-- 错误信息容器,出现2秒后消失 -->
+        </div>
+      </div>
+
       <div id="address_container"></div>
       <div class="clearfix pad-l-r10">
-        <em class="check-btn fl-l">添加新地址</em>
-        <em class="wap-more-address fl-r">更多地址<em class="wap-ad-down-ico"></em></em>
+        <em class="check-btn fl-l" style="display:none" id="new_address_btn">添加新地址</em>
+        <em class="wap-more-address fl-r" style="display:none" id="more_address_btn">更多地址<em class="wap-ad-down-ico"></em></em>
       </div>
       <h4 class="wap-order-title-item">送货时间</h4>
       <div class="clearfix pad-l-r10" style="padding-bottom:20px;">
@@ -106,9 +144,7 @@
 	</div>
 	<div class="date-select ui-icon-carat-d">
 		<span>选择日期</span>
-		<select id="day_sel" type="day">
-
-		</select>
+		<select id="day_sel" type="day"></select>
 	</div>
 	<div class="date-select ui-icon-carat-d">
 		<span>选择小时</span>
@@ -124,8 +160,8 @@
 	</div>
         
       </div>
-      <h4 class="wap-order-title-item">发票</h4>
-      <div class="wap-order-item" style="padding:10px;">
+      <h4 class="wap-order-title-item hide">发票</h4>
+      <div class="wap-order-item hide" style="padding:10px;">
         <label>开发票<input type="checkbox" class="wap-checkbox-item" style="top:18px;"/></label>
         <ul class="tt-ul invoice-ul clearfix hide">
           <li class="clearfix">
@@ -187,86 +223,21 @@
       <a href="#" id="done_button" class="btn big-btn status1-btn">提交订单</a>
     </div>
   </div>
+						<form action="http://www.mescake.com/flow.php" method="post" id="submit_form">
+							<input type="hidden"  id="leaving_message" name="leaving_message">
+							<input type="hidden" name="pay_id" value="1" id="pay_id">
+							<input type="hidden" name="surplus" value="0.00" id="surplus">
+							<input type="hidden" name="bonus_id" value="请输入10位现金券券号" id="bonus_id">
+							<input type="hidden" name="shipping_fee" value="0.00"  id="shipping_fee">
+							<input type="hidden" name="x" value="97">
+							<input type="hidden" name="y" value="32">
+							<input type="hidden" name="token" value="{$order_token}">
+							<input type="hidden" name="step" value="done">
+						</form>
   <script>
- (function(){
-  var server_date = '<%=date%>';
-  var time = (new Date(server_date*1));
-  var year = time.getFullYear();
-  var month = time.getMonth()+1;
-  var day = time.getDate();
-  var monthHtml='';
-  var dayHtml='';
-  var jq  ={
-   year_sel:$('#year_sel'),
-   month_sel:$('#month_sel'),
-   day_sel:$('#day_sel')
-
-  }
-  var getSelDate = function(){
-	return year_sel.val()+'-'+month_sel.val()+'-'+day_sel.val();
-  }
-
-  var renderMonth = function(month){
-	var monthHtml='';
-	for(var i=month;i<=12;i++){
-	    monthHtml+='<option value="'+i+'">'+i+'月</option>'
-	}
-	jq.month_sel.html(monthHtml);
-	jq.month_sel.prev().html(month+'月');
-  }
-  renderMonth(month);
-
-  for(var i=day;i<=31;i++){
-     dayHtml+='<option value="'+i+'">'+i+'日</option>'
-  }
-  jq.day_sel.html(dayHtml);
-  jq.day_sel.prev().html(day+'日');
-  jq.year_sel.change(function(){
-	var monthHtml='';
-	if($(this).val()>year){
-	  renderMonth(1);
-	}else{
-	  renderMonth(month);
-	}
-  });
-  $('.date-select').find('select').change(function(){
-    var _this = $(this);
-    var val = _this.val();
-    var type = _this.attr('type');
-    var prefix = '';
-    switch(type){
-	case 'year':prefix='年';break;
-	case 'month':prefix='月';break;
-	case 'day':prefix='日';break;
-	case 'hour':prefix='时';break;
-	case 'minute':prefix='分';break;
-    }
-    _this.prev().html(val+prefix);
-  });
-
-  jqHourSel.change(function(){
-		var date = getSelDate();
-		var temp = CURRENT_TIME.split('-').join('').split(' ');
-		var currentDate = temp[0];
-		var hour = parseInt(temp[1].split(':')[0],10);
-		var minute = parseInt(temp[1].split(':')[1],10);
-		var selDate = date.split('-').join('');
-		var selHour=jqHourSel.val();
-
-		if($(this).val()==22){
-			jqMinuteSel.html('<option value="0">0</option>');
-		}else if(currentDate == selDate){
-			//下当日订单且当前时间不超过半点，送货时间最早为五小时以后的30分的节点，超过半点送货时间最早为六小时以后00分的时间节点
-			if(minute<30 && selHour==hour+5){
-				jqMinuteSel.html('<option value="0">30</option>');
-			}else{
-				jqMinuteSel.html('<option value="0">0</option><option value="30">30</option>');
-			}
-		}else{
-			jqMinuteSel.html('<option value="0">0</option><option value="30">30</option>');
-		}
-	});
-})();
+  window.HAS_BIG_STAFF = false;
+  window.HAS_NO_SUGAR_STAFF = false;
+  window.server_date = '<%=date%>';
   </script>
   <script src="<%=STATIC_DOMAIN%>touch/page/shopcar.js"></script>
   <script src="<%=STATIC_DOMAIN%>touch/page/checkout.js"></script>
