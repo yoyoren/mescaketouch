@@ -29,7 +29,7 @@
 	       <%if(goodsData[catoData[i].cato[j].data[m]]){%>
 		<div class="pro-list-item">
 		  <a href="/cake?id=<%=goodsData[catoData[i].cato[j].data[m]].goods_id%>">
-		  <canvas class="lazyload" id="cvs_<%=i%>_<%=j%>_<%=m%>" data-src="<%=goodsData[catoData[i].cato[j].data[m]].url%>" style="margin:0 auto;z-index:1;width: 140px;"></canvas>
+		  <img class="lazyload" id="cvs_<%=i%>_<%=j%>_<%=m%>" src="<%=goodsData[catoData[i].cato[j].data[m]].url%>" style="margin:0 auto;z-index:1;width: 140px;"></canvas>
 		  </a>
 		  <h5><%=goodsData[catoData[i].cato[j].data[m]].goods_name%></h5>
 		  <p><%=goodsData[catoData[i].cato[j].data[m]].goods_desc%></p>
@@ -48,6 +48,7 @@
 </body>
 <script>
 (function(){
+	return;
 	var renderCvs = function(max){
 		var lazyloadImage = $('.lazyload');
 		var max = max||lazyloadImage.length;
