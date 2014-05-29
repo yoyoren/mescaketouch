@@ -55,8 +55,8 @@
 		content: "";
 		position: absolute;
 		display: block;
-		width: 22px;
-		height: 22px;
+		width: 20px;
+		height: 20px;
 		background-image: url("data:image/svg+xml;charset=US-ASCII,%3C%3Fxml%20version%3D%221.0%22%20encoding%3D%22iso-8859-1%22%3F%3E%3C!DOCTYPE%20svg%20PUBLIC%20%22-%2F%2FW3C%2F%2FDTD%20SVG%201.1%2F%2FEN%22%20%22http%3A%2F%2Fwww.w3.org%2FGraphics%2FSVG%2F1.1%2FDTD%2Fsvg11.dtd%22%3E%3Csvg%20version%3D%221.1%22%20id%3D%22Layer_1%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%20x%3D%220px%22%20y%3D%220px%22%20%20width%3D%2214px%22%20height%3D%2214px%22%20viewBox%3D%220%200%2014%2014%22%20style%3D%22enable-background%3Anew%200%200%2014%2014%3B%22%20xml%3Aspace%3D%22preserve%22%3E%3Cpolygon%20style%3D%22fill%3A%23FFFFFF%3B%22%20points%3D%2211.949%2C3.404%207%2C8.354%202.05%2C3.404%20-0.071%2C5.525%207%2C12.596%2014.07%2C5.525%20%22%2F%3E%3C%2Fsvg%3E");
 		background-color: rgba(0,0,0,.3);
 		background-position: center center;
@@ -67,13 +67,10 @@
       </style>
 </head>
 <body>
-  <% include includes/right_nav %>
+  
   <div id="app_main" class="app-main app-nav">
-    <div class="return-area">
-	<a href="/"><em class="ra-ico"></em>
-	<span class="ra-con">继续购物</span></a><em class="wap-func-more-ico" id="right_nav_menu_button"></em>
-    </div>
-    <div class="scroll-area">
+    <% include includes/header_v2 %>
+    <div class="scroll-area" style="padding-bottom:120px;padding-top:60px;">
       <h4 class="wap-order-title-item">订单信息</h4>
       <p class="wap-total-price" id="order_price"></p>
       <div class="wap-order-item" style="padding:10px;">
@@ -84,44 +81,44 @@
       <h4 class="wap-order-title-item">送货地址</h4>
       <p class="wap-little-tip hide">*为保证送货准确性，请您填写正确无误的信息</p>
       <p class="wap-little-tip hide">如果您之前注册购买过，请<a href="" class="td-u">登录</a>以读取地址信息，并积累积分</p>
-      
-      <div class="wap-add-adress">
-        <p>区域选择：</p>
-	<div class="date-select ui-icon-carat-d">
-		<span>北京市</span>
-		<select id="city_sel" type="city">
-		  <option value="441">北京市</option>
-		</select>
-	</div>
-        <div class="date-select ui-icon-carat-d">
-		<span>选择区</span>
-		<select id="region_sel" type="region">
-		</select>
-	</div>
-	<div class="date-select ui-icon-carat-d">
-		<span>选择街道</span>
-		<select id="district_sel" type="district">
-		</select>
-	</div>
-	<br>
-        <p class="wap-check-tip hide">北京市五环内免费送货，五环外不送货</p>
-        <p>详细地址：</p>
-        <div class="check-container">
-          <input type="text" id="new_address" class="global-input has-bor-input" placeholder="详细地址">
-          <span class="tips-container hide">输入错误</span>
-        </div>
-        <p>收货人：</p>
-        <div class="check-container">
-          <input type="text" id="new_contact" class="global-input has-bor-input" placeholder="收货人姓名">
-          <span class="tips-container hide">输入错误</span><!-- 错误信息容器,出现2秒后消失 -->
-        </div>
-        <p>联系手机：</p>
-        <div class="check-container">
-          <input type="text" id="new_tel" class="global-input has-bor-input" placeholder="联系人的手机号码">
-          <span class="tips-container hide">输入错误</span><!-- 错误信息容器,出现2秒后消失 -->
-        </div>
+      <div id="new_address_container" style="display:none">
+	      <div class="wap-add-adress">
+		<p>区域选择：</p>
+		<div class="date-select ui-icon-carat-d">
+			<span>北京市</span>
+			<select id="city_sel" type="city">
+			  <option value="441">北京市</option>
+			</select>
+		</div>
+		<div class="date-select ui-icon-carat-d">
+			<span>选择区</span>
+			<select id="region_sel" type="region">
+			</select>
+		</div>
+		<div class="date-select ui-icon-carat-d" style="display:none">
+			<span>选择街道</span>
+			<select id="district_sel" type="district">
+			</select>
+		</div>
+		<br>
+		<p class="wap-check-tip hide">北京市五环内免费送货，五环外不送货</p>
+		<p>详细地址：</p>
+		<div class="check-container">
+		  <input type="text" id="new_address" class="global-input has-bor-input" placeholder="详细地址">
+		  <span class="tips-container hide">输入错误</span>
+		</div>
+		<p>收货人：</p>
+		<div class="check-container">
+		  <input type="text" id="new_contact" class="global-input has-bor-input" placeholder="收货人姓名">
+		  <span class="tips-container hide">输入错误</span><!-- 错误信息容器,出现2秒后消失 -->
+		</div>
+		<p>联系手机：</p>
+		<div class="check-container">
+		  <input type="text" id="new_tel" class="global-input has-bor-input" placeholder="联系人的手机号码">
+		  <span class="tips-container hide">输入错误</span><!-- 错误信息容器,出现2秒后消失 -->
+		</div>
+	      </div>
       </div>
-
       <div id="address_container"></div>
       <div class="clearfix pad-l-r10">
         <em class="check-btn fl-l" style="display:none" id="new_address_btn">添加新地址</em>
@@ -206,21 +203,21 @@
       </div>
       
       <h4 class="wap-order-title-item">付款方式</h4>
-      <div class="wap-order-item" style="padding:10px;">
-        <label for="cashon">货到付款
-            <input type="radio" name="payStyle" id="cashon" class="wap-radio-item" />
+      <div class="wap-order-item pay_container" style="padding:10px;" id="cash_container" data-id="1">
+        <label for="cashon" >货到付款
+            <input type="radio" name="payStyle" id="cashon" class="wap-radio-item" checked="true"/>
         </label>
       </div>
-      <div class="wap-order-item" style="padding:10px;">
+      <div class="wap-order-item pay_container" style="padding:10px;" id="alipay_container" data-id="3">
         <label for="alipay"><input type="radio" name="payStyle" id="alipay" class="wap-radio-item" />支付宝</label>
       </div>
-      <div class="wap-order-item" style="padding:10px;">
+      <div class="wap-order-item pay_container" style="padding:10px;" id="kuaiqian_container" data-id="4">
         <label for="kuaiqian"><input type="radio" name="payStyle" id="kuaiqian" class="wap-radio-item" />快钱</label>
       </div>
     </div>
     <div class="wap-total-btn-area tl-c">
-      <p>总计<span id="total_price"></span>元<p/>
-      <a href="#" id="done_button" class="btn big-btn status1-btn">提交订单</a>
+      <p>总计<span id="total_price"></span>元<span style="display:none" id="shipping_fee_display">(含10元运费)</span><p/>
+      <a href="#" id="done_button" class="btn status1-btn">提交订单</a>
     </div>
   </div>
 						<form action="http://www.mescake.com/flow.php" method="post" id="submit_form">
@@ -231,15 +228,17 @@
 							<input type="hidden" name="shipping_fee" value="0.00"  id="shipping_fee">
 							<input type="hidden" name="x" value="97">
 							<input type="hidden" name="y" value="32">
-							<input type="hidden" name="token" value="{$order_token}">
+							<input type="hidden" name="token" value="from_mobile">
 							<input type="hidden" name="step" value="done">
 						</form>
   <script>
   window.HAS_BIG_STAFF = false;
   window.HAS_NO_SUGAR_STAFF = false;
   window.server_date = '<%=date%>';
+  M.loading();
   </script>
-  <script src="<%=STATIC_DOMAIN%>touch/page/shopcar.js"></script>
   <script src="<%=STATIC_DOMAIN%>touch/page/checkout.js"></script>
+  <script src="<%=STATIC_DOMAIN%>touch/page/shopcar.js"></script>
+  
 </body>
 </html>

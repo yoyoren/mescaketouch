@@ -8,12 +8,9 @@
   <link rel="stylesheet" type="text/css" href="<%=STATIC_DOMAIN%>css/dialog-wap.css" />
 </head>
 <body>
-<% include includes/right_nav %>
+
 <div id="app_main" class="app-main app-nav">
-  <div class="return-area" href="/">
-    <a href='/myorder'><em class="ra-ico"></em><span class="ra-con">返回我的订单</span></a>
-    <em class="wap-func-more-ico" id="right_nav_menu_button"></em>
-  </div>
+  <% include includes/header_v2 %>
   <div class="scroll-area" style="padding-bottom:100px;" id="container">
     <p class="need-login-tip tl-r" style="display:none">您还没有设置访问密码，建议<a href="" class="td-u">设置</a>以完成注册，方便查看订单信息。</p>
     <h4 class="wap-order-title-item">订单信息</h4>

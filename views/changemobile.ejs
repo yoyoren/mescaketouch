@@ -8,25 +8,25 @@
   <link rel="stylesheet" type="text/css" href="<%=STATIC_DOMAIN%>css/dialog-wap.css" />
 </head>
 <body>
-  <% include includes/header %>
-  <div class="dialog" style="top:60px;">
+  <div id="app_main" class="app-main app-nav">
+    <% include includes/header_v2 %>
+
+    <div class="scroll-area">
+      <div class="content-area">
+        <div class="dialog" style="top:60px;">
   <div class="dialog-head">
-    <p class="dia-title">修改登录密码</p>
+    <p class="dia-title">修改手机</p>
     <a href="" class="close-ico">X</a>
   </div>
   <div class="dialog-con">
     <form action="">
       <div class="check-container">
-        <input type="text" class="global-input no-border-b" placeholder="请输入当前密码">
-        <span class="tips-container">密码错误</span><!-- 错误信息容器,出现2秒后消失 -->
-      </div>
+        <input type="text" class="global-input slide-code-btn" placeholder="请输入您的新的手机号码" style="width:198px;">
+        <span class="tips-container hide">输入错误</span><!-- 错误信息容器,出现2秒后消失 -->
+      </div><a href="" class="btn vert-btn code-btn">获取验证码</a>
       <div class="check-container">
-        <input type="text" class="global-input no-border" placeholder="请输入6位或以上密码">
-        <span class="tips-container">不能为空密码</span>
-      </div>
-      <div class="check-container">
-        <input type="text" class="global-input no-border-t" placeholder="请再次确认密码">
-        <span class="tips-container">两次输入不一致</span>
+        <input type="password" class="global-input" placeholder="请输入短信验证码">
+        <span class="tips-container hide">输入错误</span><!-- 错误信息容器,出现2秒后消失 -->
       </div>
       <div class="single-btn-area">
         <input class="btn status1-btn" type="submit" value="确定">
@@ -34,6 +34,11 @@
     </form>
   </div>
 </div>
+      </div>
+    </div>
+
+  </div>
+</body>
 <script>
 $('#popup_login').click(function() {
   var from = location.href.split('?')[1];
@@ -69,6 +74,4 @@ $('#popup_login').click(function() {
   return false;
 }); 						
 </script>
-
-<% include includes/footer_nav %>
 </html>

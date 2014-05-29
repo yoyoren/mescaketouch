@@ -104,11 +104,7 @@ app.get('/checkout',function(req,res){
 	});
 });
 
-app.get('/done',function(req,res){
-	Res.page(res,{
-		view:'done'
-	});
-});
+
 
 app.get('/orderdetail',function(req,res){
 	var orderId = req.query.id;
@@ -152,12 +148,39 @@ app.get('/register',function(req,res){
 	});
 });
 
+app.get('/setpassword',function(req,res){
+	Res.page(res,{
+		view:'setpassword'
+	});
+});
+
+app.get('/done',function(req,res){
+    var orderId = req.query.oid;
+	console.log(orderId);
+	Res.page(res,{
+		view:'done',
+		orderId:orderId
+	});
+});
+
 app.get('/shopcar',function(req,res){
 	Res.page(res,{
 		view:'shopcar'
 	});
 });
 
+app.get('/shopcarempty',function(req,res){
+	Res.page(res,{
+		view:'shopcarempty'
+	});
+});
+
+
+app.get('/newaddress',function(req,res){
+	Res.page(res,{
+		view:'newaddress'
+	});
+});
 app.get('/cake',function(req,res){
 	  var pageview = require('./lib/pageview.js').PageView;
 	  var goodsId = req.query.id;

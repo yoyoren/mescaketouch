@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>产品分类</title>
+  <% include includes/head_script %>
+  <link rel="stylesheet" type="text/css" href="<%=STATIC_DOMAIN%>css/home-wap.css" />
+   <link rel="stylesheet" type="text/css" href="<%=STATIC_DOMAIN%>css/dialog.css" />
+  <link rel="stylesheet" type="text/css" href="<%=STATIC_DOMAIN%>css/dialog-wap.css" />
+   <style>
+      .date-select{
+		width:100%;
+		background-color: #f6f6f6;
+		border-color: #ddd;
+		color: #333;
+		text-shadow: 0 1px 0 #f3f3f3;
+		margin: .5em 0;
+		padding: .5em .5em;
+		display: block;
+		position: relative;
+		text-align: center;
+		text-overflow: ellipsis;
+		overflow: hidden;
+		white-space: nowrap;
+		cursor: pointer;
+		-webkit-user-select: none;
+		border-radius: .3125em;
+		box-shadow: 0 1px 3px rgba(0,0,0,.15);
+		font-weight: 700;
+		border-width: 1px;
+		border-style: solid;
+		display:inline-block
+		}
+	.date-select select {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		min-height: 1.5em;
+		min-height: 100%;
+		height: 3em;
+		max-height: 100%;
+		outline: 0;
+		-webkit-border-radius: inherit;
+		border-radius: inherit;
+		-webkit-appearance: none;
+		-moz-appearance: none;
+		cursor: pointer;
+		filter: Alpha(Opacity=0);
+		opacity: 0;
+		z-index: 2;
+	}
+	.ui-icon-carat-d:after {
+		top: 50%;
+		margin-top: -11px;
+		content: "";
+		position: absolute;
+		display: block;
+		width: 20px;
+		height: 20px;
+		background-image: url("data:image/svg+xml;charset=US-ASCII,%3C%3Fxml%20version%3D%221.0%22%20encoding%3D%22iso-8859-1%22%3F%3E%3C!DOCTYPE%20svg%20PUBLIC%20%22-%2F%2FW3C%2F%2FDTD%20SVG%201.1%2F%2FEN%22%20%22http%3A%2F%2Fwww.w3.org%2FGraphics%2FSVG%2F1.1%2FDTD%2Fsvg11.dtd%22%3E%3Csvg%20version%3D%221.1%22%20id%3D%22Layer_1%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%20x%3D%220px%22%20y%3D%220px%22%20%20width%3D%2214px%22%20height%3D%2214px%22%20viewBox%3D%220%200%2014%2014%22%20style%3D%22enable-background%3Anew%200%200%2014%2014%3B%22%20xml%3Aspace%3D%22preserve%22%3E%3Cpolygon%20style%3D%22fill%3A%23FFFFFF%3B%22%20points%3D%2211.949%2C3.404%207%2C8.354%202.05%2C3.404%20-0.071%2C5.525%207%2C12.596%2014.07%2C5.525%20%22%2F%3E%3C%2Fsvg%3E");
+		background-color: rgba(0,0,0,.3);
+		background-position: center center;
+		background-repeat: no-repeat;
+		-webkit-border-radius: 1em;
+		border-radius: 1em;
+	}
+      </style>
+</head>
+<body>
+  <div id="app_main" class="app-main app-nav">
+    <% include includes/header_v2 %>
+    <div class="scroll-area">
+      <div class="content-area">
+        <div class="content">
+		  <div class="dialog" style="padding-top:20px;">
+			  <div class="dialog-head">
+			    <p class="dia-title">新建收货地址</p>
+			  </div>
+			  <div class="dialog-con">
+			    <form>
+			      <div class="date-select ui-icon-carat-d">
+				<span>北京市</span>
+				<select id="city_sel" type="city">
+				  <option value="441">北京市</option>
+				</select>
+				</div>
+				<div class="date-select ui-icon-carat-d">
+					<span>选择区</span>
+					<select id="region_sel" type="region">
+					</select>
+				</div>
+				<div class="date-select ui-icon-carat-d">
+					<span>选择街道</span>
+					<select id="district_sel" type="district">
+					</select>
+				</div><br>
+			      <div class="check-container mart-10">
+				<textarea class="text-area" placeholder="详细地址" id="new_address_popup"></textarea>
+				<span class="tips-container hide">地址格式错误</span>
+			      </div>
+			      <div class="check-container">
+				<input type="text" class="global-input" placeholder="收货人姓名" id="new_contact_popup">
+				<span class="tips-container hide">请填写收货人</span><!-- 错误信息容器,出现2秒后消失 -->
+			      </div>
+			      <div class="check-container">
+				<input type="text" class="global-input" placeholder="联系人的手机号码" id="new_tel_popup">
+				<span class="tips-container hide">手机号码格式错误</span>
+			      </div>
+			      <div class="single-btn-area">
+				<input class="btn status1-btn" type="button" id="save_address" value="确定">
+			      </div>
+			    </form>
+			  </div>
+			</div>
+		</div>
+	  </div>
+    </div>
+  </div>
+<script>
+var jq = {
+    region_sel : $('#region_sel'),
+    dis_district:$('#district_sel')
+  }
+jq.region_sel.change(function() {
+
+    var _val = $(this).val().split('_')[0];
+    //默认没有选择
+    if (_val == 0) {
+      return;
+    }
+
+    M.get('route.php?mod=order&action=get_district', {
+      city : _val
+    }, function(d) {
+      if (d.code == 0) {
+        var html = '<option value="0">选择送货街道</option>';
+        if (d.data) {
+          for (var i in d.data) {
+            var name = d.data[i].name;
+            if (!d.data[i].free) {
+              if (name.indexOf('*') < 0) {
+                name = '*' + name;
+              }
+            }
+            html += '<option value="' + i + '_'+name+'">' + name + '</option>'
+          }
+          jq.dis_district.html(html);
+          jq.dis_district.parent().show();
+        } else {
+          jq.dis_district.html(html);
+          jq.dis_district.parent().hide();
+        }
+      }
+    }); 
+  });
+  
+  M.get('route.php?mod=order&action=get_region', {}, function(d) {
+    var html = '';
+    for (var i = 0; i < d.length; i++) {
+      if (d[i].region_id == 571 || d[i].region_id == 572) {
+        d[i].region_name += '*';
+      }
+      html += '<option value="' + d[i].region_id + '_' + d[i].region_name + '">' + d[i].region_name + '</option>'
+    }
+    jq.region_sel.append(html);
+  });
+  $('.date-select').find('select').change(function() {
+    var _this = $(this);
+    var val = _this.val();
+    var type = _this.attr('type');
+    var prefix = '';
+    switch(type) {
+      case 'region':
+        prefix = '';
+        val = val.split('_')[1];
+        break;
+       case 'district':
+        prefix = '';
+        val = val.split('_')[1];
+        break;
+        
+    }
+    _this.prev().html(val + prefix);
+  });
+
+var jqRegionSel = $('#region_sel');
+var jqDistrictSel = $('#district_sel');
+var jqNewAddressInput = $('#new_address_popup');
+var jqNewContactInput =  $('#new_contact_popup');
+var jqNewTelInput =  $('#new_tel_popup');
+//地址表单的验证
+var vaildForm = function() {
+
+  if ($.trim($('#region_sel').val()) == 0) {
+    jqDistrictSel.next().show();
+    setTimeout(function() {
+      jqDistrictSel.next().hide();
+    }, 2000);
+    return false;
+  }
+
+  if ($.trim(jqDistrictSel.val()) == 0 && jqDistrictSel.css('display') != 'none') {
+    jqDistrictSel.next().show();
+    setTimeout(function() {
+      jqDistrictSel.next().hide();
+    }, 2000);
+    return false;
+  }
+
+  if ($.trim(jqNewAddressInput.val()) == '') {
+    jqNewAddressInput.next().show();
+    setTimeout(function() {
+      jqNewAddressInput.next().hide();
+    }, 2000);
+    return false;
+  }
+
+  if ($.trim(jqNewContactInput.val()) == '') {
+    jqNewContactInput.next().show();
+    setTimeout(function() {
+      jqNewContactInput.next().hide();
+    }, 2000);
+    return false;
+  }
+
+  var tel = $.trim(jqNewTelInput.val());
+  if (!/\d{5,}/.test(tel)) {
+    jqNewTelInput.next().show();
+    setTimeout(function() {
+      jqNewTelInput.next().hide();
+    }, 2000)
+    return false;
+  }
+
+  return true;
+}
+$('#save_address').click(function() {
+  var city = jqRegionSel.val();
+  var district = jqDistrictSel.val();
+  var address = jqNewAddressInput.val();
+  var tel = jqNewTelInput.val();
+  var contact = jqNewContactInput.val();
+
+  //表单验证失败
+  if (!vaildForm()) {
+    return;
+  }
+  M.loading();
+  M.post('route.php?mod=order&action=add_order_address',{
+      country : 441,
+      city : city.split('_')[0],
+      address : address,
+      district : district.split('_')[0],
+      tel : tel,
+      contact : contact
+    }, function(d) {
+      if (d.code == 0) {
+	location.href=M.touchDomain+"checkout";
+      }
+    });
+}); 
+</script>
+</body>  
+</html>
