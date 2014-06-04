@@ -16,5 +16,19 @@ $('#logout').click(function(){
 	location.reload();
   });
 });
-
+M.getShopCarCount = function(animation){
+	var el = $('#shopcar_num');
+	M.get('route.php?mod=account&action=get_order_count_by_sid',{},function(d){
+		if(d.count){
+			el.html(d.count).show();
+			if(animation){
+				el.addClass('animated bounce');
+				el[0].addEventListener('webkitAnimationEnd',function(){
+					el.removeClass('animated bounce');
+				},false);
+			}
+		}
+	});
+}
+M.getShopCarCount();
 </script>

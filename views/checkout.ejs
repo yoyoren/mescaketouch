@@ -7,6 +7,7 @@
   <link rel="stylesheet" type="text/css" href="<%=STATIC_DOMAIN%>css/dialog.css" />
   <link rel="stylesheet" type="text/css" href="<%=STATIC_DOMAIN%>css/dialog-wap.css" />
   <style>
+      .error-border{border:red 1px solid}
       .date-select{
 		width:26%;
 		background-color: #f6f6f6;
@@ -70,11 +71,11 @@
   
   <div id="app_main" class="app-main app-nav">
     <% include includes/header_v2 %>
-    <div class="scroll-area" style="padding-bottom:120px;padding-top:60px;">
-      <h4 class="wap-order-title-item">订单信息</h4>
+    <div class="scroll-area" id="scroll_container" style="padding-bottom:120px;padding-top:60px;">
+      <h4 class="wap-order-title-item">订单结算</h4>
       <p class="wap-total-price" id="order_price"></p>
-      <div class="wap-order-item" style="padding:10px;">
-        <div class="check-container">
+      <div class="wap-order-item leave-mes" style="padding:0;">
+        <div class="check-container" style="width:100%;">
           <input type="text" id="message_input" name="message_input" class="global-input" placeholder="留言说明（140字以内）" style="margin-bottom:0;"/>
         </div>
       </div>
@@ -102,7 +103,7 @@
 		</div>
 		<br>
 		<p class="wap-check-tip hide">北京市五环内免费送货，五环外不送货</p>
-		<p>详细地址：</p>
+		<p><a name="new_address"></a>详细地址：</p>
 		<div class="check-container">
 		  <input type="text" id="new_address" class="global-input has-bor-input" placeholder="详细地址">
 		  <span class="tips-container hide">输入错误</span>
@@ -122,7 +123,7 @@
       <div id="address_container"></div>
       <div class="clearfix pad-l-r10">
         <em class="check-btn fl-l" style="display:none" id="new_address_btn">添加新地址</em>
-        <em class="wap-more-address fl-r" style="display:none" id="more_address_btn">更多地址<em class="wap-ad-down-ico"></em></em>
+        <em class="check-btn fl-r" style="display:none" id="more_address_btn">显示更多地址<em class="wap-ad-down-ico"></em></em>
       </div>
       <h4 class="wap-order-title-item">送货时间</h4>
       <div class="clearfix pad-l-r10" style="padding-bottom:20px;">
@@ -205,14 +206,14 @@
       <h4 class="wap-order-title-item">付款方式</h4>
       <div class="wap-order-item pay_container" style="padding:10px;" id="cash_container" data-id="1">
         <label for="cashon" >货到付款
-            <input type="radio" name="payStyle" id="cashon" class="wap-radio-item" checked="true"/>
+	    <em class="wap-radio wap-radio-item checked pay_sel" id="cashon"></em>
         </label>
       </div>
       <div class="wap-order-item pay_container" style="padding:10px;" id="alipay_container" data-id="3">
-        <label for="alipay"><input type="radio" name="payStyle" id="alipay" class="wap-radio-item" />支付宝</label>
+        <label for="alipay">支付宝<em class="wap-radio wap-radio-item pay_sel"  id="alipay" ></em></label>
       </div>
       <div class="wap-order-item pay_container" style="padding:10px;" id="kuaiqian_container" data-id="4">
-        <label for="kuaiqian"><input type="radio" name="payStyle" id="kuaiqian" class="wap-radio-item" />快钱</label>
+        <label for="kuaiqian">快钱<em class="wap-radio wap-radio-item pay_sel" id="kuaiqian"></em></label>
       </div>
     </div>
     <div class="wap-total-btn-area tl-c">

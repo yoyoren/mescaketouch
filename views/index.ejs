@@ -4,7 +4,8 @@
   <title>产品分类</title>
   <% include includes/head_script %>
   <link rel="stylesheet" type="text/css" href="<%=STATIC_DOMAIN%>css/home-wap.css" />
- <link rel="stylesheet" type="text/css" href="<%=STATIC_DOMAIN%>touch/animate.css" />
+  <link rel="stylesheet" type="text/css" href="<%=STATIC_DOMAIN%>css/dialog.css" />
+  <link rel="stylesheet" type="text/css" href="<%=STATIC_DOMAIN%>css/dialog-wap.css" />
 </head>
 <body>
 <div id="app_main" class="app-main app-nav">
@@ -28,8 +29,8 @@
          <%for(var m=0;m<catoData[i].cato[j].data.length;m++){%>
 	       <%if(goodsData[catoData[i].cato[j].data[m]]){%>
 		<div class="pro-list-item">
-		  <a href="/cake?id=<%=goodsData[catoData[i].cato[j].data[m]].goods_id%>">
-		  <img class="lazyload" id="cvs_<%=i%>_<%=j%>_<%=m%>" src="<%=goodsData[catoData[i].cato[j].data[m]].url%>" style="margin:0 auto;z-index:1;width: 140px;"></canvas>
+		  <a  class="list_item" href="/cake?id=<%=goodsData[catoData[i].cato[j].data[m]].goods_id%>">
+		  <img class="lazyload" id="cvs_<%=i%>_<%=j%>_<%=m%>" data-src="<%=goodsData[catoData[i].cato[j].data[m]].url%>" style="margin:0 auto;z-index:1;width: 140px;">
 		  </a>
 		  <h5><%=goodsData[catoData[i].cato[j].data[m]].goods_name%></h5>
 		  <p><%=goodsData[catoData[i].cato[j].data[m]].goods_desc%></p>
@@ -48,7 +49,9 @@
 </body>
 <script>
 (function(){
-	return;
+	$('.list_item').click(function(){
+	  M.loading();
+	});
 	var renderCvs = function(max){
 		var lazyloadImage = $('.lazyload');
 		var max = max||lazyloadImage.length;
@@ -56,14 +59,17 @@
 		    var img = new Image();
 		    img.id = lazyloadImage[i].id;
 		    img.onload = function(){
+		        
 			var zCvs = $('#'+this.id);
 			var domCvs = zCvs[0];
-			var cvs = domCvs.getContext('2d');
-			domCvs.width = '140';
-			domCvs.height = '108';
-			cvs.drawImage(this,0,0,140,108);
+
+			domCvs.src = this.src;
+			//var cvs = domCvs.getContext('2d');
+			//domCvs.width = '140';
+			//domCvs.height = '108';
+			//cvs.drawImage(this,0,0,140,108);
 			domCvs.className='animated fadeIn';
-			domCvs.style.display = 'block';
+			//domCvs.style.display = 'block';
 			zCvs.removeClass('lazyload');
 		    }
 		    img.src = lazyloadImage[i].getAttribute('data-src');

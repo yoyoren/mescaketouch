@@ -45,16 +45,17 @@ var Mysql = {
 	  });
 	},
 
-	getAll:function(table,condition,callback){
+	getAll:function(table,condition,callback,order){
 	  var sql = 'SELECT * FROM {TABLE} WHERE {CONDITION}';
 	  var con = [];
+	  var order = order||'';
 	  for(var c in condition){
 		  con.push(c+'='+condition[c]);
 	  }
 	  con = con.join(' AND ');
 	  sql = sql.replace('{TABLE}',table);
 	  sql = sql.replace('{CONDITION}',con);
-
+	  sql+=order;
 	  this.query(sql,function(rows,fields){
 		callback(rows);
 	  });

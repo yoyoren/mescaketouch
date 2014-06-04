@@ -129,7 +129,8 @@
 
 	  $('#add_to_cart').click(function(){
 		add_to_cart(function(){
-			alert('添加成功!');
+			M.getShopCarCount(true);
+			//alert('添加成功!');
 		});
 		return false;
 	  });
