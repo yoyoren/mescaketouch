@@ -8,10 +8,13 @@
 
 <div id="app_main" class='app-main app-nav'>
   <% include includes/header_v2 %>
+  <div class="wap-price-area" id="top_price" style="position:absolute;top:60px;left:0px;width:100%;border:none;display:none;z-index:1000">
+    <p class="buy-price"><%=goods.goods_name%><em>￥</em><span class="display_price">0</span></p>
+  </div>
   <script type="tmpl" id="operate">
   <p class="wap-pro-tip">* 产品照片为2磅蛋糕实物</p>
   <div class="wap-price-area">
-    <p class="buy-price"><%=goods.goods_name%><em>￥</em><span id="display_price">0</span></p>
+    <p class="buy-price"><%=goods.goods_name%><em>￥</em><span class="display_price">0</span></p>
     <div class="wap-price-intro" id="attr_sel">请选择蛋糕尺寸<em class="check-down-ico"></em></div>
     <div class="wap-check-area" style="display:none" id="sel_list">
       <p class="wap-check-tip">5磅以上蛋糕请提前24小时订购或致电客服咨询</p>
@@ -19,7 +22,7 @@
   </div>
   </script>
   
-  <div class="wap-bug-btn app-bottom">
+  <div class="wap-bug-btn app-bottom" id="bottom_bar">
     <a href="#" id="buy_now" class="btn big-btn status1-btn">立即购买</a>
     <a href="#" id="add_to_cart" class="btn big-btn">加入购物车</a>
   </div>
@@ -76,10 +79,10 @@
 			html+='<em class="check-btn" data-id="'+data[i].goods_attr_id+'" data-price="'+data[i].attr_price+'">'+data[i].attr_value+'</em>';
 		}
 		container.prepend(html);
-		$(container.find('em')[0]).trigger('click');
+		$(container.find('em')[0]).trigger(CLICK);
 	  });
 
-	  $('#attr_sel').click(function(){
+	  $('#attr_sel')[CLICK](function(){
 		if(container.css('display')=='none'){
 			container.show();
 		}else{
@@ -87,12 +90,12 @@
 		}
 	  });
 
-	  container.delegate('em','click',function(){
+	  container.delegate('em',CLICK,function(){
 		
 		var _this = $(this);
 		var price = _this.data('price');
 		window.ATTR = _this.data('id');
-		$('#display_price').html(price);
+		$('.display_price').html(price);
 		container.find('em').removeClass('checked');
 		_this.addClass('checked');
 	  });
@@ -120,19 +123,41 @@
 		callback();
 	    });	    
 	  }
-	  $('#buy_now').click(function(){
+	  $('#buy_now')[CLICK](function(){
 		add_to_cart(function(){
 		   location.href = M.touchDomain+'checkout';
 		});
 		return false;
 	  });
 
-	  $('#add_to_cart').click(function(){
+	  $('#add_to_cart')[CLICK](function(){
 		add_to_cart(function(){
 			M.getShopCarCount(true);
-			//alert('添加成功!');
 		});
 		return false;
+	  });
+
+	  var height = $($('.sia_01')[0]).height();
+	  var scrollArea = $($('.scroll-area')[0]);
+	  var bottomBar = $('#bottom_bar');
+	  var scrollTimer;
+	  scrollArea.scroll(function(){
+		clearTimeout(scrollTimer);
+		var _this = scrollArea.scrollTop();
+		if(!bottomBar.hasClass('fadeOutDown')){
+		   bottomBar.addClass('animated-quick fadeOutDown');
+		}
+                
+		if(_this>height){
+			$('#top_price').show();
+		}else{
+			$('#top_price').hide();
+		}
+		scrollTimer = setTimeout(function(){
+		  bottomBar.removeClass('fadeOutDown');
+		  bottomBar.addClass('fadeInUp');
+		},800);
+
 	  });
   })();
   </script>
