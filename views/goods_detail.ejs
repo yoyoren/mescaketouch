@@ -69,6 +69,19 @@
   </script>
   <script>
   (function(){
+	  var scrollArea = $($('.scroll-area')[0]);
+	  var lazyLoad = $('.lazyload');
+	  lazyLoad[0].className+= ' animated-quick fadeIn'; 
+	  lazyLoad[0].src = lazyLoad[0].getAttribute('data-src');
+	  var loadImg = function(){
+
+	    for(var i=1;i<lazyLoad.length;i++){
+	    lazyLoad[i].className+= ' animated-quick fadeIn'; 
+	    lazyLoad[i].src = lazyLoad[i].getAttribute('data-src');
+	    }
+	  }
+	  scrollArea.one('scroll',loadImg);
+
 	  $('.sia_01').after($('#operate').html());
 	  var id = '<%=goods.goods_id%>';
 	  var container = $('#sel_list');
@@ -138,7 +151,7 @@
 	  });
 
 	  var height = $($('.sia_01')[0]).height();
-	  var scrollArea = $($('.scroll-area')[0]);
+	 
 	  var bottomBar = $('#bottom_bar');
 	  var scrollTimer;
 	  scrollArea.scroll(function(){

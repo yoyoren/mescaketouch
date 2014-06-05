@@ -193,7 +193,7 @@ app.get('/cake',function(req,res){
 				if(exists){
 					var tmpl = fs.readFileSync(filePath,'utf-8');
 					tmpl = tmpl.replace(/\{STATIC_DOMAIN\}/gi,STATIC_DOMAIN);
-					
+					tmpl = tmpl.replace(/src/gi,' class="lazyload" data-src');
 					Res.page(res,{
 						view:'goods_detail',
 						goodsId:goodsId,
