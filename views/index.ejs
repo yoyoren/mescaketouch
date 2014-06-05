@@ -51,6 +51,8 @@
 (function(){
 	$('.list_item')[CLICK](function(){
 	  M.loading();
+	  location.href = $(this).attr('href');
+	  return false;
 	});
 	var renderCvs = function(max){
 		var lazyloadImage = $('.lazyload');

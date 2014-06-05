@@ -144,19 +144,19 @@
 	  scrollArea.scroll(function(){
 		clearTimeout(scrollTimer);
 		var _this = scrollArea.scrollTop();
-		if(!bottomBar.hasClass('fadeOutDown')){
-		   bottomBar.addClass('animated-quick fadeOutDown');
-		}
+		//if(!bottomBar.hasClass('fadeOutDown')){
+		//   bottomBar.addClass('animated-quick fadeOutDown');
+		//}
                 
 		if(_this>height){
 			$('#top_price').show();
 		}else{
 			$('#top_price').hide();
 		}
-		scrollTimer = setTimeout(function(){
-		  bottomBar.removeClass('fadeOutDown');
-		  bottomBar.addClass('fadeInUp');
-		},800);
+		//scrollTimer = setTimeout(function(){
+		//  bottomBar.removeClass('fadeOutDown');
+		//  bottomBar.addClass('fadeInUp');
+		//},800);
 
 	  });
   })();
