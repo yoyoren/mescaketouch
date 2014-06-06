@@ -45,6 +45,7 @@ app.get('/',function(req,res){
 				d1[i].goods_desc = htmlToText.fromString(d1[i].goods_desc);
 			}
 		}
+		console.log(d2);
 		Res.page(res,{
 			view:'index',
 			goodsData:d1,
@@ -194,6 +195,8 @@ app.get('/cake',function(req,res){
 					var tmpl = fs.readFileSync(filePath,'utf-8');
 					tmpl = tmpl.replace(/\{STATIC_DOMAIN\}/gi,STATIC_DOMAIN);
 					tmpl = tmpl.replace(/src/gi,' class="lazyload" data-src');
+					d.goodsattr = d.goodsattr||{};
+					
 					Res.page(res,{
 						view:'goods_detail',
 						goodsId:goodsId,
