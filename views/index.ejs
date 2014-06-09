@@ -66,12 +66,14 @@
 	  
 	  $(this).addClass('current');
 	  catoFrame.hide();
+	  M.loading();
 	  cur.scrollTop(0);
 	  cur.show();
-	  cur.addClass('animated-quick slideInRight');
+	  cur.addClass('animated-quick fadeIn');
 	  setTimeout(function(){
 		renderCvs(cur);
 	  },200);
+	  setTimeout(function(){ M.loadingEnd();},1000);
 	  return false;
 	});
 
