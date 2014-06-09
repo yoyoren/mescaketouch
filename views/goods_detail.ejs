@@ -143,6 +143,7 @@
 	    });	    
 	  }
 	  $('#buy_now')[CLICK](function(){
+	        M.loading();
 		add_to_cart(function(){
 		   location.href = M.touchDomain+'checkout';
 		});
