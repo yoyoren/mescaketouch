@@ -80,11 +80,17 @@
 	    lazyLoad[i].src = lazyLoad[i].getAttribute('data-src');
 	    }
 	  }
-	  scrollArea.one('scroll',loadImg);
 
-	  $('.sia_01').after($('#operate').html());
+	  scrollArea.one('scroll',loadImg);
+	  if(window.GOODS_ID == 68){
+		$($('.s-img-area')[0]).after($('#operate').html());
+	  }else{
+		$('.sia_01').after($('#operate').html());
+	  }
+	  
 	  var id = '<%=goods.goods_id%>';
 	  var container = $('#sel_list');
+
 	  $.get('getGoodsAttrAnsyc',{id:id},function(d){
 		var data = d.data;
 		var html = '';

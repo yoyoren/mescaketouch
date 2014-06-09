@@ -10,12 +10,14 @@
 <body>
 <div id="app_main" class="app-main app-nav">
   <% include includes/header_v2 %>
-  <div class="scroll-area" style="padding-top:60px;">
-  <div class="wap-btn-area tl-c">
-    <%for(var i in catoData){%>
-          <a href="#<%=catoData[i].cls%>" data-cato="<%=catoData[i].cls%>" class="wap-btn sub_nav" style="margin-right:2px;padding-left:10px;padding-right:10px"><%=catoData[i].name%></a> 
-    <%}%>
-  </div>
+  <div class="wap-btn-area" style="top:56px;">
+      <ul>
+	      <%for(var i in catoData){%>
+		 <li><a href="#<%=catoData[i].cls%>" data-cato="<%=catoData[i].cls%>" class="wap-btn sub_nav" style="margin-right:2px;padding-left:10px;padding-right:10px"><%=catoData[i].name%></a></li> 
+	      <%}%>
+      </ul>
+    </div>
+  <div class="scroll-area" style="padding-top:110px;">
   <!-- for-love  for-happy for-dream -->
   <div class="pro-content-area">
       <%for(var i in catoData){%>
@@ -49,15 +51,22 @@
 
 (function(){
         var catoFrame = $('.cato_frame');
+	var subNav = $('.sub_nav');
         catoFrame[0].style.display = 'block';
-        $('.sub_nav')[CLICK](function(){
+	subNav[0].className+=' current'
+        subNav[CLICK](function(){
 	  var id = $(this).data('cato');
+	  var cur = $('#'+id);
 	  if(id=='for-dream'){
 		location.href = '/cake?id=68';
 		return;
 	  }
-	  var cur = $('#'+id);
+	  subNav.removeClass('current');
+
+	  
+	  $(this).addClass('current');
 	  catoFrame.hide();
+	  cur.scrollTop(0);
 	  cur.show();
 	  cur.addClass('animated-quick slideInRight');
 	  setTimeout(function(){

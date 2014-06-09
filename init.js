@@ -196,7 +196,9 @@ app.get('/cake',function(req,res){
 					tmpl = tmpl.replace(/\{STATIC_DOMAIN\}/gi,STATIC_DOMAIN);
 					tmpl = tmpl.replace(/src/gi,' class="lazyload" data-src');
 					d.goodsattr = d.goodsattr||{};
-					
+					if(goodsId==68){
+					   d.goodsattr.attr_value = 188;
+					}
 					Res.page(res,{
 						view:'goods_detail',
 						goodsId:goodsId,
