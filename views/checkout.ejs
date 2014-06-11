@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>结算</title>
+  <title>MES-结算</title>
+  <% include includes/static_config %>
+  <% include includes/static_loader %>
   <% include includes/head_script %>
-  <link rel="stylesheet" type="text/css" href="<%=STATIC_DOMAIN%>css/home-wap.css" />
-  <link rel="stylesheet" type="text/css" href="<%=STATIC_DOMAIN%>css/dialog.css" />
-  <link rel="stylesheet" type="text/css" href="<%=STATIC_DOMAIN%>css/dialog-wap.css" />
   <style>
       .error-border{border:red 1px solid}
       .date-select{
@@ -237,9 +236,7 @@
   window.HAS_NO_SUGAR_STAFF = false;
   window.server_date = '<%=date%>';
   M.loading();
-  </script>
-  <script src="<%=STATIC_DOMAIN%>touch/page/checkout.js"></script>
-  <script src="<%=STATIC_DOMAIN%>touch/page/shopcar.js"></script>
-  
+  Loader(['touch/page/checkout.js','touch/page/shopcar.js']);
+  </script>  
 </body>
 </html>

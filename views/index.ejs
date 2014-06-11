@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>产品分类</title>
+  <title>MES蛋糕-触屏版</title>
+  <% include includes/static_config %>
+  <% include includes/static_loader %>
   <% include includes/head_script %>
-  <link rel="stylesheet" type="text/css" href="<%=STATIC_DOMAIN%>css/home-wap.css" />
-  <link rel="stylesheet" type="text/css" href="<%=STATIC_DOMAIN%>css/dialog.css" />
-  <link rel="stylesheet" type="text/css" href="<%=STATIC_DOMAIN%>css/dialog-wap.css" />
 </head>
 <body>
 <div id="app_main" class="app-main app-nav">
@@ -91,6 +90,7 @@
 		var max = max||lazyloadImage.length;
 		for(var i=0;i<max;i++){
 		    var img = new Image();
+		    img.index = i;
 		    img.id = lazyloadImage[i].id;
 		    img.onload = function(){
 		        
@@ -102,7 +102,9 @@
 			//domCvs.width = '140';
 			//domCvs.height = '108';
 			//cvs.drawImage(this,0,0,140,108);
-			domCvs.className='animated fadeIn';
+			if(this.index<4){
+			   domCvs.className='animated fadeIn';
+			}
 			//domCvs.style.display = 'block';
 			zCvs.removeClass('lazyload');
 		    }

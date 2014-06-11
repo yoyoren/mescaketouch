@@ -4,13 +4,23 @@ var path = require('path');
 var fs = require('fs');
 var app = express();
 var session = require('express-session');
+var compression = require('compression');
+var cookieParser = require('cookie-parser')
 //var jade = require('jade');
+
 app.set('port', process.env.PORT || 5000);
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 //app.use(express.logger('dev'));
 //app.use(express.bodyParser());
-//app.use(express.session());
+app.use(cookieParser('mescakemobile'));
+app.use(session({
+    secret: 'mescakemobile',
+	proxy: false // if you do SSL outside of node.
+}));
+app.use(compression({
+ threshold: 1024
+}));
 var sys = require('sys');
 var RES_SUCCESS = 0;
 var RES_FAIL = 1;
@@ -45,7 +55,7 @@ app.get('/',function(req,res){
 				d1[i].goods_desc = htmlToText.fromString(d1[i].goods_desc);
 			}
 		}
-		console.log(d2);
+   
 		Res.page(res,{
 			view:'index',
 			goodsData:d1,
