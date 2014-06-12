@@ -66,6 +66,24 @@
         _loader(arr[i]);
     }
   }
+
+  var cacheImage = function(img){
+			if(document.getElementById('cache_cvs')==null){
+				var cvs = document.createElement('canvas');
+				cvs.width = 140;
+				cvs.height = 108;
+				cvs.id = 'cache_cvs';
+				document.body.appendChild(cvs);
+			}
+			var cvs = document.getElementById('cache_cvs')
+			var rcvs = cvs.getContext('2d');
+			rcvs.drawImage(img,0,0,140,108);
+			var data = cvs.toDataURL();
+			debugger
+  }
   window.Loader = loader;
+  window.cacheImage = cacheImage;
+  window.SET = set;
+  window.GET = get;
 })(); 
 </script>
