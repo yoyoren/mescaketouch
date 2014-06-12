@@ -29,7 +29,7 @@
 		       <%if(goodsData[catoData[i].cato[j].data[m]]){%>
 			<div class="pro-list-item">
 			  <a class="list_item" href="/cake?id=<%=goodsData[catoData[i].cato[j].data[m]].goods_id%>">
-			  <img class="lazyload" id="cvs_<%=i%>_<%=j%>_<%=m%>" data-src="<%=goodsData[catoData[i].cato[j].data[m]].url%>" style="margin:0 auto;z-index:1;width: 140px;">
+			  <canvas class="lazyload" id="cvs_<%=i%>_<%=j%>_<%=m%>" data-src="<%=goodsData[catoData[i].cato[j].data[m]].url%>" style="margin:0 auto;z-index:1;width: 140px;"></canvas>
 			  </a>
 			  <h5><%=goodsData[catoData[i].cato[j].data[m]].goods_name%></h5>
 			  <p><%=goodsData[catoData[i].cato[j].data[m]].goods_desc%></p>
@@ -98,13 +98,13 @@
 			var domCvs = zCvs[0];
 
 			domCvs.src = this.src;
-			//var cvs = domCvs.getContext('2d');
-			//domCvs.width = '140';
-			//domCvs.height = '108';
-			//cvs.drawImage(this,0,0,140,108);
-			if(this.index<4){
-			   domCvs.className='animated fadeIn';
-			}
+			var cvs = domCvs.getContext('2d');
+			domCvs.width = '140';
+			domCvs.height = '108';
+			cvs.drawImage(this,0,0,140,108);
+			//if(this.index<4){
+			   //domCvs.className='animated fadeIn';
+			//}
 			//domCvs.style.display = 'block';
 			zCvs.removeClass('lazyload');
 		    }

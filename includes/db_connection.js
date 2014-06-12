@@ -11,7 +11,7 @@ function handleError (err) {
   if (err) {
     // 如果是连接断开，自动重新连接
     if (err.code === 'PROTOCOL_CONNECTION_LOST') {
-      var connection = mysql.createConnection({
+      connection = mysql.createConnection({
 		  host     : 'localhost',
 		  user     : 'root',
 		  password:password,
