@@ -7,8 +7,23 @@ var connection = mysql.createConnection({
   password:password,
   database:dbName
 });
-
-
+function handleError (err) {
+  if (err) {
+    // 如果是连接断开，自动重新连接
+    if (err.code === 'PROTOCOL_CONNECTION_LOST') {
+      var connection = mysql.createConnection({
+		  host     : 'localhost',
+		  user     : 'root',
+		  password:password,
+		  database:dbName
+		});
+	   connection.on('error', handleError);
+    } else {
+      console.error(err.stack || err);
+    }
+  }
+}
+connection.on('error', handleError);
 var Mysql = {
 	connect:function(){
 		return connection.connect();
