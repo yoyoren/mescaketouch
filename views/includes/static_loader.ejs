@@ -3,10 +3,10 @@
   var config = window.staticConfig;
   var root = '<%=STATIC_DOMAIN%>';
   var get = function(key) {
-    return localStorage.getItem(key);
+    return window.localStorage?false:localStorage.getItem(key);
   }
   var set = function(key, value) {
-    return localStorage.setItem(key, value);
+    return window.localStorage?false:localStorage.setItem(key, value);
   }
   var _xhr;
   var httpGet = function(url, callback) {
@@ -36,7 +36,7 @@
     var src = root + path;
     var version = config[path];
     var data = get(path);
-    if ( data!== null && get(path + 'version') == version) {
+    if ( data!== null && get(path + 'version') == version && window.localStorage) {
       if (/\.css/.test(path)) {
         data = data.replace(/img\//gi,root+'/touch/css/img/');
         var stylesheet = '<style type="text/css">' + data + '<\/style>';
@@ -51,11 +51,12 @@
       } else {
         document.write('<script src="' + src + '"><\/script>');
       }
-      httpGet(src, function(txt) {
-        set(path, txt);
-        set(path + 'version', version);
-      });
-
+      if(window.localStorage){
+	      httpGet(src, function(txt) {
+		set(path, txt);
+		set(path + 'version', version);
+	     });
+      }
     }
 
   }

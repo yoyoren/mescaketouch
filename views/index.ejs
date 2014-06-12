@@ -105,19 +105,22 @@
 			var domCvs = zCvs[0];
 			domCvs.src = this.src;
 			zCvs.removeClass('lazyload');
-			var cvs = document.createElement('canvas');
-			cvs.id = 'cache_cvs';
-			cvs.style.display = 'none';
-			document.body.appendChild(cvs);
-			var rcvs = cvs.getContext('2d');
-			cvs.width = 140;
-			cvs.height = 108;
-			rcvs.drawImage(this,0,0,140,108);
-			setTimeout(function(){
-			  var data = cvs.toDataURL();
-			  SET(_this.id,data);
-			  document.body.removeChild(cvs);
-			},200);
+			try{
+				var cvs = document.createElement('canvas');
+				cvs.style.display = 'none';
+				document.body.appendChild(cvs);
+				var rcvs = cvs.getContext('2d');
+				cvs.width = 140;
+				cvs.height = 108;
+				rcvs.drawImage(this,0,0,140,108);
+				setTimeout(function(){
+				  var data = cvs.toDataURL();
+				  SET(_this.id,data);
+				  document.body.removeChild(cvs);
+				},200);
+			}catch(ex){
+			
+			}
 		    }
 		    img.src = lazyloadImage[i].getAttribute('data-src');
 		}
