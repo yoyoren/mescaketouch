@@ -3,10 +3,10 @@
   var config = window.staticConfig;
   var root = '<%=STATIC_DOMAIN%>';
   var get = function(key) {
-    return window.localStorage?false:localStorage.getItem(key);
+    return window.localStorage?localStorage.getItem(key):false;
   }
   var set = function(key, value) {
-    return window.localStorage?false:localStorage.setItem(key, value);
+    return window.localStorage?localStorage.setItem(key, value):false;
   }
   var _xhr;
   var httpGet = function(url, callback) {
