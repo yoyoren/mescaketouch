@@ -107,8 +107,8 @@ app.get('/myorder',function(req,res){
 });
 
 app.get('/checkout',function(req,res){
-	var  time = (new Date()).getTime();
-	//var time1 = new Date();
+	var time = (new Date()).getTime();
+	console.log('checkout'+time);
 	Res.page(res,{
 		view:'checkout',
 		date:time
@@ -167,7 +167,7 @@ app.get('/setpassword',function(req,res){
 
 app.get('/done',function(req,res){
     var orderId = req.query.oid;
-	console.log(orderId);
+	console.log('done/'+orderId);
 	Res.page(res,{
 		view:'done',
 		orderId:orderId
@@ -175,6 +175,7 @@ app.get('/done',function(req,res){
 });
 
 app.get('/shopcar',function(req,res){
+	console.log('shopcar');
 	Res.page(res,{
 		view:'shopcar'
 	});
