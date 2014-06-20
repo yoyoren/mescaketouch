@@ -78,6 +78,10 @@ app.get('/getIndexDataAnsyc',function(req,res){
 
 app.get('/getGoodsAttrAnsyc',function(req,res){
 	 var goodsId = req.query.id;
+	 if(!goodsId){
+		res.redirect('/');
+		return;
+	}
 	 var goods = require('./lib/goods.js').Goods;
 	 goods.getGoodsAttrData(goodsId,function(d){
 		 Res.ajax(res,{
@@ -167,6 +171,10 @@ app.get('/setpassword',function(req,res){
 
 app.get('/done',function(req,res){
     var orderId = req.query.oid;
+	if(!orderId){
+	   res.redirect('/');
+	   return;
+	}
 	console.log('done/'+orderId);
 	Res.page(res,{
 		view:'done',
@@ -196,6 +204,10 @@ app.get('/newaddress',function(req,res){
 app.get('/cake',function(req,res){
 	  var pageview = require('./lib/pageview.js').PageView;
 	  var goodsId = req.query.id;
+      if(!goodsId||isNaN(goodsId)){
+	   res.redirect('/');
+	   return;
+	  }
 	  pageview.getGoodsDetailData(goodsId,function(d,err){
 		if(err){
 			res.redirect('/');

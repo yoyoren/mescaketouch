@@ -64,6 +64,7 @@
 		-webkit-border-radius: 1em;
 		border-radius: 1em;
 	}
+	input,.wap-order-title-item{font-size:16px;}
       </style>
 </head>
 <body>
@@ -83,7 +84,6 @@
       <p class="wap-little-tip hide">如果您之前注册购买过，请<a href="" class="td-u">登录</a>以读取地址信息，并积累积分</p>
       <div id="new_address_container" style="display:none">
 	      <div class="wap-add-adress">
-		<p>区域选择：</p>
 		<div class="date-select ui-icon-carat-d">
 			<span>北京市</span>
 			<select id="city_sel" type="city">
@@ -102,19 +102,19 @@
 		</div>
 		<br>
 		<p class="wap-check-tip hide">北京市五环内免费送货，五环外不送货</p>
-		<p><a name="new_address"></a>详细地址：</p>
+		<a name="new_address"></a>
 		<div class="check-container">
 		  <input type="text" id="new_address" class="global-input has-bor-input" placeholder="详细地址">
 		  <span class="tips-container hide">输入错误</span>
 		</div>
-		<p>收货人：</p>
+		
 		<div class="check-container">
 		  <input type="text" id="new_contact" class="global-input has-bor-input" placeholder="收货人姓名">
 		  <span class="tips-container hide">输入错误</span><!-- 错误信息容器,出现2秒后消失 -->
 		</div>
-		<p>联系手机：</p>
+	
 		<div class="check-container">
-		  <input type="number" id="new_tel" class="global-input has-bor-input" placeholder="联系人的手机号码">
+		  <input type="tel" id="new_tel" class="global-input has-bor-input" placeholder="联系人的手机号码">
 		  <span class="tips-container hide">输入错误</span><!-- 错误信息容器,出现2秒后消失 -->
 		</div>
 	      </div>
@@ -216,8 +216,8 @@
       </div>
     </div>
     <div class="wap-total-btn-area tl-c">
-      <p>总计<span id="total_price"></span>元<span style="display:none" id="shipping_fee_display">(含10元运费)</span><p/>
-      <a href="#" id="done_button" class="btn status1-btn">提交订单</a>
+      <div class="fl-l" style="padding:5px;font-size:20px;">总计<b id="total_price"></b> 元<span style="display:none" id="shipping_fee_display">(含10元运费)</span></div>
+      <div class="fl-r" style="padding-bottom:5px;"><a href="#" id="done_button" class="btn  big-btn status1-btn" style="font-size:16px;">提交订单</a></div>
     </div>
   </div>
 						<form action="http://www.mescake.com/flow.php" method="post" id="submit_form">

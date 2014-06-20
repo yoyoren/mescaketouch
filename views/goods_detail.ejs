@@ -11,14 +11,14 @@
 <div id="app_main" class='app-main app-nav'>
   <% include includes/header_v2 %>
   <div class="wap-price-area" id="top_price" style="position:absolute;top:60px;left:0px;width:100%;border:none;display:none;z-index:1000">
-    <p class="buy-price"><%=goods.goods_name%><em>￥</em><span class="display_price">0</span></p>
+    <p class="buy-price"><%=goods.goods_name%> <span class='init_price_tip'></span><em>￥</em><span class="display_price">0</span><span class='init_price_tip'></span></p>
   </div>
   <script type="tmpl" id="operate">
   <p class="wap-pro-tip">* 产品照片为2磅蛋糕实物</p>
   <div class="wap-price-area">
-    <p class="buy-price"><%=goods.goods_name%><em>￥</em><span class="display_price">0</span></p>
-    <div class="wap-price-intro" id="attr_sel">请选择蛋糕尺寸<em class="check-down-ico"></em></div>
-    <div class="wap-check-area" style="display:none" id="sel_list">
+    <p class="buy-price"><%=goods.goods_name%> <span class='init_price_tip'></span><em>￥</em><span class="display_price">0</span><span class='init_price_tip'></span></p>
+    <div class="wap-price-intro" id="attr_sel" style="font-size:14px;display:none">选择一个尺寸蛋糕<em class="check-down-ico"></em></div>
+    <div class="wap-check-area" style="" id="sel_list">
       <p class="wap-check-tip">5磅以上蛋糕请提前24小时订购或致电客服咨询</p>
     </div>
   </div>
@@ -97,7 +97,12 @@
 		var data = d.data;
 		var html = '';
 		for(var i=0;i<data.length;i++){
-			html+='<em class="check-btn" data-id="'+data[i].goods_attr_id+'" data-price="'+data[i].attr_price+'">'+data[i].attr_value+'</em>';
+			if(data[i].attr_value.indexOf('：')>-1){
+				var attr_short = data[i].attr_value.split('：')[0];
+			}else{
+				var attr_short = data[i].attr_value.split(':')[0];
+			}
+			html+='<em class="check-btn" data-id="'+data[i].goods_attr_id+'" data-price="'+data[i].attr_price+'">'+attr_short+'</em>';
 		}
 		container.prepend(html);
 		$(container.find('em')[0]).trigger(CLICK);
