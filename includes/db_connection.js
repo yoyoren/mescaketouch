@@ -44,7 +44,7 @@ var Mysql = {
 	//m.getOne('ecs_users',{user_id:2},function(d){
 	//console.log(d);
 	//});
-	getOne:function(table,condition,callback){
+	getOne:function(table,condition,callback,orderby){
 	  
 	  var sql = 'SELECT * FROM {TABLE} WHERE {CONDITION} LIMIT 0,1';
 	  var con = [];
@@ -54,6 +54,9 @@ var Mysql = {
 	  con = con.join(' AND ');
 	  sql = sql.replace('{TABLE}',table);
 	  sql = sql.replace('{CONDITION}',con);
+	  if(orderby){
+		sql+=orderby;
+	  }
 
 	  this.query(sql,function(rows,fields){
 		callback(rows[0]);
@@ -70,7 +73,10 @@ var Mysql = {
 	  con = con.join(' AND ');
 	  sql = sql.replace('{TABLE}',table);
 	  sql = sql.replace('{CONDITION}',con);
-	  sql+=order;
+	  if(order){
+		sql+=order;
+	  }
+	  console.log(sql)
 	  this.query(sql,function(rows,fields){
 		callback(rows);
 	  });
