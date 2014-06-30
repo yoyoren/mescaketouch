@@ -30,7 +30,9 @@
 		       <div class="pro-list-item">
 			  <div class="pro-list-item-inner">
 			    <a href="/cake?id=<%=goodsData[catoData[i].cato[j].data[m]].goods_id%>"><img  class="lazyload" id="cvs_<%=i%>_<%=j%>_<%=m%>" data-src="<%=goodsData[catoData[i].cato[j].data[m]].url%>" style=""></a>
-			    <h5><%=goodsData[catoData[i].cato[j].data[m]].goods_name%><span style="color:#fd578e; float:right; font-size:16px; font-weight:bold;">￥<%=goodsData[catoData[i].cato[j].data[m]].startprice%>起</span></h5>
+			    <h5>
+			    <span <%if(goodsData[catoData[i].cato[j].data[m]].goods_id==32){%>style="font-size:12px;"<% } %>><%=goodsData[catoData[i].cato[j].data[m]].goods_name%></span>
+			    <span style="color:#fd578e; float:right; font-size:16px; font-weight:bold;">￥<%=goodsData[catoData[i].cato[j].data[m]].startprice%>起</span></h5>
 			  </div>
 			</div>
 		        <%}%>
