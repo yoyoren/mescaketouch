@@ -10,7 +10,7 @@
 
 <div id="app_main" class='app-main app-nav'>
   <% include includes/header_v2 %>
-  <div class="wap-price-area" id="top_price" style="position:absolute;top:60px;left:0px;width:100%;border:none;display:none;z-index:1000">
+  <div class="wap-price-area" id="top_price" style="position:absolute;top:50px;left:0px;width:100%;border:none;display:none;z-index:1000">
     <p class="buy-price"><%=goods.goods_name%> <span class='init_price_tip'></span><em>￥</em><span class="display_price">0</span><span class='init_price_tip'></span></p>
   </div>
   <script type="tmpl" id="operate">
@@ -174,7 +174,7 @@
 		//if(!bottomBar.hasClass('fadeOutDown')){
 		//   bottomBar.addClass('animated-quick fadeOutDown');
 		//}
-                
+               
 		if(_this>height){
 			$('#top_price').show();
 		}else{
