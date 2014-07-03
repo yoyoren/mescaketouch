@@ -1,53 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>MES蛋糕-触屏版</title>
-  <% include includes/static_config %>
-  <% include includes/static_loader %>
-  <% include includes/head_script %>
-</head>
-<body>
-<div id="app_main" class="app-main app-nav">
-  <% include includes/header_v2 %>
-
-  <div class="wap-btn-area">
-      <ul>
-	      <%for(var i in catoData){%>
-		 <li><a href="#<%=catoData[i].cls%>" data-cato="<%=catoData[i].cls%>" class="wap-btn sub_nav" style="margin-right:2px;padding-left:10px;padding-right:10px"><%=catoData[i].name%></a></li> 
-	      <%}%>
-      </ul>
-  </div>
-  <div class="scroll-area" style="padding-top:105px;background:#f0f0f0;">
-  <!-- for-love  for-happy for-dream -->
-  <div class="pro-content-area">
-      <%for(var i in catoData){%>
-        
-        <div class="pro-content clearfix cato_frame" id="<%=catoData[i].cls%>" style="display:none">    
-	    <div class="pro-list-area fl-l">
-	       <%for(var j=0;j<catoData[i].cato.length;j++){%>
-		    <%for(var m=0;m<catoData[i].cato[j].data.length;m++){%>
-		       <%if(goodsData[catoData[i].cato[j].data[m]]){%>
-		       <div class="pro-list-item">
-			  <div class="pro-list-item-inner">
-			    <a href="/cake?id=<%=goodsData[catoData[i].cato[j].data[m]].goods_id%>"><img  class="lazyload" id="cvs_<%=i%>_<%=j%>_<%=m%>" data-src="<%=goodsData[catoData[i].cato[j].data[m]].url%>" style=""></a>
-			    <h5>
-			    <span <%if(goodsData[catoData[i].cato[j].data[m]].goods_id==32){%>style="font-size:12px;"<% } %>><%=goodsData[catoData[i].cato[j].data[m]].goods_name%></span>
-			    <span style="color:#fd578e; float:right; font-size:16px; font-weight:bold;">￥<%=goodsData[catoData[i].cato[j].data[m]].startprice%>起</span></h5>
-			  </div>
-			</div>
-		        <%}%>
-		    <%}%>
-	       <%}%>
-	   </div>
-       </div>
-    <%}%>
-  </div>
-  <% include includes/footer %>
-</div>
-  
-</div>
-</body>
-<script>
+<!DOCTYPE html><html><head><title>MES蛋糕-触屏版</title><% include static_config %><% include static_loader %><% include head_script %></head><body><div id="app_main" class="app-main app-nav"><% include header_v2 %><div class="wap-btn-area"><ul><%for(var i in catoData){%><li><a href="#<%=catoData[i].cls%>" data-cato="<%=catoData[i].cls%>" class="wap-btn sub_nav" style="margin-right:2px;padding-left:10px;padding-right:10px"><%=catoData[i].name%></a></li><%}%></ul></div><div class="scroll-area" style="padding-top:105px;background:#f0f0f0;"><!-- for-love  for-happy for-dream --><div class="pro-content-area"><%for(var i in catoData){%><div class="pro-content clearfix cato_frame" id="<%=catoData[i].cls%>" style="display:none"><div class="pro-list-area fl-l"><%for(var j=0;j<catoData[i].cato.length;j++){%><%for(var m=0;m<catoData[i].cato[j].data.length;m++){%><%if(goodsData[catoData[i].cato[j].data[m]]){%><div class="pro-list-item"><div class="pro-list-item-inner"><a href="/cake?id=<%=goodsData[catoData[i].cato[j].data[m]].goods_id%>"><img  class="lazyload" id="cvs_<%=i%>_<%=j%>_<%=m%>" data-src="<%=goodsData[catoData[i].cato[j].data[m]].url%>" style=""></a><h5><span <%if(goodsData[catoData[i].cato[j].data[m]].goods_id==32){%>style="font-size:12px;"<% } %>><%=goodsData[catoData[i].cato[j].data[m]].goods_name%></span><span style="color:#fd578e; float:right; font-size:16px; font-weight:bold;">￥<%=goodsData[catoData[i].cato[j].data[m]].startprice%>起</span></h5></div></div><%}%><%}%><%}%></div></div><%}%></div><% include footer %></div></div></body><script>
 (function(){
         var catoFrame = $('.cato_frame');
 	var subNav = $('.sub_nav');
@@ -128,6 +79,4 @@
 	renderCvs(catoFrame[0]);
 })();
 
-</script>
-<% include includes/baidu %>
-</html>
+</script><% include baidu %></html>

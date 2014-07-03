@@ -1,44 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>MES-会员注册</title>
-  <% include includes/static_config %>
-  <% include includes/static_loader %>
-  <% include includes/head_script %>
-</head>
-<body>
-  <% include includes/header_v2 %>
-  <div class="content-area">
-    <div class="content">
-      <div class="dialog-con dialog" style="z-index:1900; padding-top:60px;">
-        <form>
-          <div class="dialog-head">
-            <p class="dia-title">新用户注册</p>
-          </div>
-          <div class="check-container">
-            <input type="text" class="global-input slide-code-btn" placeholder="请输入手机号码" style="width:198px;" id="username">
-            <span class="tips-container" style="display:none" id="username_error">输入错误</span><!-- 错误信息容器,出现2秒后消失 -->
-          </div><a href="#" id="get_vaild_code" class="btn vert-btn code-btn">获取验证码</a>
-	  <a style="display:none;width:auto" href="#" class="btn vert-btn code-btn" id="vaild_code_sended">已发送</a>
-          <div class="check-container">
-            <input type="password" class="global-input" placeholder="请输入短信验证码" id="vaild_code">
-            <span class="tips-container" style="display:none" id="vaildcode_error">输入错误</span><!-- 错误信息容器,出现2秒后消失 -->
-          </div>
-          
-          <div class="check-container">
-            <input type="password" id="password" class="global-input" placeholder="设置6位以上登录密码">
-            <span class="tips-container" style="display:none">输入错误</span><!-- 错误信息容器,出现2秒后消失 -->
-          </div>
-          <div class="single-btn-area">
-            <input class="btn status1-btn long-btn" type="button" value="注册" id="do_signup">
-            <p class="regis-tip">如果您已是注册用户，请您<a href="/login">登录</a></p>
-          </div>
-          
-        </form>
-      </div>
-    </div>
-  </div>
-  <script>
+<!DOCTYPE html><html><head><title>MES-会员注册</title><% include static_config %><% include static_loader %><% include head_script %></head><body><% include header_v2 %><div class="content-area"><div class="content"><div class="dialog-con dialog" style="z-index:1900; padding-top:60px;"><form><div class="dialog-head"><p class="dia-title">新用户注册</p></div><div class="check-container"><input type="text" class="global-input slide-code-btn" placeholder="请输入手机号码" style="width:198px;" id="username"><span class="tips-container" style="display:none" id="username_error">输入错误</span><!-- 错误信息容器,出现2秒后消失 --></div><a href="#" id="get_vaild_code" class="btn vert-btn code-btn">获取验证码</a><a style="display:none;width:auto" href="#" class="btn vert-btn code-btn" id="vaild_code_sended">已发送</a><div class="check-container"><input type="password" class="global-input" placeholder="请输入短信验证码" id="vaild_code"><span class="tips-container" style="display:none" id="vaildcode_error">输入错误</span><!-- 错误信息容器,出现2秒后消失 --></div><div class="check-container"><input type="password" id="password" class="global-input" placeholder="设置6位以上登录密码"><span class="tips-container" style="display:none">输入错误</span><!-- 错误信息容器,出现2秒后消失 --></div><div class="single-btn-area"><input class="btn status1-btn long-btn" type="button" value="注册" id="do_signup"><p class="regis-tip">如果您已是注册用户，请您<a href="/login">登录</a></p></div></form></div></div></div><script>
   (function(){
 	var VaildLock = false;
 	var JQ ={
@@ -123,6 +83,4 @@
 		return false;
 	});
 })();
-  </script>
-  <% include includes/baidu %>
-</html>
+  </script><% include baidu %></html>
