@@ -176,17 +176,17 @@ i:before{content: "\f054";}
 })(Zepto);
 
 $(function(){
-	$('#right_nav_menu_button').click(function(){
-	   if($('#app_main').hasClass('sidebar-left-in')){
-		$('#app_main').removeClass('sidebar-left-in');
-	   }else{
-		$('#app_main').addClass('sidebar-left-in');
-	   }
-	 });
-	 $(document).swipeLeft(function(){
-		$('#app_main').addClass('sidebar-left-in');
-	}).swipeRight(function(){
-		$('#app_main').removeClass('sidebar-left-in');
-	});
+$('#right_nav_menu_button').click(function(){
+   if($('#app_main').hasClass('sidebar-left-in')){
+$('#app_main').removeClass('sidebar-left-in');
+   }else{
+$('#app_main').addClass('sidebar-left-in');
+   }
+ });
+ $(document).swipeLeft(function(){
+$('#app_main').addClass('sidebar-left-in');
+}).swipeRight(function(){
+$('#app_main').removeClass('sidebar-left-in');
+});
 });
 </script>

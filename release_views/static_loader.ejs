@@ -52,10 +52,10 @@
         document.write('<script src="' + src + '"><\/script>');
       }
       if(window.localStorage){
-	      httpGet(src, function(txt) {
-		set(path, txt);
-		set(path + 'version', version);
-	     });
+      httpGet(src, function(txt) {
+set(path, txt);
+set(path + 'version', version);
+     });
       }
     }
 
