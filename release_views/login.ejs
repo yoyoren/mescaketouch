@@ -19,11 +19,11 @@ $('#popup_login').click(function() {
     password : password
   }, function(d) {
     if (d.code == 0) {
-	if(from=='account'){
-	 location.href = M.touchDomain;
-	}else{
-	 location.href =  M.touchDomain;
-	}
+if(from=='account'){
+ location.href = M.touchDomain;
+}else{
+ location.href =  M.touchDomain;
+}
        
     } else {
       M.loadingEnd();
@@ -31,5 +31,5 @@ $('#popup_login').click(function() {
     }
   });
   return false;
-}); 						
+}); 
 </script><% include baidu %></html>
