@@ -12,19 +12,7 @@ line-height: 1;
 -webkit-font-smoothing: antialiased;color: #555;box-sizing: border-box;}
 i:before{content: "\f054";}
 #app_main{z-index:10;background: #fff;}
-</style>
-<div id="right_bar" class="right-bar">
-	<div class="main-logo right-bar-logo"></div>
-	<div>
-		<a href="/">返回首页<i></i></a>
-		<a href="#" id="nav_account">我的账户<i></i></a>
-		<a href="#" id="nav_my_order">我的订单<i></i></a>
-		<a href="/shopcar">购物车<i></i></a>
-		<a href="#" id="logout">退出登录<i></i></a>
-	</div>
-</div>
-<% include nav_script %>
-<script>
+</style><div id="right_bar" class="right-bar"><div class="main-logo right-bar-logo"></div><div><a href="/">返回首页<i></i></a><a href="#" id="nav_account">我的账户<i></i></a><a href="#" id="nav_my_order">我的订单<i></i></a><a href="/shopcar">购物车<i></i></a><a href="#" id="logout">退出登录<i></i></a></div></div><% include nav_script %><script>
 ;(function($){
   var touch = {},
     touchTimeout, tapTimeout, swipeTimeout, longTapTimeout,
