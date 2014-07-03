@@ -1,1 +1,24 @@
-<!DOCTYPE html><html><head><title>MES-我的订单</title><% include static_config %><% include static_loader %><% include head_script %></head><body><div id="app_main" class="app-main app-nav"><% include header_v2 %><div class="scroll-area"><div class="content-area" id="container"></div></div><script>M.loading();  </script><script src="<%=STATIC_DOMAIN%>touch/page/myorder.js"></script></div></body><% include baidu %></html>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>MES-我的订单</title>
+  <% include includes/static_config %>
+  <% include includes/static_loader %>
+  <% include includes/head_script %>
+</head>
+<body>
+<div id="app_main" class="app-main app-nav">
+  <% include includes/header_v2 %>
+  <div class="scroll-area">
+    <div class="content-area" id="container">
+      
+    </div>
+  </div>
+  <script>
+	M.loading();
+  </script>
+  <script src="<%=STATIC_DOMAIN%>touch/page/myorder.js"></script>
+</div>
+</body>
+<% include includes/baidu %>
+</html>

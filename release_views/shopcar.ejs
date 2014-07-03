@@ -1,1 +1,30 @@
-<!DOCTYPE html><html><head><title>MES-购物车</title><% include static_config %><% include static_loader %><% include head_script %></head><body><div id="app_main" class="app-main app-nav"><% include header_v2 %><div class="scroll-area" style="padding-top:60px"><h4 class="wap-order-title-item">我的购物车</h4><p class="wap-total-price" id="order_price"></p></div><div class="wap-total-btn-area tl-c"><p class="hide">共<span id="staff_count">0</span>件商品，总计<span id="total_price"></span>元</p><p style="margin-bottom:6px"><a href="/checkout" class="btn big-btn status1-btn">去结算</a></p></div></div><script>  M.loading();  </script><script src="<%=STATIC_DOMAIN%>touch/page/shopcar.js"></script><% include baidu %></body></html>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>MES-购物车</title>
+  <% include includes/static_config %>
+  <% include includes/static_loader %>
+  <% include includes/head_script %>
+</head>
+<body>
+
+ <div id="app_main" class="app-main app-nav">
+    <% include includes/header_v2 %>
+    <div class="scroll-area" style="padding-top:60px">
+      <h4 class="wap-order-title-item">我的购物车</h4>
+      <p class="wap-total-price" id="order_price"></p>
+    </div>
+    <div class="wap-total-btn-area tl-c">
+      <p class="hide">共<span id="staff_count">0</span>件商品，总计<span id="total_price"></span>元</p>
+      <p style="margin-bottom:6px">
+        <a href="/checkout" class="btn big-btn status1-btn">去结算</a>
+      </p>
+    </div>
+  </div>
+  <script>
+  M.loading();
+  </script>
+ <script src="<%=STATIC_DOMAIN%>touch/page/shopcar.js"></script>
+ <% include includes/baidu %>
+</body>  
+</html>
