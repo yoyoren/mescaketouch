@@ -1,3 +1,4 @@
+var DEBUG = true;
 var express = require('express');
 var http = require('http');
 var path = require('path');
@@ -7,9 +8,12 @@ var session = require('express-session');
 var compression = require('compression');
 var cookieParser = require('cookie-parser')
 //var jade = require('jade');
-
+var viewPath =  '/release_views';
+if(DEBUG){
+   viewPath = '/views'
+}
 app.set('port', process.env.PORT || 5000);
-app.set('views', __dirname + '/views');
+app.set('views', __dirname +viewPath );
 app.set('view engine', 'ejs');
 //app.use(express.logger('dev'));
 //app.use(express.bodyParser());
@@ -26,10 +30,8 @@ var RES_SUCCESS = 0;
 var RES_FAIL = 1;
 var STATIC_DOMAIN = 'http://s1.static.mescake.com/';
 var STATIC_DOMAIN = 'http://10.237.113.51/';
-var DEBUG = false;
-if(DEBUG){
-   STATIC_DOMAIN = 'http://static.n.mescake.com/';
-}
+
+
 var Res = {
 	ajax:function(res,d){
 		res.send(d);
@@ -37,6 +39,7 @@ var Res = {
 	page:function(res,d){
 		var d = d||{};
 		d.STATIC_DOMAIN = STATIC_DOMAIN;
+		d.DEBUG = DEBUG;
 		res.render(d.view,d);
 	}
 }
@@ -114,7 +117,7 @@ app.get('/checkout',function(req,res){
 	var time = (new Date()).getTime();
 	console.log('checkout'+time);
 	Res.page(res,{
-		view:'checkout',
+		view:'checkout_v2',
 		date:time
 	});
 });
@@ -131,6 +134,12 @@ app.get('/orderdetail',function(req,res){
 			orderId:orderId
 		});
 	}
+});
+
+app.get('/addressmanager',function(req,res){
+	Res.page(res,{
+		view:'addressmanager'
+	});
 });
 
 app.get('/forgetpassword',function(req,res){

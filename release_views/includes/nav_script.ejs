@@ -1,0 +1,34 @@
+<script>
+M.checklogin(function(d){
+if(d){
+	$('#nav_account').attr('href','/account');
+	$('#nav_my_order').attr('href','/myorder');
+}else{
+	$('#nav_account').attr('href','/login?from=account');
+	$('#nav_my_order').attr('href','/login?from=myorder');
+	
+}
+});
+
+$('#logout')[CLICK](function(){
+  M.loading();
+  M.checkLogout(function(){
+	location.reload();
+  });
+});
+M.getShopCarCount = function(animation){
+	var el = $('#shopcar_num');
+	M.get('route.php?mod=account&action=get_order_count_by_sid',{},function(d){
+		if(d.count){
+			el.html(d.count).show();
+			if(animation){
+				el.addClass('animated bounce');
+				el[0].addEventListener('webkitAnimationEnd',function(){
+					el.removeClass('animated bounce');
+				},false);
+			}
+		}
+	});
+}
+M.getShopCarCount();
+</script>

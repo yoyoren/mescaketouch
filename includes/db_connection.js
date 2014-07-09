@@ -76,7 +76,7 @@ var Mysql = {
 	  if(order){
 		sql+=order;
 	  }
-	  console.log(sql)
+	  
 	  this.query(sql,function(rows,fields){
 		callback(rows);
 	  });
