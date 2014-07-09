@@ -1,4 +1,5 @@
 var DEBUG = true;
+var TEST_RELEASE = false;
 var express = require('express');
 var http = require('http');
 var path = require('path');
@@ -29,8 +30,13 @@ var sys = require('sys');
 var RES_SUCCESS = 0;
 var RES_FAIL = 1;
 var STATIC_DOMAIN = 'http://s1.static.mescake.com/';
-var STATIC_DOMAIN = 'http://10.237.113.51/';
 
+if(DEBUG){
+   STATIC_DOMAIN = 'http://10.237.113.51/';
+}
+if(TEST_RELEASE){
+   STATIC_DOMAIN = 'http://s1.n.mescake.com/'
+}
 
 var Res = {
 	ajax:function(res,d){
