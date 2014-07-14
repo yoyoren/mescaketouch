@@ -5,17 +5,19 @@
   <% include includes/static_config %>
   <% include includes/static_loader %>
   <% include includes/head_script_v2 %>
- 
+ <style>
+ .error-border{border-color:red}
+ </style>
 </head>
 <body>
   
   <div id="app_main" class="app-main app-nav">
     <div class="return-area"><a class="ra-ico" href="/"></a><span class="ra-con">订单确认</span></div>
-    <div class="scroll-area" id="scroll_container" style="padding-bottom:120px;padding-top:60px;">
+    <div class="scroll-area" id="scroll_container" style="padding-bottom:15px;padding-top:40px;">
       
       <div class="data-item">
         <p class="wap-order-title-item" id="staff_container">订单信息</p>
-        <div class="line-item">运费：<span class="woi-price" style="color:#ff7e00;">免邮</span></div>
+        <div class="line-item" style="display:none" id="fee_bar">运费：<span class="woi-price" style="color:#ff7e00;" id="address_fee_top">免邮</span></div>
         <div class="leave-mes" style="padding:0;">
           <div class="check-container" style="width:100%;">
             <input type="text" id="message_input" class="global-input has-bor-input" placeholder="留言说明（20字以内）" style="margin-bottom:0;">
@@ -29,7 +31,7 @@
           <input type="text" id="new_contact" class="global-input has-bor-input" placeholder="收货人姓名">
         </div>
         <div class="check-container">
-          <input type="text" id="new_tel" class="global-input has-bor-input" placeholder="联系电话">
+          <input type="telephone" id="new_tel" class="global-input has-bor-input" placeholder="联系电话">
         </div>
         <div class="clearfix tl-c">
           <div class="check-container fl-l" style="width:20%;">
@@ -40,7 +42,7 @@
 	    <input type="text" class="global-input has-bor-input" placeholder="请选择街道" id="street_picker">
 	    <input type="hidden" id="district_sel" value="0">
           </div>
-          <div class="check-container" style="width:30%;">
+          <div class="check-container" style="width:75%;" id="zone_container">
              <input type="text" class="global-input has-bor-input" placeholder="请选择区" id="zone_picker">
 	     <input type="hidden" id="region_sel" value="0">
           </div>
@@ -79,7 +81,7 @@
 	  <input type="hidden" id="minute_sel" value="0">
         </div>
       </div>
-      <div class="data-item">      
+      <div class="data-item" style="padding-bottom:15px;">      
 	      <h4 class="wap-order-title-item">付款方式</h4>
 	      <div class="wap-order-item pay_container" style="padding:14px 10px;" id="cash_container" data-id="1">
 		<label for="cashon" >货到付款

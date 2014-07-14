@@ -213,7 +213,7 @@ app.get('/shopcarempty',function(req,res){
 
 app.get('/newaddress',function(req,res){
 	Res.page(res,{
-		view:'newaddress'
+		view:'newaddress_v2'
 	});
 });
 app.get('/cake',function(req,res){
