@@ -1,5 +1,12 @@
-var DEBUG = true;
+//视图调试模式
+var VIEW_DEBUG = true;
+
+//测试机发布环境
 var TEST_RELEASE = false;
+
+//线上灰度的发布环境
+var PREVIEW_RELEASE = false;
+
 var express = require('express');
 var http = require('http');
 var path = require('path');
@@ -10,7 +17,7 @@ var compression = require('compression');
 var cookieParser = require('cookie-parser')
 //var jade = require('jade');
 var viewPath =  '/release_views';
-if(DEBUG){
+if(VIEW_DEBUG){
    viewPath = '/views'
 }
 app.set('port', process.env.PORT || 5000);
@@ -35,7 +42,11 @@ if(DEBUG){
    STATIC_DOMAIN = 'http://10.237.113.51/';
 }
 if(TEST_RELEASE){
-   STATIC_DOMAIN = 'http://s1.n.mescake.com/'
+   STATIC_DOMAIN = 'http://static.n.mescake.com/';
+}
+
+if(PREVIEW_RELEASE){
+  STATIC_DOMAIN = 'http://static.preview.mescake.com/';
 }
 
 var Res = {
