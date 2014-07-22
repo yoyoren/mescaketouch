@@ -37,7 +37,7 @@ var sys = require('sys');
 var RES_SUCCESS = 0;
 var RES_FAIL = 1;
 var STATIC_DOMAIN = 'http://s1.static.mescake.com/';
-
+var DEBUG = true;
 if(DEBUG){
    STATIC_DOMAIN = 'http://10.237.113.51/';
 }
@@ -98,7 +98,7 @@ app.get('/getIndexDataAnsyc',function(req,res){
 
 app.get('/getGoodsAttrAnsyc',function(req,res){
 	 var goodsId = req.query.id;
-	 if(!goodsId){
+	 if(!goodsId||isNaN(goodsId)){
 		res.redirect('/');
 		return;
 	}
