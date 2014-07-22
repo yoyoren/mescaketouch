@@ -37,6 +37,7 @@ var sys = require('sys');
 var RES_SUCCESS = 0;
 var RES_FAIL = 1;
 var STATIC_DOMAIN = 'http://s1.static.mescake.com/';
+var IMG_DOMAIN = 'http://touch.mescake.com/';
 var DEBUG = true;
 if(DEBUG){
    STATIC_DOMAIN = 'http://10.237.113.51/';
@@ -47,6 +48,7 @@ if(TEST_RELEASE){
 
 if(PREVIEW_RELEASE){
   STATIC_DOMAIN = 'http://static.preview.mescake.com/';
+  IMG_DOMAIN = 'http://touch.n.mescake.com/';
 }
 
 var Res = {
@@ -69,7 +71,7 @@ app.get('/',function(req,res){
 	 pageview.getGoodsData(function(d1,d2){
 		for(var i in d1){
 			if(d1[i]){
-				d1[i].url = 'http://touch.mescake.com/'+d1[i].goods_sn.substring(0,3)+'.jpg';
+				d1[i].url =IMG_DOMAIN + d1[i].goods_sn.substring(0,3)+'.jpg';
 			}
 			if(d1[i]){
 				d1[i].goods_desc = htmlToText.fromString(d1[i].goods_desc);
