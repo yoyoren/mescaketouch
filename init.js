@@ -1,6 +1,9 @@
 //视图调试模式
 var VIEW_DEBUG = true;
 
+//开发环境调试
+var DEV_DEBUG = true;
+
 //测试机发布环境
 var TEST_RELEASE = false;
 
@@ -14,12 +17,10 @@ var fs = require('fs');
 var app = express();
 var session = require('express-session');
 var compression = require('compression');
-var cookieParser = require('cookie-parser')
-//var jade = require('jade');
+var cookieParser = require('cookie-parser');
+var sys = require('sys');
 var viewPath =  '/release_views';
-if(VIEW_DEBUG){
-   viewPath = '/views'
-}
+
 app.set('port', process.env.PORT || 5000);
 app.set('views', __dirname +viewPath );
 app.set('view engine', 'ejs');
@@ -33,15 +34,22 @@ app.use(session({
 app.use(compression({
  threshold: 1024
 }));
-var sys = require('sys');
+
+
 var RES_SUCCESS = 0;
 var RES_FAIL = 1;
 var STATIC_DOMAIN = 'http://s1.static.mescake.com/';
 var IMG_DOMAIN = 'http://touch.mescake.com/';
-var DEBUG = true;
-if(DEBUG){
+
+if(VIEW_DEBUG){
+   viewPath = '/views';
+   app.set('views', __dirname +viewPath );
+}
+
+if(DEV_DEBUG){
    STATIC_DOMAIN = 'http://10.237.113.51/';
 }
+
 if(TEST_RELEASE){
    STATIC_DOMAIN = 'http://static.n.mescake.com/';
 }
@@ -58,7 +66,7 @@ var Res = {
 	page:function(res,d){
 		var d = d||{};
 		d.STATIC_DOMAIN = STATIC_DOMAIN;
-		d.DEBUG = DEBUG;
+		d.DEBUG = DEV_DEBUG;
 		res.render(d.view,d);
 	}
 }
