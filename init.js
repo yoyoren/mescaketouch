@@ -21,7 +21,7 @@ var cookieParser = require('cookie-parser');
 var sys = require('sys');
 var viewPath =  '/release_views';
 
-app.set('port', process.env.PORT || 5000);
+app.set('port', process.env.PORT || 5002);
 app.set('views', __dirname +viewPath );
 app.set('view engine', 'ejs');
 //app.use(express.logger('dev'));
