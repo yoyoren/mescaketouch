@@ -1,8 +1,8 @@
 //视图调试模式
-var VIEW_DEBUG = true;
+var VIEW_DEBUG = false;
 
 //开发环境调试
-var DEV_DEBUG = true;
+var DEV_DEBUG = false;
 
 //测试机发布环境
 var TEST_RELEASE = false;

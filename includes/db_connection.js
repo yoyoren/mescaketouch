@@ -1,5 +1,5 @@
 var dbName = 'mescake';
-var password = '';
+var password = 'dbmescake_149server_production';
 var mysql = require('mysql');
 var connection = mysql.createConnection({
   host     : 'localhost',

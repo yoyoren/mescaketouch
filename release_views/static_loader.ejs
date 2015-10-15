@@ -42,7 +42,6 @@ if(location.href.indexOf('debug')>-1&&window.localStorage){
     var data = get(path);
     if ( data!== null && get(path + 'version') == version && window.localStorage) {
       if (/\.css/.test(path)) {
-data = data.replace(/img\//gi,root+'/touch/css/img/');
         var stylesheet = '<style type="text/css">' + data + '<\/style>';
         document.write(stylesheet);
       } else {
