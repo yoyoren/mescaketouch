@@ -19,7 +19,7 @@ var session = require('express-session');
 var compression = require('compression');
 var cookieParser = require('cookie-parser');
 var sys = require('sys');
-var viewPath =  '/release_views';
+var viewPath =  '/views';
 
 app.set('port', process.env.PORT || 5002);
 app.set('views', __dirname +viewPath );
@@ -92,6 +92,13 @@ app.get('/',function(req,res){
 			catoData:d2
 		});
 	 });
+	 
+});
+
+app.get('/paytest',function(req,res){
+	Res.page(res,{
+		view:'paytest'
+	});
 	 
 });
 
