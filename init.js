@@ -225,6 +225,12 @@ app.get('/done',function(req,res){
 	});
 });
 
+app.get('/shipping_site',function(req,res){
+	Res.page(res,{
+		view:'shipping_site'
+	});
+});
+
 app.get('/shopcar',function(req,res){
 	console.log('shopcar');
 	Res.page(res,{

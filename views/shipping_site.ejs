@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>MES-自提站选择</title>
+  <% include includes/static_config %>
+  <% include includes/static_loader %>
+  <% include includes/head_script %>
+</head>
+<body>
+  <div id="app_main" class="app-main app-nav">
+  <% include includes/header_v2 %>
+  <ul id="list_container" style="margin-top:50px;"></ul>
+  </div>
+</body>
+<script>
+var siteInfo = {};
+M.get('/route.php?mod=self_station&action=list',{},function(d){
+    var data = d;
+	var container = $('#list_container');
+	var html = '';
+	
+	for(var i=0;i<data.length;i++){
+	    var _d = data[i];
+		siteInfo[_d.station_id] = _d;
+		html += '<li class="station_sel" data-id="'+_d.station_id+'">'+ _d.station_address +'</li>'
+	}
+	container.html(html);
+});
+
+$('#list_container').delegate('.station_sel','click',function(){
+   //直接在存储里搞这个事情
+	var _id = $(this).data('id');
+	localStorage.setItem('shipping_site',_id);
+	localStorage.setItem('shipping_site_obj',JSON.stringify(siteInfo[_id]));
+});
+</script>
+<% include includes/baidu %>
+</html>
