@@ -6,6 +6,150 @@
   <% include includes/static_loader %>
   <% include includes/head_script_v2 %>
  <style>
+ *{padding: 0; margin: 0;}
+html, body {
+    font-size: 14px;
+    color: #333;
+}
+body, input {
+    font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",sans-serif;
+}
+a, input, em, .wap-price-intro, .wap-check-area, .wap-func-more-ico, .ra-con {
+    outline: 0;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+table{border-collapse:collapse;border-spacing:0}
+a,label,:focus{outline:0 none}
+.clearfix:after{display:block;content:"\20";height:0;clear:both;overflow:hidden;visibility:hidden}
+.clearfix{*zoom:1}
+.app-main{
+  position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    min-height: 500px;
+    overflow: hidden;
+}
+
+.return-area {
+    height: 50px;
+    line-height: 50px;
+    background: #fff;
+    border-bottom: 1px solid #ccc;
+    overflow: hidden;
+    font-weight: bold;
+}
+.return-area {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 10;
+}
+.return-area a {
+    color: #333;
+}
+.ra-ico {
+    float: left;
+    display: inline-block;
+    margin: 0 10px 0 0;
+    width: 40px;
+    height: 50px;
+    vertical-align: middle;
+    border-right: 1px solid #ccc;
+    background: url(http://s1.static.mescake.com/touch/css/img/wap-return-home.png) center center no-repeat;
+    background-size: 12px 12px;
+}
+.ra-con {
+    display: inline-block;
+    font-size: 16px;
+}
+
+.scroll-area {
+    display: block;
+    height: 100%;
+    overflow: auto;
+    box-sizing: border-box;
+    padding: 60px 0;
+}
+.data-item {
+    padding: 10px;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+    margin: 10px 0;
+    background: #fff;
+}
+.address-detail {
+    padding-right: 30px;
+    position: relative;
+}
+.address-num {
+    font-weight: bold;
+    margin-left: 0;
+}
+.wap-radio, .wap-checkbox {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+}
+.wap-radio {
+    background: url(http://s1.static.mescake.com/touch/css/img/wap-radio41.png) 0 0 no-repeat;
+    background-size: 24px 24px;
+}
+.wap-checkbox-item, .wap-radio-item {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    margin-top: -12px;
+}
+.wap-radio:active, .wap-radio.checked {
+    background: url(http://s1.static.mescake.com/touch/css/img/wap-radio42.png) 0 0 no-repeat;
+    background-size: 24px 24px;
+}
+
+.has-bor-input {
+    border: 1px solid #e5e5e5;
+    border-radius: 3px;
+    background: #fff;
+    padding: 10px;
+}
+.global-input {
+    height: 42px;
+    line-height: normal;
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+}
+
+
+.wap-more-ico {
+    position: absolute;
+    top: 50%;
+    margin-top: -4px;
+    right: 10px;
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background: url(http://s1.static.mescake.com/touch/css/img/wap-more-ico.png) 0 0 no-repeat;
+    background-size: 8px 8px;
+}
+
+/* 订单确认部分新增部分 */
+.por-r{position: relative;}
+
+.check-sent-style .por-r{width: 50%; float: left; padding-left: 64px; box-sizing:border-box;}
+.check-sent-style .wap-radio{right: auto; left: 30px;}
+
+.self-sent-enter-mes{padding-top: 10px;}
+
+.new-wap-btn{
+    border: 0 none;
+    background: #fff; height: 40px; box-sizing:border-box;
+    line-height: normal; padding: 10px 0; text-align: center; width: 100%;
+    color: #939862; font-size: 14px; margin:0; margin-bottom: 10px; border: 1px solid #eee;
+    border-radius: 3px;
+}
  .error-border{border-color:red}
  </style>
 </head>
@@ -53,14 +197,43 @@
         </div>
       </div>
 
-      <div class="data-item" id="new_address_link" style="display:none">
+      
+	  
+      <div class="data-item">
+		  <div class="check-sent-style clearfix">
+			  <div class="por-r" id="mes_shipping_button">
+				<em class="wap-radio wap-radio-item checked"></em>每实配送
+			  </div>
+			  <div class="por-r" id="self_shipping_button">
+				<em class="wap-radio wap-radio-item"></em>站点自提
+			  </div>
+		  </div>
+      </div>
+	  
+	  <div class="data-item" id="new_address_link" style="display:none">
         <p class="pos-r">新增地址<em class="wap-more-ico"></em></p>
       </div>
-     
-
-      <div class="data-item" id="address_container" style="display:none">
+	  
+      <div class="data-item" id="address_container" style="display:none;margin-top:0px">
         <p class="wap-order-title-item">收货地址</p>
       </div>
+	  
+	  <div class="data-item" style="display:none" id="self_input_container">
+        <div class="self-sent-enter-mes">
+          <div class="check-container">
+            <input type="text" id="self_shipping_name" class="global-input has-bor-input" placeholder="收货人姓名" />
+          </div>
+          <div class="check-container">
+            <input type="text" id="self_shipping_mobile" class="global-input has-bor-input" placeholder="联系电话" />
+          </div>
+		  <div class="new-wap-btn" style="display:none" id="selected_shipping_adress">
+          </div>
+          <div class="new-wap-btn" id="sel_shipping_button">
+              确认并选择自提地点 >
+          </div>
+
+        </div>
+    </div>
 
       <div class="clearfix pad-l-r10">
         <em class="check-btn fl-l" style="display:none" id="new_address_btn">添加新地址</em>
@@ -93,6 +266,11 @@
 	      <div class="wap-order-item pay_container" style="padding:14px 10px;" id="alipay_container" data-id="3">
 		<label for="alipay">支付宝<em class="wap-radio wap-radio-item pay_sel"  id="alipay" ></em></label>
 	      </div>
+		  
+		  <div class="wap-order-item pay_container" style="padding:14px 10px;" id="weixin_container" data-id="9">
+		<label for="alipay">微信<em class="wap-radio wap-radio-item pay_sel"  id="weixin" ></em></label>
+	      </div>
+		  
 	      <div class="wap-order-item pay_container" style="padding:14px 10px;" id="kuaiqian_container" data-id="4">
 		<label for="kuaiqian">快钱<em class="wap-radio wap-radio-item pay_sel" id="kuaiqian"></em></label>
 	      </div>
@@ -131,6 +309,39 @@
   window.server_date = '<%=date%>';
   M.loading();
   Loader(['touch/page/picker.js','touch/page/checkout.js','touch/page/shopcar_checkout.js']);
+  $('#self_shipping_button').click(function(){
+	  $('#self_input_container').show();
+	  $('#self_shipping_button').find('em').addClass('checked');
+	  $('#mes_shipping_button').find('em').removeClass('checked');
+	  $('#address_container').hide();
+  });
+  
+  $('#mes_shipping_button').click(function(){
+	  $('#self_input_container').hide();
+	  $('#self_shipping_button').find('em').removeClass('checked');
+	  $('#mes_shipping_button').find('em').addClass('checked');
+	  $('#address_container').show();
+  });
+  
+  $('#sel_shipping_button').click(function(){
+	location.href='/shipping_site';
+  });
+  var shipping_site = localStorage.getItem('shipping_site');
+  if(shipping_site){
+	 $('#self_shipping_button').trigger('click');
+	 var shipping_site_obj = localStorage.getItem('shipping_site_obj');
+	 shipping_site_obj = JSON.parse(shipping_site_obj);
+	 $('#selected_shipping_adress').show().html('已选择自提站:'+shipping_site_obj.station_name);
+  }
+  $('#self_shipping_mobile').blur(function(){
+	  var val = $(this).val();
+	  localStorage.setItem('self_shipping_mobile',val);
+  });
+  
+  $('#self_shipping_name').blur(function(){
+	 var val = $(this).val();
+	 localStorage.setItem('self_shipping_name',val);
+  });
   </script>
   <% include includes/baidu %>
 </body>

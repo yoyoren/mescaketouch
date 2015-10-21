@@ -5,12 +5,142 @@
   <% include includes/static_config %>
   <% include includes/static_loader %>
   <% include includes/head_script %>
+  <style type="text/css">
+	*{padding: 0; margin: 0;}
+	html, body {
+		font-size: 14px;
+		color: #333;
+	}
+	body, input {
+		font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",sans-serif;
+	}
+	a, input, em, .wap-price-intro, .wap-check-area, .wap-func-more-ico, .ra-con {
+		outline: 0;
+		-webkit-tap-highlight-color: rgba(0,0,0,0);
+	}
+	table{border-collapse:collapse;border-spacing:0}
+	a,label,:focus{outline:0 none}
+	.clearfix:after{display:block;content:"\20";height:0;clear:both;overflow:hidden;visibility:hidden}
+	.clearfix{*zoom:1}
+	.app-main{
+	  position: absolute;
+		top: 0;
+		left: 0;
+		height: 100%;
+		width: 100%;
+		min-height: 500px;
+		overflow: hidden;
+	}
+
+	.return-area {
+		height: 50px;
+		line-height: 50px;
+		background: #fff;
+		border-bottom: 1px solid #ccc;
+		overflow: hidden;
+		font-weight: bold;
+	}
+	.return-area {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		z-index: 10;
+	}
+	.return-area a {
+		color: #333;
+	}
+	.ra-ico {
+		float: left;
+		display: inline-block;
+		margin: 0 10px 0 0;
+		width: 40px;
+		height: 50px;
+		vertical-align: middle;
+		border-right: 1px solid #ccc;
+		background: url(http://s1.static.mescake.com/touch/css/img/wap-return-home.png) center center no-repeat;
+		background-size: 12px 12px;
+	}
+	.ra-con {
+		display: inline-block;
+		font-size: 16px;
+	}
+
+
+	.scroll-area {
+		display: block;
+		height: 100%;
+		overflow: auto;
+		box-sizing: border-box;
+		padding: 60px 0;
+	}
+	.data-item {
+		padding: 10px;
+		border-top: 1px solid #eee;
+		border-bottom: 1px solid #eee;
+		margin: 10px 0;
+		background: #fff;
+	}
+	.address-detail {
+		padding-right: 30px;
+		position: relative;
+	}
+	.address-num {
+		font-weight: bold;
+		margin-left: 0;
+	}
+	.wap-radio, .wap-checkbox {
+		display: inline-block;
+		width: 24px;
+		height: 24px;
+	}
+	.wap-radio {
+		background: url(http://s1.static.mescake.com/touch/css/img/wap-radio41.png) 0 0 no-repeat;
+		background-size: 24px 24px;
+	}
+	.wap-checkbox-item, .wap-radio-item {
+		position: absolute;
+		right: 10px;
+		top: 50%;
+		margin-top: -12px;
+	}
+	.wap-radio:active, .wap-radio.checked {
+		background: url(http://s1.static.mescake.com/touch/css/img/wap-radio42.png) 0 0 no-repeat;
+		background-size: 24px 24px;
+	}
+
+	/* 自提页面新增部分 */
+	.por-r{position: relative;}
+	.self-address-check-area{position: relative; padding-left: 120px;}
+	.self-address-list{width: 120px; position:absolute; left: 0; top: 0;}
+	.self-address-list li{width: 100%; height: 38px; line-height: 38px; background: #d7d7d7;
+	text-align: center;}
+	.self-address-list li.current{background: #f7f7f7;}
+	.self-address-check-area .data-item{border-top: 0 none; padding: 0 0 10px; margin: 0 20px 20px;}
+	.self-address-check-area .data-item:first-child{padding-top: 20px;}
+	.address-lists-area .title{color: #e77262; font-size: 18px;}
+	.address-lists-area .data-item{background: #f7f7f7;}
+	</style>
 </head>
 <body>
-  <div id="app_main" class="app-main app-nav">
-  <% include includes/header_v2 %>
-  <ul id="list_container" style="margin-top:50px;"></ul>
+<div class="app-main app-nav">
+  <div class="return-area">
+    <a class="ra-ico" href="/checkout"></a>
+    <span class="ra-con">站点自提</span>
   </div>
+  <div class="scroll-area" style="padding-bottom:80px; padding-top:42px; background:#f7f7f7;">
+    <div class="data-item" id="new_address_link" style="margin-bottom:0;">
+      <p class="pos-r" style="color:#e77262;"></p>
+    </div>
+    <div class="clearfix self-address-check-area">
+      <ul class="self-address-list" id="dis_title_list">        
+      </ul>
+      <div class="address-lists-area" id="container">
+      </div>
+    </div>
+  </div>
+</div>
+<ul id="list_container" style="margin-top:50px;"></ul>
 </body>
 <script>
 var siteInfo = {};
@@ -18,20 +148,59 @@ M.get('/route.php?mod=self_station&action=list',{},function(d){
     var data = d;
 	var container = $('#list_container');
 	var html = '';
-	
+	var station_dis = {};
+	var station_dis_info = {};
 	for(var i=0;i<data.length;i++){
 	    var _d = data[i];
 		siteInfo[_d.station_id] = _d;
-		html += '<li class="station_sel" data-id="'+_d.station_id+'">'+ _d.station_address +'</li>'
+	    if(!station_dis[_d.station_district_id]){
+		    station_dis[_d.station_district_id] = [];
+			station_dis_info[_d.station_district_id] = _d.station_district_name;
+		}
+		station_dis[_d.station_district_id].push(_d);
+		//html += '<li class="station_sel" data-id="'+_d.station_id+'">'+ _d.station_address +'</li>'
 	}
-	container.html(html);
+	
+	var html_title = '';
+	for(var i in station_dis){
+		var _d = station_dis[i];
+		html_title += '<li data-id="'+i+'">'+station_dis_info[i]+'</li>'
+		var html = '<div style="display:none" class="j-station-list" id="station_list_'+i+'">';
+		for(var k=0;k<_d.length;k++){
+		    var __d = _d[k];
+			html += '<div class="data-item address_item" data-id="'+__d.station_id+'">\
+					  <div class="address-detail">\
+						<h4 class="title">'+__d.station_name+'</h4>\
+						'+__d.station_address+'<br>\
+						<em class="wap-radio wap-radio-item" ></em>\
+					  </div>\
+					</div>'
+		}
+		html += '</div>';
+		
+		$('#container').append(html);
+	}
+	
+	$('#dis_title_list').html(html_title);
+	var list_all = $('.j-station-list');
+	var title_all = $('#dis_title_list').find('li');
+	title_all.click(function(){
+		var _id = $(this).data('id');
+		title_all.removeClass('current');
+		$(this).addClass('current');
+		list_all.hide();
+		$('#station_list_' + _id).show();
+	});
+	$($('#dis_title_list').find('li')[0]).trigger('click');
+	//container.html(html);
 });
 
-$('#list_container').delegate('.station_sel','click',function(){
+$('#container').delegate('.address_item','click',function(){
    //直接在存储里搞这个事情
 	var _id = $(this).data('id');
 	localStorage.setItem('shipping_site',_id);
 	localStorage.setItem('shipping_site_obj',JSON.stringify(siteInfo[_id]));
+	location.href = '/checkout';
 });
 </script>
 <% include includes/baidu %>
