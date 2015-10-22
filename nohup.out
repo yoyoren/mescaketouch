@@ -8130,3 +8130,172 @@ shopcar
 shopcar
 shopcar
 shopcar
+Express server listening on port 5002
+shopcar
+Express server listening on port 5002
+checkout1444908134660
+checkout1444908134917
+shopcar
+shopcar
+shopcar
+shopcar
+checkout1444908398351
+shopcar
+shopcar
+shopcar
+shopcar
+ReferenceError: /www/mescaketouch_weixin/views/shopcar.ejs:31
+    29|   </script>
+    30|    (function(){
+ >> 31|         var tmpl = '<% for(var i=0;i<data.length;i++){ %>\
+    32| 						<div class="wap-order-item">\
+    33| 						<div class="woi-img">\
+    34| 						 <%if(data[i].goods_id == CAT_CAKE) {%>\
+
+data is not defined
+    at eval (eval at <anonymous> (/www/mescaketouch_weixin/node_modules/ejs/lib/ejs.js:242:14), <anonymous>:39:630)
+    at eval (eval at <anonymous> (/www/mescaketouch_weixin/node_modules/ejs/lib/ejs.js:242:14), <anonymous>:41:59)
+    at /www/mescaketouch_weixin/node_modules/ejs/lib/ejs.js:255:15
+    at Object.exports.render (/www/mescaketouch_weixin/node_modules/ejs/lib/ejs.js:293:13)
+    at View.exports.renderFile [as engine] (/www/mescaketouch_weixin/node_modules/ejs/lib/ejs.js:323:20)
+    at View.render (/www/mescaketouch_weixin/node_modules/express/lib/view.js:76:8)
+    at Function.app.render (/www/mescaketouch_weixin/node_modules/express/lib/application.js:503:10)
+    at ServerResponse.res.render (/www/mescaketouch_weixin/node_modules/express/lib/response.js:802:7)
+    at Object.Res.page (/www/mescaketouch_weixin/init.js:70:7)
+    at Object.app.get.Res.page.view [as handle] (/www/mescaketouch_weixin/init.js:230:6)
+shopcar
+ReferenceError: /www/mescaketouch_weixin/views/shopcar.ejs:31
+    29|   </script>
+    30|    (function(){
+ >> 31|         var tmpl = '<% for(var i=0;i<data.length;i++){ %>\
+    32| 						<div class="wap-order-item">\
+    33| 						<div class="woi-img">\
+    34| 						 <%if(data[i].goods_id == CAT_CAKE) {%>\
+
+data is not defined
+    at eval (eval at <anonymous> (/www/mescaketouch_weixin/node_modules/ejs/lib/ejs.js:242:14), <anonymous>:39:630)
+    at eval (eval at <anonymous> (/www/mescaketouch_weixin/node_modules/ejs/lib/ejs.js:242:14), <anonymous>:41:59)
+    at /www/mescaketouch_weixin/node_modules/ejs/lib/ejs.js:255:15
+    at Object.exports.render (/www/mescaketouch_weixin/node_modules/ejs/lib/ejs.js:293:13)
+    at View.exports.renderFile [as engine] (/www/mescaketouch_weixin/node_modules/ejs/lib/ejs.js:323:20)
+    at View.render (/www/mescaketouch_weixin/node_modules/express/lib/view.js:76:8)
+    at Function.app.render (/www/mescaketouch_weixin/node_modules/express/lib/application.js:503:10)
+    at ServerResponse.res.render (/www/mescaketouch_weixin/node_modules/express/lib/response.js:802:7)
+    at Object.Res.page (/www/mescaketouch_weixin/init.js:70:7)
+    at Object.app.get.Res.page.view [as handle] (/www/mescaketouch_weixin/init.js:230:6)
+shopcar
+ReferenceError: /www/mescaketouch_weixin/views/shopcar.ejs:31
+    29|   </script>
+    30|    (function(){
+ >> 31|         var tmpl = '<% for(var i=0;i<data.length;i++){ %>\
+    32| 						<div class="wap-order-item">\
+    33| 						<div class="woi-img">\
+    34| 						 <%if(data[i].goods_id == CAT_CAKE) {%>\
+
+data is not defined
+    at eval (eval at <anonymous> (/www/mescaketouch_weixin/node_modules/ejs/lib/ejs.js:242:14), <anonymous>:39:630)
+    at eval (eval at <anonymous> (/www/mescaketouch_weixin/node_modules/ejs/lib/ejs.js:242:14), <anonymous>:41:59)
+    at /www/mescaketouch_weixin/node_modules/ejs/lib/ejs.js:255:15
+    at Object.exports.render (/www/mescaketouch_weixin/node_modules/ejs/lib/ejs.js:293:13)
+    at View.exports.renderFile [as engine] (/www/mescaketouch_weixin/node_modules/ejs/lib/ejs.js:323:20)
+    at View.render (/www/mescaketouch_weixin/node_modules/express/lib/view.js:76:8)
+    at Function.app.render (/www/mescaketouch_weixin/node_modules/express/lib/application.js:503:10)
+    at ServerResponse.res.render (/www/mescaketouch_weixin/node_modules/express/lib/response.js:802:7)
+    at Object.Res.page (/www/mescaketouch_weixin/init.js:70:7)
+    at Object.app.get.Res.page.view [as handle] (/www/mescaketouch_weixin/init.js:230:6)
+shopcar
+shopcar
+shopcar
+ReferenceError: /www/mescaketouch_weixin/views/shopcar.ejs:30
+    28|   M.loading();
+    29|     (function(){
+ >> 30|         var tmpl = '<% for(var i=0;i<data.length;i++){ %>\
+    31| 						<div class="wap-order-item">\
+    32| 						<div class="woi-img">\
+    33| 						 <%if(data[i].goods_id == CAT_CAKE) {%>\
+
+data is not defined
+    at eval (eval at <anonymous> (/www/mescaketouch_weixin/node_modules/ejs/lib/ejs.js:242:14), <anonymous>:39:618)
+    at eval (eval at <anonymous> (/www/mescaketouch_weixin/node_modules/ejs/lib/ejs.js:242:14), <anonymous>:41:59)
+    at /www/mescaketouch_weixin/node_modules/ejs/lib/ejs.js:255:15
+    at Object.exports.render (/www/mescaketouch_weixin/node_modules/ejs/lib/ejs.js:293:13)
+    at View.exports.renderFile [as engine] (/www/mescaketouch_weixin/node_modules/ejs/lib/ejs.js:323:20)
+    at View.render (/www/mescaketouch_weixin/node_modules/express/lib/view.js:76:8)
+    at Function.app.render (/www/mescaketouch_weixin/node_modules/express/lib/application.js:503:10)
+    at ServerResponse.res.render (/www/mescaketouch_weixin/node_modules/express/lib/response.js:802:7)
+    at Object.Res.page (/www/mescaketouch_weixin/init.js:70:7)
+    at Object.app.get.Res.page.view [as handle] (/www/mescaketouch_weixin/init.js:230:6)
+shopcar
+Express server listening on port 5002
+shopcar
+shopcar
+shopcar
+shopcar
+shopcar
+checkout1445044335885
+shopcar
+checkout1445048666763
+shopcar
+checkout1445315440527
+checkout1445315458583
+checkout1445322769799
+checkout1445323045594
+checkout1445323060670
+checkout1445323093458
+checkout1445323355277
+checkout1445323482041
+checkout1445324108989
+checkout1445324114423
+checkout1445324199041
+checkout1445324210383
+checkout1445324725057
+checkout1445325117836
+checkout1445325230474
+done/23293
+Express server listening on port 5002
+Express server listening on port 5002
+checkout1445435090906
+checkout1445435122404
+checkout1445435131782
+checkout1445435275208
+checkout1445435282845
+checkout1445435331588
+checkout1445435474808
+checkout1445435485715
+checkout1445435500074
+checkout1445435518976
+checkout1445435592991
+checkout1445435728451
+checkout1445435734007
+checkout1445435757198
+checkout1445435790046
+checkout1445435814318
+checkout1445435823046
+checkout1445435827176
+checkout1445435831718
+checkout1445437349705
+checkout1445437941096
+checkout1445440632207
+checkout1445440642253
+checkout1445440652921
+checkout1445440671516
+checkout1445440781967
+checkout1445440784809
+checkout1445440843425
+checkout1445440853592
+checkout1445440869040
+checkout1445440915026
+checkout1445440932666
+checkout1445440941771
+checkout1445441693540
+Error: ENOENT, no such file or directory 'goodsconfig.json'
+    at Object.fs.openSync (fs.js:427:18)
+    at Object.fs.readFileSync (fs.js:284:15)
+    at Object.PageView.readIndexConfig (/www/mescaketouch_weixin/lib/pageview.js:6:19)
+    at Object.PageView.getGoodsData (/www/mescaketouch_weixin/lib/pageview.js:54:21)
+    at Object.app.get.Res.page.view [as handle] (/www/mescaketouch_weixin/init.js:79:12)
+    at next_layer (/www/mescaketouch_weixin/node_modules/express/lib/router/route.js:103:13)
+    at Route.dispatch (/www/mescaketouch_weixin/node_modules/express/lib/router/route.js:107:5)
+    at /www/mescaketouch_weixin/node_modules/express/lib/router/index.js:205:24
+    at Function.proto.process_params (/www/mescaketouch_weixin/node_modules/express/lib/router/index.js:269:12)
+    at next (/www/mescaketouch_weixin/node_modules/express/lib/router/index.js:199:19)

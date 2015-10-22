@@ -168,8 +168,18 @@ a,label,:focus{outline:0 none}
           </div>
         </div>
       </div>
-
-      <div class="data-item" id="new_address_container" style="display:none">
+      <div class="data-item">
+		  <div class="check-sent-style clearfix">
+			  <div class="por-r" id="mes_shipping_button">
+				<em class="wap-radio wap-radio-item checked"></em>每实配送
+			  </div>
+			  <div class="por-r" id="self_shipping_button">
+				<em class="wap-radio wap-radio-item"></em>站点自提
+			  </div>
+		  </div>
+      </div>
+	  <!-- user unlogin -->
+	  <div class="data-item" id="new_address_container" style="display:none">
         <p class="wap-order-title-item">收货地址</p>
         <div class="check-container">
           <input type="text" id="new_contact" class="global-input has-bor-input" placeholder="收货人姓名">
@@ -195,19 +205,6 @@ a,label,:focus{outline:0 none}
         <div class="check-container">
           <input type="text" id="new_address" class="global-input has-bor-input" placeholder="详细地址">
         </div>
-      </div>
-
-      
-	  
-      <div class="data-item">
-		  <div class="check-sent-style clearfix">
-			  <div class="por-r" id="mes_shipping_button">
-				<em class="wap-radio wap-radio-item checked"></em>每实配送
-			  </div>
-			  <div class="por-r" id="self_shipping_button">
-				<em class="wap-radio wap-radio-item"></em>站点自提
-			  </div>
-		  </div>
       </div>
 	  
 	  <div class="data-item" id="new_address_link" style="display:none">
@@ -242,21 +239,23 @@ a,label,:focus{outline:0 none}
 
       <div class="data-item">
         <p class="wap-order-title-item">送货时间</p>
-        <div class="check-container" id="date_picker_parent">
+        <div class="check-container" id="date_picker_parent" style="position:relative">
+		  <div style="position:absolute;top:0px;width:100%;height:50px;z-index:9"></div>
           <input type="text" class="global-input has-bor-input" placeholder="请选择送货日期" id="date_picker" onkeydown="return false;">
-	  <em class="date-ico"></em>
-	  <input type="hidden" id="year_sel" value="0">
-	  <input type="hidden" id="month_sel" value="0">
-	  <input type="hidden" id="day_sel" value="0">
+		  <em class="date-ico"></em>
+		  <input type="hidden" id="year_sel" value="0">
+		  <input type="hidden" id="month_sel" value="0">
+		  <input type="hidden" id="day_sel" value="0">
         </div>
-        <div class="check-container">
+        <div class="check-container" id="time_picker_parent">
+		  <div style="position:absolute;top:0px;width:100%;height:50px;z-index:9"></div>
           <input type="text" class="global-input has-bor-input" placeholder="请选择送货时段" id="time_picker" onkeydown="return false;">
-	  <em class="time-ico"></em>
-	  <input type="hidden" id="hour_sel" value="0">
-	  <input type="hidden" id="minute_sel" value="0">
+		  <em class="time-ico"></em>
+		  <input type="hidden" id="hour_sel" value="0">
+		  <input type="hidden" id="minute_sel" value="0">
         </div>
       </div>
-      <div class="data-item" style="padding-bottom:15px;">      
+      <div class="data-item" style="padding-bottom:45px;">      
 	      <h4 class="wap-order-title-item">付款方式</h4>
 	      <div class="wap-order-item pay_container" style="padding:14px 10px;" id="cash_container" data-id="1">
 		<label for="cashon" >货到付款
@@ -279,7 +278,7 @@ a,label,:focus{outline:0 none}
 
     <div class="wap-total-btn-area">
       <p class="wtb-item-btn">
-        <a href="#" id="done_button" class="btn big-btn status1-btn">付款</a>
+        <a href="#" id="done_button" class="btn big-btn status1-btn">结算</a>
       </p>
       <p class="wtb-item-total">
         <span style="font-size:18px; margin-bottom:4px; display:block;">合计<span id="total_price"></span>元
@@ -299,28 +298,42 @@ a,label,:focus{outline:0 none}
 							<input type="hidden" name="y" value="32">
 							<input type="hidden" name="token" value="from_mobile">
 							<input type="hidden" name="step" value="done">
-							<input type="hidden" name="shipping_type" value="ZT">
+							<input type="hidden" id="form_shipping_type" name="shipping_type" value="">
 							<input type="hidden" name="shipping_site" value="7">
 							<input type="hidden" name="redirect_domain" value="http://touch.n.mescake.com">
 						</form>
+  <script src="http://s1.static.mescake.com/touch/page/picker.js"></script>
+  <script src="http://s1.static.mescake.com/touch/page/checkout.js"></script>
+  <script src="http://s1.static.mescake.com/touch/page/shopcar_checkout.js"></script>
   <script>
   window.HAS_BIG_STAFF = false;
   window.HAS_NO_SUGAR_STAFF = false;
   window.server_date = '<%=date%>';
   M.loading();
-  Loader(['touch/page/picker.js','touch/page/checkout.js','touch/page/shopcar_checkout.js']);
+  //Loader(['touch/page/picker.js','touch/page/checkout.js','touch/page/shopcar_checkout.js']);
   $('#self_shipping_button').click(function(){
 	  $('#self_input_container').show();
 	  $('#self_shipping_button').find('em').addClass('checked');
 	  $('#mes_shipping_button').find('em').removeClass('checked');
 	  $('#address_container').hide();
+	  $('#new_address_container').hide();
+	  $('#form_shipping_type').val('ZT');
+	  window.ZT = true;
   });
   
   $('#mes_shipping_button').click(function(){
 	  $('#self_input_container').hide();
 	  $('#self_shipping_button').find('em').removeClass('checked');
 	  $('#mes_shipping_button').find('em').addClass('checked');
-	  $('#address_container').show();
+	  if(window.IS_LOGIN){
+		$('#address_container').show();
+	  }else{
+	    $('#new_address_container').show();
+	  }
+	  localStorage.removeItem('shipping_site');
+	  $('#selected_shipping_adress').hide();
+	  $('#form_shipping_type').val('');
+	  window.ZT = false;
   });
   
   $('#sel_shipping_button').click(function(){
@@ -332,7 +345,20 @@ a,label,:focus{outline:0 none}
 	 var shipping_site_obj = localStorage.getItem('shipping_site_obj');
 	 shipping_site_obj = JSON.parse(shipping_site_obj);
 	 $('#selected_shipping_adress').show().html('已选择自提站:'+shipping_site_obj.station_name);
+	 $('#form_shipping_type').val('ZT');
+	 window.ZT = true;
   }
+  
+  var self_shipping_mobile = localStorage.getItem('self_shipping_mobile');
+  if(self_shipping_mobile){
+	$('#self_shipping_mobile').val(self_shipping_mobile);
+  }
+  
+  var self_shipping_name = localStorage.getItem('self_shipping_name');
+  if(self_shipping_name){
+	$('#self_shipping_name').val(self_shipping_name);
+  }
+  
   $('#self_shipping_mobile').blur(function(){
 	  var val = $(this).val();
 	  localStorage.setItem('self_shipping_mobile',val);
