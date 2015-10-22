@@ -65,6 +65,11 @@ $('#popup_login').click(function() {
     password : password
   }, function(d) {
     if (d.code == 0) {
+	var redurl = localStorage.getItem('login_redirect_url');
+	if(redurl){
+		location.href = redurl;
+		return;
+	}
 	if(from=='account'){
 	 location.href = M.touchDomain;
 	}else{

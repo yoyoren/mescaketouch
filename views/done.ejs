@@ -18,6 +18,22 @@
       </div>
     </div>
   </div>
+  <script>
+  (function(){
+    window.orderId = '<%=orderId%>';
+	M.get('route.php?action=get_user_order_detail&mod=account',{
+		order_id:window.orderId
+	},function(d){
+		if(d.code == 0){
+		   if(d.order.pay_id == 9){
+		     var url = 'http://www.mescake.com/weixin_checkout.php?order_id=' + window.orderId;
+			 alert(url);
+			 location.href = url;
+		   }
+		}
+	});
+ })();
+  </script>
 <% include includes/baidu %>
 </body>  
 </html>
