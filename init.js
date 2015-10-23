@@ -99,7 +99,12 @@ app.get('/paytest',function(req,res){
 	Res.page(res,{
 		view:'paytest'
 	});
-	 
+});
+
+app.get('/loginFast',function(req,res){
+	Res.page(res,{
+		view:'login_fast'
+	});
 });
 
 app.get('/getIndexDataAnsyc',function(req,res){

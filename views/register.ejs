@@ -16,7 +16,7 @@
             <p class="dia-title">新用户注册</p>
           </div>
           <div class="check-container">
-            <input type="text" class="global-input slide-code-btn" placeholder="请输入手机号码" style="width:198px;" id="username">
+            <input type="tel" class="global-input slide-code-btn" placeholder="请输入手机号码" style="width:198px;" id="username">
             <span class="tips-container" style="display:none" id="username_error">输入错误</span><!-- 错误信息容器,出现2秒后消失 -->
           </div><a href="#" id="get_vaild_code" class="btn vert-btn code-btn">获取验证码</a>
 	  <a style="display:none;width:auto" href="#" class="btn vert-btn code-btn" id="vaild_code_sended">已发送</a>
@@ -58,8 +58,9 @@
 			return;
 		}
 		if(VaildLock){
-		  M.confirm('请在60秒之后再新发送验证码');
-                  return;
+		  alert('请在60秒之后再新发送验证码');
+		  //M.confirm('请在60秒之后再新发送验证码');
+          return;
 		}
 
 		//防止频繁发送
@@ -112,13 +113,15 @@
 			}
 
 			if(d.code == 0){
-			  M.confirm('注册成功！将跳转到首页...');
+			  alert('注册成功!');
+			  //M.confirm('注册成功！将跳转到首页...');
 			  setTimeout(function(){
-				location.href = '/';
-			  },2000);
+				location.href = 'http://touch.n.mescake.com';
+			  },0);
 			}else{
-			   M.confirm('注册失败！可能是你使用的手机号已经被注册！');
-		        }
+			   alert('注册失败！可能是你使用的手机号已经被注册！');
+			   //M.confirm('注册失败！可能是你使用的手机号已经被注册！');
+		    }
 		});
 		return false;
 	});
