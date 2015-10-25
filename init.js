@@ -101,11 +101,7 @@ app.get('/paytest',function(req,res){
 	});
 });
 
-app.get('/loginFast',function(req,res){
-	Res.page(res,{
-		view:'login_fast'
-	});
-});
+
 
 app.get('/getIndexDataAnsyc',function(req,res){
 	 var pageview = require('./lib/pageview.js').PageView;
@@ -135,9 +131,23 @@ app.get('/getGoodsAttrAnsyc',function(req,res){
 
 app.get('/login',function(req,res){
 	Res.page(res,{
+		view:'login_fast'
+	});
+});
+
+app.get('/loginFast',function(req,res){
+	Res.page(res,{
+		view:'login_fast'
+	});
+});
+
+app.get('/loginold',function(req,res){
+	Res.page(res,{
 		view:'login'
 	});
 });
+
+
 
 app.get('/account',function(req,res){
 	Res.page(res,{

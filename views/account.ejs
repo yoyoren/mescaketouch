@@ -20,7 +20,9 @@
             <a href="/changepassword" class="btn status1-btn">修改</a>
           </div>
           <div class="list-line" style="margin:20px 0;"></div>
-          <div class="acc-item"><p class="acc-p1">账户余额：<span id="money">0</span>元</p><p class="hide">余额可以直接抵扣消费<a href="/charge" class="acc-link">礼品卡充值</a></p></div>
+          <div class="acc-item"><p class="acc-p1">账户余额：<span id="money">0</span>元</p>
+		  <a href="#" id="logout" class="btn status1-btn">退出登陆</a>
+		  <p class="hide">余额可以直接抵扣消费<a href="/charge" class="acc-link">礼品卡充值</a></p></div>
         </div>
       </div>
     </div>
@@ -29,6 +31,11 @@
 <script>
 M.loading();
 (function(){
+	$('#logout').click(function(){
+		M.get('route.php?mod=account&action=logout',{},function(d){
+			location.href = "http://touch.n.mescake.com";
+		});
+	});
 	M.get('route.php?mod=account&action=get_users_info',{},function(d){
 		var data = d.info[0];
 		$('#phone').html(data.mobile_phone);
