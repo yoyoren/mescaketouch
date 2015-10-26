@@ -37,6 +37,11 @@ M.loading();
 		});
 	});
 	M.get('route.php?mod=account&action=get_users_info',{},function(d){
+		if(d.code == 10005){
+			localStorage.setItem('fast_login_redirect_url',location.href);
+			location.href = "http://touch.n.mescake.com/login?from=account";
+			return;
+		}
 		var data = d.info[0];
 		$('#phone').html(data.mobile_phone);
 		$('#money').html(data.user_money);

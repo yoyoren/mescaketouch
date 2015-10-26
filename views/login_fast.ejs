@@ -107,6 +107,12 @@
 			  alert('登陆成功!');
 			  //M.confirm('注册成功！将跳转到首页...');
 			  setTimeout(function(){
+				var redurl = localStorage.getItem('fast_login_redirect_url');
+				if(redurl){
+					location.href = redurl;
+					localStorage.removeItem('fast_login_redirect_url');
+					return;
+				}
 				location.href = 'http://touch.n.mescake.com';
 			  },0);
 			}else{

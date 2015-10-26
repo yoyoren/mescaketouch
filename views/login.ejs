@@ -68,6 +68,7 @@ $('#popup_login').click(function() {
 	var redurl = localStorage.getItem('login_redirect_url');
 	if(redurl){
 		location.href = redurl;
+		localStorage.removeItem('login_redirect_url');
 		return;
 	}
 	if(from=='account'){
