@@ -17,7 +17,7 @@
 	      <%}%>
       </ul>
   </div>
-  <div class="scroll-area" style="padding-top:105px;background:#f0f0f0;">
+  <div class="scroll-area" style="padding-top:95px;background:#f0f0f0;">
   <!-- for-love  for-happy for-dream -->
   <div class="pro-content-area">
       <%for(var i in catoData){%>
@@ -32,7 +32,7 @@
 			    <a href="/cake?id=<%=goodsData[catoData[i].cato[j].data[m]].goods_id%>"><img  class="lazyload" id="cvs_<%=i%>_<%=j%>_<%=m%>" data-src="<%=goodsData[catoData[i].cato[j].data[m]].url%>" style=""></a>
 			    <h5>
 			    <span <%if(goodsData[catoData[i].cato[j].data[m]].goods_id==32){%>style="font-size:12px;"<% } %>><%=goodsData[catoData[i].cato[j].data[m]].goods_name%></span>
-			    <span style="color:#fd578e; float:right; font-size:16px; font-weight:bold;">￥<%=goodsData[catoData[i].cato[j].data[m]].startprice%>起</span></h5>
+			    <span style="float:right; font-weight:bold;">￥<%=goodsData[catoData[i].cato[j].data[m]].startprice%>起</span></h5>
 			  </div>
 			</div>
 		        <%}%>
