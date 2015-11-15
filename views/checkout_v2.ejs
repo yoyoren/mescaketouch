@@ -6,135 +6,6 @@
   <% include includes/static_loader %>
   <% include includes/head_script_v2 %>
  <style>
- *{padding: 0; margin: 0;}
-html, body {
-    font-size: 14px;
-    color: #333;
-}
-body, input {
-    font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",sans-serif;
-}
-a, input, em, .wap-price-intro, .wap-check-area, .wap-func-more-ico, .ra-con {
-    outline: 0;
-    -webkit-tap-highlight-color: rgba(0,0,0,0);
-}
-table{border-collapse:collapse;border-spacing:0}
-a,label,:focus{outline:0 none}
-.clearfix:after{display:block;content:"\20";height:0;clear:both;overflow:hidden;visibility:hidden}
-.clearfix{*zoom:1}
-.app-main{
-  position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    min-height: 500px;
-    overflow: hidden;
-}
-
-.return-area {
-    height: 50px;
-    line-height: 50px;
-    background: #fff;
-    border-bottom: 1px solid #ccc;
-    overflow: hidden;
-    font-weight: bold;
-}
-.return-area {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 10;
-}
-.return-area a {
-    color: #333;
-}
-.ra-ico {
-    float: left;
-    display: inline-block;
-    margin: 0 10px 0 0;
-    width: 40px;
-    height: 50px;
-    vertical-align: middle;
-    border-right: 1px solid #ccc;
-    background: url(http://s1.static.mescake.com/touch/css/img/wap-return-home.png) center center no-repeat;
-    background-size: 12px 12px;
-}
-.ra-con {
-    display: inline-block;
-    font-size: 16px;
-}
-
-.scroll-area {
-    display: block;
-    height: 100%;
-    overflow: auto;
-    box-sizing: border-box;
-    padding: 60px 0;
-}
-.data-item {
-    padding: 10px;
-    border-top: 1px solid #eee;
-    border-bottom: 1px solid #eee;
-    margin: 10px 0;
-    background: #fff;
-}
-.address-detail {
-    padding-right: 30px;
-    position: relative;
-}
-.address-num {
-    font-weight: bold;
-    margin-left: 0;
-}
-.wap-radio, .wap-checkbox {
-    display: inline-block;
-    width: 24px;
-    height: 24px;
-}
-.wap-radio {
-    background: url(http://s1.static.mescake.com/touch/css/img/wap-radio41.png) 0 0 no-repeat;
-    background-size: 24px 24px;
-}
-.wap-checkbox-item, .wap-radio-item {
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    margin-top: -12px;
-}
-.wap-radio:active, .wap-radio.checked {
-    background: url(http://s1.static.mescake.com/touch/css/img/wap-radio42.png) 0 0 no-repeat;
-    background-size: 24px 24px;
-}
-
-.has-bor-input {
-    border: 1px solid #e5e5e5;
-    border-radius: 3px;
-    background: #fff;
-    padding: 10px;
-}
-.global-input {
-    height: 42px;
-    line-height: normal;
-    width: 100%;
-    box-sizing: border-box;
-    margin-bottom: 10px;
-}
-
-
-.wap-more-ico {
-    position: absolute;
-    top: 50%;
-    margin-top: -4px;
-    right: 10px;
-    display: inline-block;
-    width: 8px;
-    height: 8px;
-    background: url(http://s1.static.mescake.com/touch/css/img/wap-more-ico.png) 0 0 no-repeat;
-    background-size: 8px 8px;
-}
-
 /* 订单确认部分新增部分 */
 .por-r{position: relative;}
 
@@ -256,7 +127,7 @@ a,label,:focus{outline:0 none}
 		  <input type="hidden" id="minute_sel" value="0">
         </div>
       </div>
-      <div class="data-item" style="padding-bottom:45px;">      
+      <div class="data-item" style="padding-bottom:50px;">      
 	      <h4 class="wap-order-title-item">付款方式</h4>
 	      <div class="wap-order-item pay_container" style="padding:14px 10px;" id="cash_container" data-id="1">
 		<label for="cashon" >货到付款
@@ -277,18 +148,20 @@ a,label,:focus{outline:0 none}
 	    </div>
     </div>
 
-    <div class="wap-total-btn-area">
+   
+  </div>
+
+ <div class="wap-total-btn-area">
       <p class="wtb-item-btn">
         <a href="#" id="done_button" class="btn big-btn status1-btn">结算</a>
       </p>
       <p class="wtb-item-total">
-        <span style="font-size:18px; margin-bottom:4px; display:block;">合计<span id="total_price"></span>元
+        <span style="font-size:16px; margin-bottom:4px; display:block;">合计<span id="total_price"></span>元
 	<span style="display:none;font-size:14px;" id="shipping_fee_display">(含10元运费)</span>
 	</span>
         <span style="color:#999;"><span id="staff_count">0</span>件商品</span>
       </p>
-    </div>
-  </div>
+ </div>
 						<form action="http://www.mescake.com/flow.php" method="post" id="submit_form">
 							<input type="hidden" id="leaving_message" name="leaving_message">
 							<input type="hidden" name="pay_id" value="1" id="pay_id">

@@ -6,6 +6,9 @@
   <% include includes/static_loader %>
   <% include includes/head_script %>
 </head>
+<style type="text/css">
+.scroll-area {padding-bottom:30px;}
+</style>
 <body>
 <div id="app_main" class="app-main app-nav">
   <% include includes/header_v2 %>
@@ -104,6 +107,7 @@
 			var zCvs = $('#'+this.id);
 			var domCvs = zCvs[0];
 			domCvs.src = this.src;
+			return;
 			zCvs.removeClass('lazyload');
 			try{
 				var cvs = document.createElement('canvas');
