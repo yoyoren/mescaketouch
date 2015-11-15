@@ -39,7 +39,7 @@ app.use(compression({
 var RES_SUCCESS = 0;
 var RES_FAIL = 1;
 var STATIC_DOMAIN = 'http://s1.static.mescake.com/';
-var IMG_DOMAIN = 'http://touch.mescake.com/';
+var IMG_DOMAIN = 'http://touch.n.mescake.com/';
 
 if(VIEW_DEBUG){
    viewPath = '/views';
