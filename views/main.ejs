@@ -20,35 +20,19 @@ iframe{position: absolute; top: -200px;}
 <div class="main-banner">
     <div id="slider-1" class="swipe" >
         <ul class="swipe-wrap" >
-            <li>
-                <a href="#">
-                    <img data-img="http://www.21cake.com/public/images/35/e3/99/56b1d847a6a3474c93fd18f4fd699962.jpg?1447384337#w" alt="" title="" >
+		<% data.forEach(function(d){%>
+			<li>
+                <a href="<%= d['link'] %>">
+                    <img data-img="http://www.mescake.com/<%= d['img'] %>" alt="" title="" >
                 </a>
             </li>
-
-            <li>
-                <a href="#">
-                    <img data-img="http://www.21cake.com/public/images/63/4d/a7/573a0c0a229e8281dee252de4e47aad8.jpg?1440054007#w" alt="" title=""/>
-                </a>
-            </li>
-
-            <li>
-                <a href="#">
-                    <img data-img="http://www.21cake.com/public/images/33/65/16/33d35489b3eb64d78873d4460a94a9e3.jpg?1440392041#w" alt="" title="" />
-                </a>
-            </li>
-
-            <li>
-                <a href="#">
-                    <img data-img="http://www.21cake.com/public/images/94/53/a0/c4d87d846045e8d4f3d8b9853f2e4a34.jpg?1438326486#w" alt="" title="" />
-                </a>
-            </li>
+		<% })%>
         </ul>
         <div id="position-1" class="position">
-            <a href="#" class="on"></a>
-            <a href="#" class=" "></a>
-            <a href="#" class=" "></a>
-            <a href="#" class=""></a>
+		<% data.forEach(function(d,i){%>
+		  
+            <a href="#" <% if(i==0) {%> class="on" <% } %>></a>
+		<% })%>
         </div>
     </div>
 
@@ -59,7 +43,7 @@ iframe{position: absolute; top: -200px;}
         <em class="nb-ico-acc"></em>
         <span class="name">我的账户</span>
       </a>
-      <a href="#" class="h-ico-item">
+      <a href="/list" class="h-ico-item">
         <em class="nb-ico-list"></em>
         <span class="name">所有蛋糕</span>
       </a>

@@ -71,6 +71,30 @@ var Res = {
 	}
 }
 
+app.get('/list',function(req,res){
+	 var host = res.req.headers.host;
+	 var pageview = require('./lib/pageview.js').PageView;
+	 var htmlToText = require('html-to-text');
+
+	 pageview.getGoodsData(function(d1,d2){
+		for(var i in d1){
+			if(d1[i]){
+				d1[i].url =IMG_DOMAIN + d1[i].goods_sn.substring(0,3)+'.jpg';
+			}
+			if(d1[i]){
+				d1[i].goods_desc = htmlToText.fromString(d1[i].goods_desc);
+			}
+		}
+
+		Res.page(res,{
+			view:'index',
+			goodsData:d1,
+			catoData:d2
+		});
+	 });
+
+});
+
 app.get('/',function(req,res){
 	 var host = res.req.headers.host;
 	 var pageview = require('./lib/pageview.js').PageView;
@@ -93,6 +117,17 @@ app.get('/',function(req,res){
 		});
 	 });
 
+});
+
+app.get('/main',function(req,res){
+	var string = fs.readFileSync('../mescake/index_wx_config.json','utf-8');
+	var data = JSON.parse(string,true);
+	//console.log(data);
+	Res.page(res,{
+		view:'main',
+		data:data
+	});			
+	
 });
 
 app.get('/paytest',function(req,res){
