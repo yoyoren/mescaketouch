@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>MES蛋糕-微信商城</title>
+  <% include includes/static_config %>
+  <% include includes/static_loader %>
+  <% include includes/head_script %>
+  <script>
+    Loader(['touch/css/wap-for-index.css']);
+  </script>
+</head>
+<style type="text/css">
+.head-area{position: static;}
+.scroll-area {padding-bottom:30px;}
+iframe{position: absolute; top: -200px;}
+</style>
+<body class="main-page">
+<% include includes/header_v2 %>
+
+<div class="main-banner">
+    <div id="slider-1" class="swipe" >
+        <ul class="swipe-wrap" >
+            <li>
+                <a href="#">
+                    <img data-img="http://www.21cake.com/public/images/35/e3/99/56b1d847a6a3474c93fd18f4fd699962.jpg?1447384337#w" alt="" title="" >
+                </a>
+            </li>
+
+            <li>
+                <a href="#">
+                    <img data-img="http://www.21cake.com/public/images/63/4d/a7/573a0c0a229e8281dee252de4e47aad8.jpg?1440054007#w" alt="" title=""/>
+                </a>
+            </li>
+
+            <li>
+                <a href="#">
+                    <img data-img="http://www.21cake.com/public/images/33/65/16/33d35489b3eb64d78873d4460a94a9e3.jpg?1440392041#w" alt="" title="" />
+                </a>
+            </li>
+
+            <li>
+                <a href="#">
+                    <img data-img="http://www.21cake.com/public/images/94/53/a0/c4d87d846045e8d4f3d8b9853f2e4a34.jpg?1438326486#w" alt="" title="" />
+                </a>
+            </li>
+        </ul>
+        <div id="position-1" class="position">
+            <a href="#" class="on"></a>
+            <a href="#" class=" "></a>
+            <a href="#" class=" "></a>
+            <a href="#" class=""></a>
+        </div>
+    </div>
+
+</div>
+<div class="main-nav-enter">
+    <div class="h-ico-area clearfix">
+      <a href="/login?from=account" class="h-ico-item">
+        <em class="nb-ico-acc"></em>
+        <span class="name">我的账户</span>
+      </a>
+      <a href="#" class="h-ico-item">
+        <em class="nb-ico-list"></em>
+        <span class="name">所有蛋糕</span>
+      </a>
+      <a href="/shopcar" class="h-ico-item">
+        <em class="nb-ico-car"></em>
+        <span class="name">购物车</span>
+      </a>
+      <a href="login?from=myorder" class="h-ico-item">
+        <em class="nb-ico-order"></em>
+        <span class="name">我的订单</span>
+      </a>
+    </div>
+</div>
+<div class="main-title-area tl-c">
+    <img src="http://s1.static.mescake.com/touch/css/img/index-title.png" style="height:30px;" />
+</div>
+
+<div class="main-list-area clearfix">
+    <div class="pro-list-item">
+      <div class="pro-list-item-inner">
+        <a href="/cake?id=6">
+          <img  class="lazyload" id="cvs_specialday_0_1" src="http://touch.n.mescake.com/D12.jpg" style="">
+        </a>
+        <span class="name">斯昆</span>
+      </div>
+    </div>
+
+    <div class="pro-list-item">
+      <div class="pro-list-item-inner">
+        <a href="/cake?id=6">
+          <img  class="lazyload" id="cvs_specialday_0_1" src="http://touch.n.mescake.com/D10.jpg" style="">
+        </a>
+        <span class="name">巴黎清晨</span>
+      </div>
+    </div>
+
+    <div class="pro-list-item">
+      <div class="pro-list-item-inner">
+        <a href="/cake?id=6">
+          <img  class="lazyload" id="cvs_specialday_0_1" src="http://touch.n.mescake.com/D01.jpg" style="">
+        </a>
+        <span class="name">斯昆</span>
+      </div>
+    </div>
+
+    <div class="pro-list-item">
+      <div class="pro-list-item-inner">
+        <a href="/cake?id=6">
+          <img  class="lazyload" id="cvs_specialday_0_1" src="http://touch.n.mescake.com/S01.jpg" style="">
+        </a>
+        <span class="name">斯昆</span>
+      </div>
+    </div>
+
+</div>
+
+<div class="home-to-top">
+    <div style="float:right;">
+      <a href="#" class="to-top">
+        返回顶部
+      </a>
+    </div>
+    <div id="footerlogin">
+    <a href="/login" class="lnk">登录</a> | <a href="/register" class="lnk">注册</a><a href="javascript:;" id="logout" class="lnk">退出</a>
+    </div>
+
+</div>
+<% include includes/footer %>
+</body>
+<script>
+Loader(['touch/swipe.js']);
+</script>
+<script>
+(function(){
+
+  /* 轮播插件 Start */
+    var target = $('#slider-1');
+    if(target.length>0)
+    {
+        target.show().find('img').each(function(){
+            $(this).attr('src', $(this).data('img'));
+        });
+
+        var slider =
+            Swipe(document.getElementById('slider-1'), {
+                auto: 3000,
+                continuous: true,
+                callback: function(pos) {
+                    var i = bullets.length;
+                    while (i--) {
+                        bullets[i].className = ' ';
+                    }
+                    bullets[pos].className = 'on';
+                }
+            });
+            var bullets = document.getElementById('position-1').getElementsByTagName('a');
+    }
+    /* 轮播插件 End */
+
+
+  $('.list_item')[CLICK](function(){
+    M.loading();
+    location.href = $(this).attr('href');
+    return false;
+  });
+  var renderCvs = function(parent,max){
+    var lazyloadImage = $('.lazyload',parent);
+    if(lazyloadImage.length<1){
+       return;
+    }
+    var max = max||lazyloadImage.length;
+    for(var i=0;i<max;i++){
+        var imgId = lazyloadImage[i].id;
+        var imageCache = GET(imgId);
+        if(imageCache){
+          lazyloadImage[i].src = imageCache;
+          continue;
+        }
+        var img = new Image();
+        img.index = i;
+        img.id = imgId;
+        img.crossorigin="anonymous";
+        img.onload = function(){
+            var _this = this;
+      var zCvs = $('#'+this.id);
+      var domCvs = zCvs[0];
+      domCvs.src = this.src;
+      return;
+      zCvs.removeClass('lazyload');
+      try{
+        var cvs = document.createElement('canvas');
+        cvs.style.display = 'none';
+        document.body.appendChild(cvs);
+        var rcvs = cvs.getContext('2d');
+        cvs.width = 140;
+        cvs.height = 108;
+        rcvs.drawImage(this,0,0,140,108);
+        setTimeout(function(){
+          var data = cvs.toDataURL();
+          SET(_this.id,data);
+          document.body.removeChild(cvs);
+        },200);
+      }catch(ex){
+
+      }
+        }
+        img.src = lazyloadImage[i].getAttribute('data-src');
+    }
+  }
+  renderCvs(catoFrame[0]);
+})();
+
+</script>
+<% include includes/baidu %>
+</html>

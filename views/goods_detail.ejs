@@ -10,57 +10,55 @@
 
 <div id="app_main" class='app-main app-nav'>
   <% include includes/header_v2 %>
-  <div class="wap-price-area" id="top_price" style="position:absolute;top:50px;left:0px;width:100%;border:none;display:none;z-index:1000">
-    <p class="buy-price"><%=goods.goods_name%> <span class='init_price_tip'></span><em>￥</em><span class="display_price">0</span><span class='init_price_tip'></span></p>
-  </div>
   <script type="tmpl" id="operate">
-  <p class="wap-pro-tip">* 产品照片为2磅蛋糕实物</p>
   <div class="wap-price-area">
-    <p class="buy-price"><%=goods.goods_name%> <span class='init_price_tip'></span><em>￥</em><span class="display_price">0</span><span class='init_price_tip'></span></p>
+
+  	<p class="tip-intro">适合人群：除儿童以外的各类人群<br/>
+      保鲜条件：0－4℃保藏12小时 5℃食用最佳。<br/>
+      甜度：★☆☆☆☆☆<br/>
+      原材料：<%=matrial%>
+    </p>
+    <p class="wap-check-tip">*装饰用材料不建议食用。</p>
+    <p class="cake-price">
+    	<span>￥</span>
+    	<span class="en display_price">0</span><span class='init_price_tip'></span>
+    </p>
+
     <div class="wap-price-intro" id="attr_sel" style="font-size:14px;display:none">选择一个尺寸蛋糕<em class="check-down-ico"></em></div>
     <div class="wap-check-area" style="" id="sel_list">
       <p class="wap-check-tip">5磅以上蛋糕请提前24小时订购或致电客服咨询</br>
 	  (4000 600 700)</p>
     </div>
   </div>
+
+  <div class="wap-price-area">
+
+
+
+  </div>
   </script>
-  
-  
+
+
   <div class="scroll-area">
 	  <%-tmpl%>
-	  <div class="material-area"> 
+	  <div class="material-area">
 	    <div class="material-inner clearfix">
-	      <div class="ma-item1">
-		<div class="ma-title">
-		  <p class="mat-1">原材料</p>
-		</div>
-		<p class="ma-intro"><%=matrial%></p>
-		<div class="ma-ico-area tl-c">
-		  <p><em class="ma-ico1"></em>含酒</p>
-		  <p class="marl-20"><em class="ma-ico2"></em>包含进口原料</p>
-		</div>
+
+				<div class="ma-item3">
+					<div class="ma-title">
+					  <p class="mat-3">送货</p>
+					</div>
+					<p class="ma-intro">北京市五环内免费送货</p>
+					<div class="ma-ico-area">
+					  <p class="clearfix"><em class="ma-ico4"></em>蛋糕在收到后2-3小时内食用最佳,如对本蛋糕
+				食材有过敏经历者，请选择其他款蛋糕</p>
+					</div>
 	      </div>
-	      <div class="ma-item2">
-		<div class="ma-title">
-		  <p class="mat-2">保鲜</p>
-		</div>
-		<p class="ma-intro">0-4℃，冷藏保鲜24小时</p>
-		<div class="ma-ico-area tl-c">
-		  <p><em class="ma-ico3"></em>最佳食用温度10℃</p>
-		</div>
-	      </div>
-	      <div class="ma-item3">
-		<div class="ma-title">
-		  <p class="mat-3">送货</p>
-		</div>
-		<p class="ma-intro">北京市五环内免费送货</p>
-		<div class="ma-ico-area">
-		  <p class="clearfix"><em class="ma-ico4"></em>蛋糕在收到后2-3小时内食用最佳,如对本蛋糕
-	食材有过敏经历者，请选择其他款蛋糕</p>
-		</div>
-	      </div>
+
 	    </div>
+
 	  </div>
+
 	  <div class="check-size-area"></div>
   </div>
 </div>
@@ -74,12 +72,12 @@
    (function(){
 	  var scrollArea = $($('.scroll-area')[0]);
 	  var lazyLoad = $('.lazyload');
-	  lazyLoad[0].className+= ' animated-quick fadeIn'; 
+	  lazyLoad[0].className+= ' animated-quick fadeIn';
 	  lazyLoad[0].src = lazyLoad[0].getAttribute('data-src');
 	  var loadImg = function(){
 
 	    for(var i=1;i<lazyLoad.length;i++){
-	    lazyLoad[i].className+= ' animated-quick fadeIn'; 
+	    lazyLoad[i].className+= ' animated-quick fadeIn';
 	    lazyLoad[i].src = lazyLoad[i].getAttribute('data-src');
 	    }
 	  }
@@ -90,7 +88,7 @@
 	  }else{
 		$('.sia_01').after($('#operate').html());
 	  }
-	  
+
 	  var id = window.GOODS_ID;
 	  var container = $('#sel_list');
 
@@ -118,7 +116,7 @@
 	  });
 
 	  container.delegate('em',CLICK,function(){
-		
+
 		var _this = $(this);
 		var price = _this.data('price');
 		window.ATTR = _this.data('id');
@@ -148,9 +146,9 @@
 		is_cut:0
 	    },function(d){
 		callback();
-	    });	    
+	    });
 	  }
-	  
+
 	  $('#buy_now')[CLICK](function(){
 		  M.checklogin(function(isLogin) {
 			if (isLogin) {
@@ -182,25 +180,25 @@
 				    localStorage.setItem('fast_login_redirect_url',login_redirect_url);
 					//M.getShopCarCount(true);
 				});
-				
+
 			  }
 		   });
-		
+
 		return false;
 	  });
 
 	  var height = $($('.sia_01')[0]).height();
-	 
+
 	  var bottomBar = $('#bottom_bar');
 	  var scrollTimer;
 	  scrollArea.scroll(function(){
 		clearTimeout(scrollTimer);
 		var _this = scrollArea.scrollTop();
-		if(_this>height){
-			$('#top_price').show();
-		}else{
-			$('#top_price').hide();
-		}
+		// if(_this>height){
+		// 	$('#top_price').show();
+		// }else{
+		// 	$('#top_price').hide();
+		// }
 	  });
   })();
   </script>

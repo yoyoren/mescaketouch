@@ -51,14 +51,14 @@ if(DEV_DEBUG){
 }
 
 if(TEST_RELEASE){
-   STATIC_DOMAIN = 'http://static.n.mescake.com/';
+   STATIC_DOMAIN = 'http://s1.static.mescake.com/';
 }
 
 if(PREVIEW_RELEASE){
   STATIC_DOMAIN = 'http://static.preview.mescake.com/';
   IMG_DOMAIN = 'http://touch.n.mescake.com/';
 }
-
+STATIC_DOMAIN = 'http://s1.static.mescake.com/';
 var Res = {
 	ajax:function(res,d){
 		res.send(d);
@@ -85,14 +85,14 @@ app.get('/',function(req,res){
 				d1[i].goods_desc = htmlToText.fromString(d1[i].goods_desc);
 			}
 		}
-   
+
 		Res.page(res,{
 			view:'index',
 			goodsData:d1,
 			catoData:d2
 		});
 	 });
-	 
+
 });
 
 app.get('/paytest',function(req,res){
@@ -146,8 +146,6 @@ app.get('/loginold',function(req,res){
 		view:'login'
 	});
 });
-
-
 
 app.get('/account',function(req,res){
 	Res.page(res,{
@@ -300,7 +298,7 @@ app.get('/cake',function(req,res){
 
 		}
 	  });
-		
+
 
 });
 
