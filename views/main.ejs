@@ -62,42 +62,16 @@ iframe{position: absolute; top: -200px;}
 </div>
 
 <div class="main-list-area clearfix">
-    <div class="pro-list-item">
-      <div class="pro-list-item-inner">
-        <a href="/cake?id=6">
-          <img  class="lazyload" id="cvs_specialday_0_1" src="http://touch.n.mescake.com/D12.jpg" style="">
-        </a>
-        <span class="name">斯昆</span>
-      </div>
-    </div>
-
-    <div class="pro-list-item">
-      <div class="pro-list-item-inner">
-        <a href="/cake?id=6">
-          <img  class="lazyload" id="cvs_specialday_0_1" src="http://touch.n.mescake.com/D10.jpg" style="">
-        </a>
-        <span class="name">巴黎清晨</span>
-      </div>
-    </div>
-
-    <div class="pro-list-item">
-      <div class="pro-list-item-inner">
-        <a href="/cake?id=6">
-          <img  class="lazyload" id="cvs_specialday_0_1" src="http://touch.n.mescake.com/D01.jpg" style="">
-        </a>
-        <span class="name">斯昆</span>
-      </div>
-    </div>
-
-    <div class="pro-list-item">
-      <div class="pro-list-item-inner">
-        <a href="/cake?id=6">
-          <img  class="lazyload" id="cvs_specialday_0_1" src="http://touch.n.mescake.com/S01.jpg" style="">
-        </a>
-        <span class="name">斯昆</span>
-      </div>
-    </div>
-
+    <% goods.forEach(function(d){%>
+			<div class="pro-list-item">
+			  <div class="pro-list-item-inner">
+				<a href="/cake?id=<%=d['id']%>">
+				  <img src="http://www.mescake.com/<%=d['img']%>" style="">
+				</a>
+				<span class="name"><%=d['name']%></span>
+			  </div>
+			</div>
+    <% })%>
 </div>
 
 <div class="home-to-top">

@@ -120,12 +120,16 @@ app.get('/',function(req,res){
 });
 
 app.get('/main',function(req,res){
-	var string = fs.readFileSync('../mescake/index_wx_config.json','utf-8');
-	var data = JSON.parse(string,true);
+	var string_banner = fs.readFileSync('../mescake/index_wx_config.json','utf-8');
+	var data_banner = JSON.parse(string_banner,true);
+	
+	var string_goods = fs.readFileSync('../mescake/index_wx_goods_config.json','utf-8');
+	var data_goods = JSON.parse(string_goods,true);
 	//console.log(data);
 	Res.page(res,{
 		view:'main',
-		data:data
+		data:data_banner,
+		goods:data_goods
 	});			
 	
 });
